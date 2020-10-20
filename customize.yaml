@@ -1,0 +1,30 @@
+light.shelly_kitchen_desk:
+  friendly_name: Aneks kuchenny
+  icon: mdi:lightbulb
+  
+light.shelly_kitchen_table:
+  friendly_name: Lampa nad stolem
+  icon: mdi:lightbulb
+ 
+light.mi_led_desk_lamp:
+  friendly_name: Lampka
+  icon: mdi:desk-lamp
+  
+light.yeelight_color_bedroom:
+  friendly_name: Lampa sufitowa
+  icon: mdi:lightbulb
+  
+fan.air_purifier_bedroom:
+  friendly_name: Oczyszczacz
+
+weather.dom:
+  friendly_name: Kraków
+  
+sensor.air_purifier_bedroom_air_quality_pm25:
+  friendly_name: Jakość powietrza
+  
+sensor.air_purifier_bedroom_temp:
+  friendly_name: Temperatura
+  
+sensor.air_purifier_bedroom_humidity:
+  friendly_name: Wilgotność

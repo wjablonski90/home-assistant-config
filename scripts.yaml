@@ -1,0 +1,62 @@
+clean_entrance:
+    alias: "Clean entrance"
+    sequence:
+      - service: vacuum.send_command
+        data:
+          entity_id: vacuum.vacuum_roborock_s50
+          command: app_zoned_clean
+          params: [[29251,20382,32001,22232,1]]
+
+clean_hall:
+    alias: "Clean hall"
+    sequence:
+        - service: vacuum.send_command
+          data:
+            entity_id: vacuum.vacuum_roborock_s50
+            command: app_zoned_clean
+            params: [[26973,27766,29223,28816,1],[27855,22115,29255,27765,1]]
+
+clean_kitchen:
+    alias: "Clean kitchen"
+    sequence:
+        - service: vacuum.send_command
+          data:
+            entity_id: vacuum.vacuum_roborock_s50
+            command: app_zoned_clean
+            params: [[24099,20933,29249,22083,1]]
+
+clean_living_room:
+    alias: "Clean living room"
+    sequence:
+        - service: vacuum.send_command
+          data:
+            entity_id: vacuum.vacuum_roborock_s50
+            command: app_zoned_clean
+            params: [[23956,22095,28106,25045,3]]
+
+clean_bathroom:
+    alias: "Clean bathroom"
+    sequence:
+      - service: vacuum.send_command
+        data:
+          entity_id: vacuum.vacuum_roborock_s50
+          command: app_zoned_clean
+          params: [[27703,28835,28753,31085,1]]
+
+clean_bedroom:
+    alias: "Clean bedroom"
+    sequence:
+        - service: vacuum.send_command
+          data:
+            entity_id: vacuum.vacuum_roborock_s50
+            command: app_zoned_clean
+            params: [[25900,27710,27050,29110,1],[26243,29085,26993,31285,1],[24113,30776,26263,31276,1]]
+            
+clean_entire_home:
+    alias: "Clean entire home"
+    sequence:
+        - service: vacuum.send_command
+          data:
+            entity_id: vacuum.vacuum_roborock_s50
+            command: app_zoned_clean
+            params: [[23873,20321,32073,27621,1],[27012,27589,29262,28789,1],[27649,28628,28799,31078,1],[25892,27674,27092,31524,1],[24150,30799,25900,31299,1]]

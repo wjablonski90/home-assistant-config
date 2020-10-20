@@ -1,0 +1,111 @@
+title: Dom
+views:
+  - path: default_view
+    title: Home
+    badges:
+      - entity: binary_sensor.rpi_power_status
+      - entity: sensor.cpu_temp
+      - entity: sensor.gpu_temp
+      - entity: sensor.cpu_clock
+      - entity: person.wojciech
+      - entity: person.justyna
+      - entity: sun.sun
+    cards:
+      - type: weather-forecast
+        entity: weather.dom
+
+      - title: Kuchnia
+        type: entities
+        entities:
+          - light.shelly_kitchen_desk
+          - light.shelly_kitchen_table
+    
+      - title: Biuro
+        type: entities
+        entities:
+          - light.mi_led_desk_lamp
+          
+      - title: Sypialnia
+        type: entities
+        entities:
+          - light.yeelight_color_bedroom
+          - fan.air_purifier_bedroom
+          
+      - title: Oczyszczacz
+        type: entities
+        entities:
+          - fan.air_purifier_bedroom
+          - input_select.air_purifier_bedroom_mode
+          - input_number.air_purifier_bedroom_favorite_level
+          - input_number.air_purifier_bedroom_fan_level
+          - switch.air_purifier_bedroom_child_lock
+          - switch.air_purifier_bedroom_led
+          - switch.air_purifier_bedroom_buzzer
+          - sensor.air_purifier_bedroom_speed
+          - sensor.air_purifier_bedroom_filter_remaining
+        show_header_toggle: false
+        theme: default
+        
+      - title: Odkurzacz
+        type: 'custom:vacuum-card'
+        entity: vacuum.vacuum_roborock_s50
+        stats:
+          default:
+            - attribute: filter_left
+              unit: hours
+              subtitle: Filter
+            - attribute: side_brush_left
+              unit: hours
+              subtitle: Side brush
+            - attribute: main_brush_left
+              unit: hours
+              subtitle: Main brush
+            - attribute: sensor_dirty_left
+              unit: hours
+              subtitle: Sensors
+          cleaning:
+            - attribute: cleaned_area
+              unit: m2
+              subtitle: Cleaning area
+            - attribute: cleaning_time
+              unit: minutes
+              subtitle: Cleaning time
+        actions:
+          - name: Clean entrance
+            service: script.clean_entrance
+            icon: 'mdi:door'
+          - name: Clean hall
+            service: script.clean_hall
+            icon: 'mdi:walk'
+          - name: Clean kitchen
+            service: script.clean_kitchen
+            icon: 'mdi:silverware-fork-knife'
+          - name: Clean living room
+            service: script.clean_living_roomn
+            icon: 'mdi:sofa'
+          - name: Clean bathroom
+            service: script.clean_bathroom
+            icon: 'mdi:shower'
+          - name: Clean bedroom
+            service: script.clean_bedroom
+            icon: 'mdi:bed-empty'
+          - name: Clean entire home
+            service: script.clean_entire_home
+            icon: 'mdi:home'
+
+        
+      - title: Środowisko
+        type: entities
+        entities:
+          - sensor.air_purifier_bedroom_air_quality_pm25
+          - sensor.air_purifier_bedroom_temp
+          - sensor.air_purifier_bedroom_humidity
+        show_header_toggle: false
+        theme: default
+  
+      - entities:
+          - sensor.air_purifier_bedroom_air_quality_pm25
+        hours_to_show: 80
+        refresh_interval: 60
+        title: Jakość powietrza
+        type: history-graph

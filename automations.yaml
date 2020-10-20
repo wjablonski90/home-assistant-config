@@ -1,0 +1,60 @@
+# Xiaomi Air Purifier 2S
+- alias: Air Purifier mode change
+  trigger:
+    platform: state
+    entity_id: input_select.air_purifier_bedroom_mode
+  action:
+    service: fan.set_speed
+    data_template:
+      entity_id: fan.air_purifier_bedroom
+      speed: '{{ states.input_select.air_purifier_bedroom_mode.state }}'
+      
+- alias: Air Purifier mode changed
+  trigger:
+    platform: state
+    entity_id: fan.air_purifier_bedroom
+  action:
+    service: input_select.select_option
+    entity_id: input_select.air_purifier_bedroom_mode
+    data_template:
+      option: '{{ states.fan.air_purifier_bedroom.attributes.speed }}'
+      
+- alias: Air Purifier favorite level change
+  trigger:
+    entity_id: input_number.air_purifier_bedroom_favorite_level
+    platform: state
+  action:
+    service: xiaomi_miio.fan_set_favorite_level
+    data_template:
+      entity_id: fan.air_purifier_bedroom
+      level: '{{ states.input_number.air_purifier_bedroom_favorite_level.state | int }}'
+      
+- alias: Air Purifier favorite level changed
+  trigger:
+    platform: state
+    entity_id: fan.air_purifier_bedroom
+  action:
+    service: input_number.set_value
+    entity_id: input_number.air_purifier_bedroom_favorite_level
+    data_template:
+      value: '{{ states.fan.air_purifier_bedroom.attributes.favorite_level }}'
+      
+- alias: Air Purifier fan level change
+  trigger:
+  - platform: state
+    entity_id: input_number.air_purifier_bedroom_fan_level
+  action:
+    service: xiaomi_miio.fan_set_fan_level
+    entity_id: fan.air_purifier_bedroom
+    data_template:
+      level: '{{ states.input_number.air_purifier_bedroom_fan_level.state | int }}'
+      
+- alias: Air Purifier fan level changed
+  trigger:
+    platform: state
+    entity_id: fan.air_purifier_bedroom
+  action:
+    service: input_number.set_value
+    entity_id: input_number.air_purifier_bedroom_fan_level
+    data_template:
+      value: '{{ states.fan.air_purifier_bedroom.attributes.fan_level }}'

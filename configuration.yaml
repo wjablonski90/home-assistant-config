@@ -1,0 +1,197 @@
+default_config:
+mobile_app:
+discovery:
+
+lovelace:
+  mode: yaml
+  resources:
+  - url: /local/community/vacuum-card/vacuum-card.js
+    type: module
+
+shelly:
+  discovery: false
+  sensors:
+    - device_temp
+    - current_consumption
+    - total_consumption
+  devices:
+    - id: !secret shelly-light-kitchen-desk-id
+      entity_id: kitchen_desk
+      light_switch: true
+    - id: !secret shelly-light-kitchen-table-id
+      entity_id: kitchen_table
+      light_switch: true
+
+yeelight:
+  devices:
+    !secret yeelight-mi-led-desk-lamp-host:
+      name: Mi LED Desk Lamp
+      transition: 1000
+      use_music_mode: true
+      save_on_change: true
+    !secret yeelight-color-bulb-host:
+      name: Yeelight Color Bedroom
+      transition: 1000
+      use_music_mode: true
+      save_on_change: true
+  custom_effects:
+    - name: 'Sunrise'
+      flow_params:
+        count: 1
+        action: stay
+        transitions:
+          - RGBTransition: [255, 0, 0, 50, 1]
+          - TemperatureTransition: [1700, 5000, 10]
+          - TemperatureTransition: [2700, 5000, 11]
+          - TemperatureTransition: [3700, 5000, 12]
+          - TemperatureTransition: [4700, 5000, 13]
+          - TemperatureTransition: [6500, 5000, 100]
+
+fan:
+  - platform: xiaomi_miio
+    name: Air Purifier Bedroom
+    host: !secret xiaomi-air-purifier-host
+    token: !secret xiaomi-air-purifier-token
+    model: zhimi.airpurifier.ma4
+
+vacuum:
+  - platform: xiaomi_miio
+    host: !secret xiaomi-vacuum-cleaner-host
+    token: !secret xiaomi-vacuum-cleaner-token
+    name: Vacuum Roborock S50
+
+#media_player:
+#  - platform: braviatv_psk
+#    host: !secret sony-bravia-tv-host
+#    mac: !secret sony-bravia-tv-mac
+#    psk: !secret sony-bravia-tv-psk
+#    amp: True
+#    android: True
+#    time_format: 24H
+#    user_labels: True
+#    name: Android TV
+
+sensor:
+  # Xiaomi Air Purifier 2S
+  - platform: template
+    sensors:
+      air_purifier_bedroom_temp:
+        friendly_name: "Temperature"
+        value_template: "{{ state_attr('fan.air_purifier_bedroom', 'temperature') }}"
+        unit_of_measurement: "°C"
+        device_class: "temperature"
+      air_purifier_bedroom_humidity:
+        friendly_name: "Humidity"
+        value_template: "{{ state_attr('fan.air_purifier_bedroom', 'humidity') }}"
+        unit_of_measurement: "%"
+        device_class: "humidity"
+      air_purifier_bedroom_air_quality_pm25:
+        friendly_name: "Air quality"
+        value_template: "{{ state_attr('fan.air_purifier_bedroom', 'aqi') }}"
+        unit_of_measurement: "μg/m³"
+        icon_template: "mdi:weather-fog"
+      air_purifier_bedroom_speed:
+        friendly_name: "Fan speed"
+        value_template: "{{ state_attr('fan.air_purifier_bedroom', 'motor_speed') }}"
+        unit_of_measurement: "rpm"
+        icon_template: "mdi:speedometer"
+      air_purifier_bedroom_filter_remaining:
+        friendly_name: "Filter remaining"
+        value_template: "{{ state_attr('fan.air_purifier_bedroom', 'filter_life_remaining') }}"
+        unit_of_measurement: "%"
+        icon_template: "mdi:heart-outline"
+        
+  - platform: command_line
+    name: CPU Temp
+    command: "cat /sys/class/thermal/thermal_zone0/temp"
+    unit_of_measurement: "°C"
+    value_template: "{{ value | multiply(0.001) | round(1) }}"
+
+  - platform: command_line
+    name: GPU Temp
+    command: "/opt/vc/bin/vcgencmd measure_temp"
+    unit_of_measurement: "°C"
+    value_template: '{{ value | regex_findall_index("=([0-9]*\.[0-9]*)", 0) }}'
+
+  - platform: command_line
+    name: CPU Clock
+    command: "/opt/vc/bin/vcgencmd measure_clock arm"
+    unit_of_measurement: "MHz"
+    value_template: '{{ value | regex_findall_index("=([0-9]*)", 0) | multiply(0.000001) | round(0) }}'
+
+switch:
+  # Xiaomi Air Purifier 2S
+  - platform: template
+    switches:
+      air_purifier_bedroom_led:
+        friendly_name: "LED"
+        value_template: "{{ is_state_attr('fan.air_purifier_bedroom', 'led', true) }}"
+        turn_on:
+          service: xiaomi_miio.fan_set_led_on
+          data:
+            entity_id: fan.air_purifier_bedroom
+        turn_off:
+          service: xiaomi_miio.fan_set_led_off
+          data:
+            entity_id: fan.air_purifier_bedroom
+        icon_template: "mdi:lightbulb-outline"
+      air_purifier_bedroom_child_lock:
+        friendly_name: "Child lock"
+        value_template: "{{ is_state_attr('fan.air_purifier_bedroom', 'child_lock', true) }}"
+        turn_on:
+          service: xiaomi_miio.fan_set_child_lock_on
+          data:
+            entity_id: fan.air_purifier_bedroom
+        turn_off:
+          service: xiaomi_miio.fan_set_child_lock_off
+          data:
+            entity_id: fan.air_purifier_bedroom
+        icon_template: "mdi:lock-outline"
+      air_purifier_bedroom_buzzer:
+        friendly_name: "Buzzer"
+        value_template: "{{ is_state_attr('fan.air_purifier_bedroom', 'buzzer', true) }}"
+        turn_on:
+          service: xiaomi_miio.fan_set_buzzer_on
+          data:
+            entity_id: fan.air_purifier_bedroom
+        turn_off:
+          service: xiaomi_miio.fan_set_buzzer_off
+          data:
+            entity_id: fan.air_purifier_bedroom
+        icon_template: "mdi:volume-high"
+  
+input_select:
+  # Xiaomi Air Purifier 2S
+  air_purifier_bedroom_mode:
+    name: Mode
+    options:
+      - Auto
+      - Silent
+      - Favorite
+      - Fan
+    icon: "mdi:animation-outline"
+
+input_number:
+  # Xiaomi Air Purifier 2S
+  air_purifier_bedroom_favorite_level:
+    name: "Favorite level"
+    initial: 0
+    min: 0
+    max: 14
+    step: 1
+    icon: "mdi:weather-windy"
+  air_purifier_bedroom_fan_level:
+    name: "Fan level"
+    initial: 1
+    min: 1
+    max: 3
+    step: 1
+    icon: mdi:jquery
+
+homeassistant:
+  customize: !include customize.yaml
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
