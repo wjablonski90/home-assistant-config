@@ -188,6 +188,13 @@ input_number:
     step: 1
     icon: mdi:jquery
 
+notify:
+  - name: all_phone_devices
+    platform: group
+    services:
+      - service: mobile_app_oneplus_7
+      - service: mobile_app_oneplus_7t
+
 homeassistant:
   customize: !include customize.yaml
 
