@@ -93,15 +93,14 @@
 - alias: AQI Bad Day
   trigger:
     platform: time_pattern
-    minutes: '/5'
+    minutes: '/10'
   condition:
     condition: and
     conditions:
-    - condition: state
-      entity_id: fan.air_purifier_bedroom
-      state: 'off'
     - condition: template
       value_template: "{{ state_attr('fan.air_purifier_bedroom', 'aqi') > 10 }}"
+    - condition: template
+      value_template: "{{ (state_attr('fan.air_purifier_bedroom', 'mode') | int) != 0 }}" # Auto=0
     - condition: time
       after: "08:00:00"
       before: "21:00:00"
@@ -112,6 +111,7 @@
     service: fan.set_speed
     data:
       speed: Auto
+  - delay: 00:00:10
   - service: notify.all_phone_devices
     data:
       title: Słaba jakość powietrza w ciągu dnia!
@@ -119,15 +119,14 @@
 - alias: AQI Bad Night
   trigger:
     platform: time_pattern
-    minutes: '/5'
+    minutes: '/10'
   condition:
     condition: and
     conditions:
-    - condition: state
-      entity_id: fan.air_purifier_bedroom
-      state: 'off'
     - condition: template
       value_template: "{{ state_attr('fan.air_purifier_bedroom', 'aqi') > 3 }}"
+    - condition: template
+      value_template: "{{ (state_attr('fan.air_purifier_bedroom', 'mode') | int) != 1 }}" # Silent=1
     - condition: time
       after: '21:00:00'
       before: '08:00:00'
@@ -138,6 +137,7 @@
       entity_id: fan.air_purifier_bedroom
       data:
         speed: Silent
+    - delay: 00:00:10
     - service: notify.all_phone_devices
       data:
         title: Słaba jakość powietrza w nocy!
