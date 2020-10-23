@@ -127,11 +127,11 @@ switch:
         friendly_name: "LED"
         value_template: "{{ is_state_attr('fan.air_purifier_bedroom', 'led', true) }}"
         turn_on:
-          service: xiaomi_miio.fan_set_led_on
+          - service: xiaomi_miio.fan_set_led_on
           data:
             entity_id: fan.air_purifier_bedroom
         turn_off:
-          service: xiaomi_miio.fan_set_led_off
+          - service: xiaomi_miio.fan_set_led_off
           data:
             entity_id: fan.air_purifier_bedroom
         icon_template: "mdi:lightbulb-outline"
@@ -139,11 +139,11 @@ switch:
         friendly_name: "Child lock"
         value_template: "{{ is_state_attr('fan.air_purifier_bedroom', 'child_lock', true) }}"
         turn_on:
-          service: xiaomi_miio.fan_set_child_lock_on
+          - service: xiaomi_miio.fan_set_child_lock_on
           data:
             entity_id: fan.air_purifier_bedroom
         turn_off:
-          service: xiaomi_miio.fan_set_child_lock_off
+          - service: xiaomi_miio.fan_set_child_lock_off
           data:
             entity_id: fan.air_purifier_bedroom
         icon_template: "mdi:lock-outline"
@@ -151,14 +151,24 @@ switch:
         friendly_name: "Buzzer"
         value_template: "{{ is_state_attr('fan.air_purifier_bedroom', 'buzzer', true) }}"
         turn_on:
-          service: xiaomi_miio.fan_set_buzzer_on
+          - service: xiaomi_miio.fan_set_buzzer_on
           data:
             entity_id: fan.air_purifier_bedroom
         turn_off:
-          service: xiaomi_miio.fan_set_buzzer_off
+          - service: xiaomi_miio.fan_set_buzzer_off
           data:
             entity_id: fan.air_purifier_bedroom
         icon_template: "mdi:volume-high"
+      air_purifier_bedroom_manual_mode:
+        friendly_name: "Manual mode"
+        value_template: "{{ states.input_boolean.air_purifier_bedroom_manual_mode.state }}"
+        turn_on:
+          - service: input_boolean.turn_on
+            entity_id: input_boolean.air_purifier_bedroom_manual_mode
+        turn_off:
+          - service: input_boolean.turn_off
+            entity_id: input_boolean.air_purifier_bedroom_manual_mode
+        icon_template: mdi:hand-right
   
 input_select:
   # Xiaomi Air Purifier 2S
@@ -187,6 +197,12 @@ input_number:
     max: 3
     step: 1
     icon: mdi:jquery
+
+input_boolean:
+  air_purifier_bedroom_manual_mode:
+    initial: false
+    name: "Manual mode"
+    icon: mdi:right-hand
 
 notify:
   - name: all_phone_devices

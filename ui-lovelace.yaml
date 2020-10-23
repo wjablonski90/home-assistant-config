@@ -35,6 +35,7 @@ views:
         type: entities
         entities:
           - fan.air_purifier_bedroom
+          - switch.air_purifier_bedroom_manual_mode
           - input_select.air_purifier_bedroom_mode
           - input_number.air_purifier_bedroom_favorite_level
           - input_number.air_purifier_bedroom_fan_level
@@ -92,7 +93,6 @@ views:
           - name: Clean entire home
             service: script.clean_entire_home
             icon: 'mdi:home'
-
         
       - title: Środowisko
         type: entities
