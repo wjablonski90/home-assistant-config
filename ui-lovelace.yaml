@@ -19,18 +19,18 @@ views:
         entities:
           - light.shelly_kitchen_desk
           - light.shelly_kitchen_table
-    
+
       - title: Biuro
         type: entities
         entities:
           - light.mi_led_desk_lamp
-          
+
       - title: Sypialnia
         type: entities
         entities:
           - light.yeelight_color_bedroom
           - fan.air_purifier_bedroom
-          
+
       - title: Oczyszczacz
         type: entities
         entities:
@@ -46,9 +46,9 @@ views:
           - sensor.air_purifier_bedroom_filter_remaining
         show_header_toggle: false
         theme: default
-        
+
       - title: Odkurzacz
-        type: 'custom:vacuum-card'
+        type: "custom:vacuum-card"
         entity: vacuum.vacuum_roborock_s50
         stats:
           default:
@@ -74,26 +74,26 @@ views:
         actions:
           - name: Clean entrance
             service: script.clean_entrance
-            icon: 'mdi:door'
+            icon: "mdi:door"
           - name: Clean hall
             service: script.clean_hall
-            icon: 'mdi:walk'
+            icon: "mdi:walk"
           - name: Clean kitchen
             service: script.clean_kitchen
-            icon: 'mdi:silverware-fork-knife'
+            icon: "mdi:silverware-fork-knife"
           - name: Clean living room
             service: script.clean_living_roomn
-            icon: 'mdi:sofa'
+            icon: "mdi:sofa"
           - name: Clean bathroom
             service: script.clean_bathroom
-            icon: 'mdi:shower'
+            icon: "mdi:shower"
           - name: Clean bedroom
             service: script.clean_bedroom
-            icon: 'mdi:bed-empty'
+            icon: "mdi:bed-empty"
           - name: Clean entire home
             service: script.clean_entire_home
-            icon: 'mdi:home'
-        
+            icon: "mdi:home"
+
       - title: Środowisko
         type: entities
         entities:
@@ -102,7 +102,7 @@ views:
           - sensor.air_purifier_bedroom_humidity
         show_header_toggle: false
         theme: default
-  
+
       - entities:
           - sensor.air_purifier_bedroom_air_quality_pm25
         hours_to_show: 80
