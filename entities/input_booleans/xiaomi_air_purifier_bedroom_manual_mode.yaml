@@ -1,0 +1,4 @@
+air_purifier_bedroom_manual_mode:
+  initial: false
+  name: "Manual mode"
+  icon: mdi:right-hand

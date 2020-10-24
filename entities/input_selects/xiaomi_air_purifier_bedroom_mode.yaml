@@ -1,0 +1,8 @@
+air_purifier_bedroom_mode:
+  name: Mode
+  options:
+    - Auto
+    - Silent
+    - Favorite
+    - Fan
+  icon: "mdi:animation-outline"
