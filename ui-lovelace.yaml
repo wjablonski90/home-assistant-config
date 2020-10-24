@@ -84,6 +84,9 @@ views:
           - name: Clean living room
             service: script.clean_living_roomn
             icon: "mdi:sofa"
+          - name: Clean office
+            service: script.clean_office
+            icon: "mdi:laptop-windows"
           - name: Clean bathroom
             service: script.clean_bathroom
             icon: "mdi:shower"
