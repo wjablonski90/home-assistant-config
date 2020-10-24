@@ -1,0 +1,7 @@
+light.shelly_kitchen_desk:
+  friendly_name: Aneks kuchenny
+  icon: mdi:lightbulb
+  
+light.shelly_kitchen_table:
+  friendly_name: Lampa nad stolem
+  icon: mdi:lightbulb

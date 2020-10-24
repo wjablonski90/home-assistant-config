@@ -1,5 +1,5 @@
-# Xiaomi Air Purifier 2S
-- alias: Air Purifier mode change
+# Mode change
+- alias: Mode change
   trigger:
     platform: state
     entity_id: input_select.air_purifier_bedroom_mode
@@ -7,8 +7,10 @@
     service: fan.set_speed
     data_template:
       entity_id: fan.air_purifier_bedroom
-      speed: '{{ states.input_select.air_purifier_bedroom_mode.state }}'   
-- alias: Air Purifier mode changed
+      speed: '{{ states.input_select.air_purifier_bedroom_mode.state }}' 
+
+# Mode changed
+- alias: Mode changed
   trigger:
     platform: state
     entity_id: fan.air_purifier_bedroom
@@ -22,8 +24,9 @@
     entity_id: input_select.air_purifier_bedroom_mode
     data_template:
       option: '{{ states.fan.air_purifier_bedroom.attributes.speed }}'
-      
-- alias: Air Purifier favorite level change
+
+# Favorite level change
+- alias: Favorite level change
   trigger:
     entity_id: input_number.air_purifier_bedroom_favorite_level
     platform: state
@@ -32,7 +35,9 @@
     data_template:
       entity_id: fan.air_purifier_bedroom
       level: '{{ states.input_number.air_purifier_bedroom_favorite_level.state | int }}'   
-- alias: Air Purifier favorite level changed
+
+# Favorite level changed
+- alias: Favorite level changed
   trigger:
     platform: state
     entity_id: fan.air_purifier_bedroom
@@ -46,8 +51,9 @@
     entity_id: input_number.air_purifier_bedroom_favorite_level
     data_template:
       value: '{{ states.fan.air_purifier_bedroom.attributes.favorite_level }}'
-      
-- alias: Air Purifier fan level change
+
+# Fan level change
+- alias: Fan level change
   trigger:
   - platform: state
     entity_id: input_number.air_purifier_bedroom_fan_level
@@ -56,7 +62,9 @@
     entity_id: fan.air_purifier_bedroom
     data_template:
       level: '{{ states.input_number.air_purifier_bedroom_fan_level.state | int }}'
-- alias: Air Purifier fan level changed
+
+# Fan level changed
+- alias: Fan level changed
   trigger:
     platform: state
     entity_id: fan.air_purifier_bedroom
@@ -71,7 +79,8 @@
     data_template:
       value: '{{ states.fan.air_purifier_bedroom.attributes.fan_level }}'
 
-- alias: AQI Day OK
+# Good AQI during the day
+- alias: Good AQI during the day
   trigger:
   - platform: numeric_state
     entity_id: fan.air_purifier_bedroom
@@ -99,7 +108,8 @@
       title: Bardzo dobra jakość powietrza!
       message: "Air Purifier: Off | AQI: {{ states.sensor.air_purifier_bedroom_air_quality_pm25.state_with_unit }}"
 
-- alias: AQI Day BAD
+# Bad AQI during the day
+- alias: Bad AQI during the day
   trigger:
     platform: time_pattern
     minutes: '/10'
@@ -134,7 +144,8 @@
       title: Słaba jakość powietrza w ciągu dnia!
       message: "Air Purifier: On | Mode: {{ states.input_select.air_purifier_bedroom_mode.state }} | AQI: {{ states.sensor.air_purifier_bedroom_air_quality_pm25.state_with_unit }}"
 
-- alias: AQI Night OK
+# Good AQI at night
+- alias: Good AQI at night
   trigger:
   - platform: numeric_state
     entity_id: fan.air_purifier_bedroom
@@ -162,7 +173,8 @@
       title: Bardzo dobra jakość powietrza!
       message: "Air Purifier: Off | AQI: {{ states.sensor.air_purifier_bedroom_air_quality_pm25.state_with_unit }}"
 
-- alias: AQI Night BAD
+# Bad AQI at night
+- alias: Bad AQI at night
   trigger:
     platform: time_pattern
     minutes: '/10'

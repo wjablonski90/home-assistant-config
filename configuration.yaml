@@ -1,3 +1,8 @@
+homeassistant:
+  # Load packages
+  packages: !include_dir_named integrations
+
+
 default_config:
 mobile_app:
 discovery:
@@ -206,10 +211,6 @@ notify:
       - service: mobile_app_oneplus_7
       - service: mobile_app_oneplus_7t
 
-homeassistant:
-  customize: !include customize.yaml
 
-group: !include groups.yaml
-automation: !include automations.yaml
+
 script: !include scripts.yaml
-scene: !include scenes.yaml

@@ -1,0 +1,17 @@
+---
+# Home Assistant component
+# # https://www.home-assistant.io/docs/configuration/basic/
+
+homeassistant:
+  # Home Assistant Instance Name
+  name: Jablonscy Home
+
+  # Units
+  unit_system: metric
+  temperature_unit: C
+
+  # Timezone
+  time_zone: Europe/Warsaw
+
+  # Customize individual entities
+  customize: !include_dir_merge_named ../customization/entities
