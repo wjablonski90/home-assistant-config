@@ -9,6 +9,7 @@
 # Ignore files.
 *.log
 *.db
+*.db-*
 .HA_VERSION
 
 # Ignore folders.
