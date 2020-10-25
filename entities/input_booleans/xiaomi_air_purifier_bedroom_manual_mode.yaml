@@ -1,7 +1,7 @@
 ---
-# Air Purifier Bedroom Manual Mode
+# Air Purifier Bedroom Automations Enabled
 
-air_purifier_bedroom_manual_mode:
-  initial: false
-  name: "Manual mode"
-  icon: mdi:right-hand
+air_purifier_bedroom_automations_enabled:
+  initial: true
+  name: "Automations Enabled"
+  icon: mdi:autorenew

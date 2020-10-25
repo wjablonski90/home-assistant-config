@@ -13,8 +13,8 @@ sensor.air_purifier_bedroom_temp:
 sensor.air_purifier_bedroom_humidity:
   friendly_name: Wilgotność
 
-switch.air_purifier_bedroom_manual_mode:
-  friendly_name: Tryb ręczny
+switch.air_purifier_bedroom_automations_enabled:
+  friendly_name: Automatyzacja
 
 input_select.air_purifier_bedroom_mode:
   friendly_name: Tryb pracy

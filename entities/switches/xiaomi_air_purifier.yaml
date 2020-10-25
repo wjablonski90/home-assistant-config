@@ -39,13 +39,13 @@
           data:
             entity_id: fan.air_purifier_bedroom
       icon_template: "mdi:volume-high"
-    air_purifier_bedroom_manual_mode:
-      friendly_name: "Manual mode"
-      value_template: "{{ states.input_boolean.air_purifier_bedroom_manual_mode.state }}"
+    air_purifier_bedroom_automations_enabled:
+      friendly_name: "Automations enabled"
+      value_template: "{{ states.input_boolean.air_purifier_bedroom_automations_enabled.state }}"
       turn_on:
         - service: input_boolean.turn_on
-          entity_id: input_boolean.air_purifier_bedroom_manual_mode
+          entity_id: input_boolean.air_purifier_bedroom_automations_enabled
       turn_off:
         - service: input_boolean.turn_off
-          entity_id: input_boolean.air_purifier_bedroom_manual_mode
-      icon_template: mdi:hand-right
+          entity_id: input_boolean.air_purifier_bedroom_automations_enabled
+      icon_template: mdi:autorenew
