@@ -12,6 +12,3 @@ homeassistant:
 
   # Timezone
   time_zone: Europe/Warsaw
-
-  # Customize individual entities
-  customize: !include_dir_merge_named ../customization/entities

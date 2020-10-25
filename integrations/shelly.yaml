@@ -1,4 +1,16 @@
 ---
 # The shelly component enables the ability to control Shelly integration within Home Assistant.
 
-shelly: !include ../entities/shelly/shelly.yaml
+shelly:
+  discovery: false
+  sensors:
+    - device_temp
+    - current_consumption
+    - total_consumption
+  devices: # !include_dir_merge_list ../entities/shellies/devices
+    - id: !secret shelly-light-kitchen-desk-id
+      entity_id: kitchen_desk
+      light_switch: true
+    - id: !secret shelly-light-kitchen-table-id
+      entity_id: kitchen_table
+      light_switch: true
