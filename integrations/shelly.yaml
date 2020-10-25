@@ -1,0 +1,4 @@
+---
+# The shelly component enables the ability to control Shelly integration within Home Assistant.
+
+shelly: !include ../entities/shelly/shelly.yaml

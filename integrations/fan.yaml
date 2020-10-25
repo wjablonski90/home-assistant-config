@@ -1,0 +1,4 @@
+---
+# The fan component enables the ability to control home fans within Home Assistant.
+
+fan: !include_dir_list ../entities/fans

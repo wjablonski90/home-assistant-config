@@ -1,0 +1,7 @@
+---
+# Defines notification group for Justyna's Devices
+
+name: justyna_devices
+platform: group
+services:
+  - service: mobile_app_oneplus_7t

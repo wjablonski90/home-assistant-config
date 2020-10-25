@@ -1,0 +1,5 @@
+---
+# Home weather customization
+
+weather.dom:
+  friendly_name: Kraków

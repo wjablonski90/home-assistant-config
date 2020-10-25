@@ -1,10 +1,10 @@
 ---
 # Home Assistant component
-# # https://www.home-assistant.io/docs/configuration/basic/
+# https://www.home-assistant.io/docs/configuration/basic/
 
 homeassistant:
   # Home Assistant Instance Name
-  name: Jablonscy Home
+  name: Sweet Home
 
   # Units
   unit_system: metric

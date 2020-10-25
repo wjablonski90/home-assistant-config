@@ -1,3 +1,6 @@
+---
+# Xiaomi Air Purifier 3
+
 # Mode change
 - alias: Mode change
   trigger:
@@ -103,7 +106,7 @@
   action:
   - service: fan.turn_off
     entity_id: fan.air_purifier_bedroom
-  - service: notify.all_phone_devices
+  - service: notify.family
     data: 
       title: Bardzo dobra jakość powietrza!
       message: "Air Purifier: Off | AQI: {{ states.sensor.air_purifier_bedroom_air_quality_pm25.state_with_unit }}"
@@ -139,7 +142,7 @@
     data:
       speed: Auto
   - delay: 00:00:10
-  - service: notify.all_phone_devices
+  - service: notify.family
     data:
       title: Słaba jakość powietrza w ciągu dnia!
       message: "Air Purifier: On | Mode: {{ states.input_select.air_purifier_bedroom_mode.state }} | AQI: {{ states.sensor.air_purifier_bedroom_air_quality_pm25.state_with_unit }}"
@@ -168,7 +171,7 @@
   action:
   - service: fan.turn_off
     entity_id: fan.air_purifier_bedroom
-  - service: notify.all_phone_devices
+  - service: notify.family
     data: 
       title: Bardzo dobra jakość powietrza!
       message: "Air Purifier: Off | AQI: {{ states.sensor.air_purifier_bedroom_air_quality_pm25.state_with_unit }}"
@@ -204,7 +207,7 @@
       data:
         speed: Silent
     - delay: 00:00:10
-    - service: notify.all_phone_devices
+    - service: notify.family
       data:
         title: Słaba jakość powietrza w nocy!
         message: "Air Purifier: On | Mode: {{ states.input_select.air_purifier_bedroom_mode.state }} | AQI: {{ states.sensor.air_purifier_bedroom_air_quality_pm25.state_with_unit }}"

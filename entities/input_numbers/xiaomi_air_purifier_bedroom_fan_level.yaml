@@ -1,3 +1,6 @@
+---
+# Air Purifier Bedroom Fan Level
+
 air_purifier_bedroom_fan_level:
   name: "Fan level"
   initial: 1

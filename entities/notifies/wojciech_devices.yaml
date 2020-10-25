@@ -1,0 +1,7 @@
+---
+# Defines notification group for Wojciech's Devices
+
+name: wojciech_devices
+platform: group
+services:
+  - service: mobile_app_oneplus_7

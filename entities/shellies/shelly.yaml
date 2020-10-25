@@ -1,0 +1,9 @@
+---
+# Shelly integration
+
+discovery: false
+sensors:
+  - device_temp
+  - current_consumption
+  - total_consumption
+devices: !include_dir_merge_list devices/

@@ -1,3 +1,6 @@
+---
+# Air Purifier Bedroom Manual Mode
+
 air_purifier_bedroom_manual_mode:
   initial: false
   name: "Manual mode"

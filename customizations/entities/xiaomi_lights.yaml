@@ -1,7 +1,0 @@
-light.mi_led_desk_lamp:
-  friendly_name: Lampka
-  icon: mdi:desk-lamp
-  
-light.yeelight_color_bedroom:
-  friendly_name: Lampa sufitowa
-  icon: mdi:lightbulb

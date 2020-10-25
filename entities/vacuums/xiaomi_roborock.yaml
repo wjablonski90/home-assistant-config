@@ -1,0 +1,8 @@
+---
+# Xiaomi Roborock S50
+# https://www.home-assistant.io/integrations/xiaomi_miio#xiaomi-mi-robot-vacuum
+
+platform: xiaomi_miio
+host: !secret xiaomi-vacuum-cleaner-host
+token: !secret xiaomi-vacuum-cleaner-token
+name: Vacuum Roborock S50

@@ -1,0 +1,9 @@
+---
+# Xiaomi Air Purifier 3
+# https://www.home-assistant.io/integrations/xiaomi_miio#xiaomi-air-purifier
+
+platform: xiaomi_miio
+name: Air Purifier Bedroom
+host: !secret xiaomi-air-purifier-host
+token: !secret xiaomi-air-purifier-token
+model: zhimi.airpurifier.ma4

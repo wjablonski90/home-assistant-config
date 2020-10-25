@@ -1,0 +1,9 @@
+---
+# Shelly kitchen lights
+
+- id: !secret shelly-light-kitchen-desk-id
+  entity_id: kitchen_desk
+  light_switch: true
+- id: !secret shelly-light-kitchen-table-id
+  entity_id: kitchen_table
+  light_switch: true
