@@ -1,0 +1,27 @@
+---
+# The yeelight component enables the ability to control Yeelight devices within Home Assistant.
+
+yeelight:
+  devices:
+    !secret yeelight-mi-led-desk-lamp-host:
+      name: Mi LED Desk Lamp
+      transition: 1000
+      use_music_mode: true
+      save_on_change: true
+    !secret yeelight-color-bulb-host:
+      name: Yeelight Color Bedroom
+      transition: 1000
+      use_music_mode: true
+      save_on_change: true
+  custom_effects:
+    - name: 'Sunrise'
+      flow_params:
+        count: 1
+        action: stay
+        transitions:
+          - RGBTransition: [255, 0, 0, 50, 1]
+          - TemperatureTransition: [1700, 5000, 10]
+          - TemperatureTransition: [2700, 5000, 11]
+          - TemperatureTransition: [3700, 5000, 12]
+          - TemperatureTransition: [4700, 5000, 13]
+          - TemperatureTransition: [6500, 5000, 100]

@@ -1,0 +1,9 @@
+---
+# Lovelace
+# https://www.home-assistant.io/lovelace/
+
+lovelace:
+  mode: yaml
+  resources:
+  - url: /local/community/vacuum-card/vacuum-card.js
+    type: module

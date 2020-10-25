@@ -1,3 +1,6 @@
+---
+# Xiaomi Roborock S50
+
 clean_entrance:
   alias: "Clean entrance"
   sequence:
