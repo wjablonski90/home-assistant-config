@@ -1,0 +1,12 @@
+---
+# Work office zones
+
+- name: ryvu
+  latitude: !secret ryvu-zone-latitude
+  longitude: !secret ryvu-zone-longitude
+  radius: 65
+
+- name: gc
+  latitude: !secret gc-zone-latitude
+  longitude: !secret gc-zone-longitude
+  radius: 30

@@ -7,6 +7,7 @@
 !*.md
 
 # Ignore files.
+*.pem
 *.log
 *.db
 *.db-*

@@ -3,5 +3,3 @@ homeassistant:
   packages: !include_dir_named integrations
 
 default_config:
-mobile_app:
-discovery:

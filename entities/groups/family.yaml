@@ -1,0 +1,8 @@
+---
+# Family group
+
+family:
+  name: Family
+  entities:
+    - person.wojciech
+    - person.justyna

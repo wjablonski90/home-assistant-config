@@ -1,0 +1,7 @@
+---
+# Home zone
+
+name: home
+latitude: !secret home-zone-latitude
+longitude: !secret home-zone-longitude
+radius: 30

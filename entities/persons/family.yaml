@@ -1,0 +1,12 @@
+---
+# Family members
+
+- name: Justyna
+  id: justyna
+  device_trackers:
+    - device_tracker.oneplus_7t
+
+- name: Wojciech
+  id: wojciech
+  device_trackers:
+    - device_tracker.oneplus_7
