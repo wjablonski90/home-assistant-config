@@ -82,7 +82,7 @@ views:
             service: script.clean_kitchen
             icon: "mdi:silverware-fork-knife"
           - name: Clean living room
-            service: script.clean_living_roomn
+            service: script.clean_living_room
             icon: "mdi:sofa"
           - name: Clean office
             service: script.clean_office
