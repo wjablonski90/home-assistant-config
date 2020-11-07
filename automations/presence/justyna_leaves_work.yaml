@@ -1,0 +1,23 @@
+---
+# Justyna leaves work
+
+- alias: Presence - Justyna leaves work
+  trigger:
+    platform: state
+    entity_id: person.justyna
+    from: 'ryvu'
+  condition:
+    - condition: time
+      after: '15:00:00'
+      before: '18:00:00'
+      weekday:
+        - mon
+        - tue
+        - wed
+        - thu
+        - fri
+  action:
+    - service: notify.wojciech_devices
+      data:
+        title: Justyna wychodzi z pracy.
+        message: "Będzie za niedługo."

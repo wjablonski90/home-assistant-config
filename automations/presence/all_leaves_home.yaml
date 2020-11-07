@@ -1,0 +1,16 @@
+---
+# All leaves home
+
+- alias: All leaves home
+  trigger:
+    platform: state
+    entity_id: group.family
+    from: 'home'
+    to:  'not_home'
+  action:
+    - service: light.turn_off
+      entity_id: group.all_lights
+    - service: notify.family
+      data:
+        title: "Nikogo nie ma w domu."
+        message: "Wyłączam światło."

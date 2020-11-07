@@ -1,0 +1,23 @@
+---
+# Justyna leaves home
+
+- alias: Presence - Justyna leaves home
+  trigger:
+    platform: state
+    entity_id: person.justyna
+    from: 'home'
+  condition:
+    - condition: time
+      after: '07:00:00'
+      before: '09:00:00'
+      weekday:
+        - mon
+        - tue
+        - wed
+        - thu
+        - fri
+  action: 
+    - service: notify.wojciech_devices
+      data:
+        title: Justyś wychodzi z domu.
+        message: "Pewnie idzie do pracy.."

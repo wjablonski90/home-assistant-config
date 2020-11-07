@@ -1,0 +1,23 @@
+---
+# Justyna arrives to home
+
+- alias: Presence - Justyna arrives to home
+  trigger:
+    platform: state
+    entity_id: person.justyna
+    to: 'home'
+  condition:
+    - condition: time
+      after: '15:00:00'
+      before: '18:00:00'
+      weekday:
+        - mon
+        - tue
+        - wed
+        - thu
+        - fri
+  action: 
+    - service: notify.wojciech_devices
+      data:
+        title: Justyna wróciła do domu.
+        message: "Właśnie weszła :)!"
