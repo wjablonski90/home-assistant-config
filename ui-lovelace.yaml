@@ -110,6 +110,12 @@ views:
       - title: Środowisko
         type: entities
         entities:
+          - sensor.temperature_living_room
+          - sensor.humidity_living_room
+          - type: divider
+          - sensor.temperature_balcony
+          - sensor.humidity_balcony
+          - type: divider
           - sensor.air_purifier_bedroom_air_quality_pm25
           - sensor.air_purifier_bedroom_temp
           - sensor.air_purifier_bedroom_humidity

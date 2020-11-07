@@ -1,0 +1,14 @@
+---
+# Humidity and temperature sensors customizations
+
+sensor.humidity_living_room:
+  friendly_name: Salon - wilgotność
+
+sensor.temperature_living_room:
+  friendly_name: Salon - temperatura
+
+sensor.humidity_balcony:
+  friendly_name: Balkon - wilgotność
+
+sensor.temperature_balcony:
+  friendly_name: Balkon - temperatura
