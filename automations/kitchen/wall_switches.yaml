@@ -1,0 +1,24 @@
+---
+# Kitchen wall switches automations
+
+- alias: Toggle kitchen desk light
+  trigger:
+    platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.wall_switch_kitchen_desk
+      click_type: single
+  action:
+    service: light.toggle
+    entity_id: light.shelly_kitchen_desk
+
+- alias: Toggle kitchen table light
+  trigger:
+    platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.wall_switch_kitchen_table
+      click_type: single
+  action:
+    service: light.toggle
+    entity_id: light.shelly_kitchen_table
