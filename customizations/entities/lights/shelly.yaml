@@ -6,5 +6,5 @@ light.shelly_kitchen_desk:
   icon: mdi:lightbulb
   
 light.shelly_kitchen_table:
-  friendly_name: Lampa nad stolem
+  friendly_name: Lampa nad stołem
   icon: mdi:lightbulb

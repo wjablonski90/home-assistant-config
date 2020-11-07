@@ -5,13 +5,13 @@ fan.air_purifier_bedroom:
   friendly_name: Xiaomi Air Purifier 3
 
 sensor.air_purifier_bedroom_air_quality_pm25:
-  friendly_name: Jakość powietrza
+  friendly_name: Sypialnia - Jakość powietrza
   
 sensor.air_purifier_bedroom_temp:
-  friendly_name: Temperatura
+  friendly_name: Sypialnia - Temperatura
   
 sensor.air_purifier_bedroom_humidity:
-  friendly_name: Wilgotność
+  friendly_name: Sypialnia - Wilgotność
 
 switch.air_purifier_bedroom_automations_enabled:
   friendly_name: Automatyzacja
