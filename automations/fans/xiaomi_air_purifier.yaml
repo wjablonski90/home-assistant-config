@@ -1,0 +1,213 @@
+---
+# Xiaomi Air Purifier 3
+
+# Mode change
+- alias: Mode change
+  trigger:
+    platform: state
+    entity_id: input_select.air_purifier_bedroom_mode
+  action:
+    service: fan.set_speed
+    data_template:
+      entity_id: fan.air_purifier_bedroom
+      speed: '{{ states.input_select.air_purifier_bedroom_mode.state }}' 
+
+# Mode changed
+- alias: Mode changed
+  trigger:
+    platform: state
+    entity_id: fan.air_purifier_bedroom
+  condition:
+    condition: and
+    conditions:
+    - condition: template
+      value_template: "{{ (state_attr('fan.air_purifier_bedroom', 'speed') | string) != (states('input_select.air_purifier_bedroom_mode') | string) }}"
+  action:
+    service: input_select.select_option
+    entity_id: input_select.air_purifier_bedroom_mode
+    data_template:
+      option: '{{ states.fan.air_purifier_bedroom.attributes.speed }}'
+
+# Favorite level change
+- alias: Favorite level change
+  trigger:
+    entity_id: input_number.air_purifier_bedroom_favorite_level
+    platform: state
+  action:
+    service: xiaomi_miio.fan_set_favorite_level
+    data_template:
+      entity_id: fan.air_purifier_bedroom
+      level: '{{ states.input_number.air_purifier_bedroom_favorite_level.state | int }}'   
+
+# Favorite level changed
+- alias: Favorite level changed
+  trigger:
+    platform: state
+    entity_id: fan.air_purifier_bedroom
+  condition:
+    condition: and
+    conditions:
+    - condition: template
+      value_template: "{{ (state_attr('fan.air_purifier_bedroom', 'favorite_level') | int) != (states('input_number.air_purifier_bedroom_favorite_level') | int) }}"
+  action:
+    service: input_number.set_value
+    entity_id: input_number.air_purifier_bedroom_favorite_level
+    data_template:
+      value: '{{ states.fan.air_purifier_bedroom.attributes.favorite_level }}'
+
+# Fan level change
+- alias: Fan level change
+  trigger:
+  - platform: state
+    entity_id: input_number.air_purifier_bedroom_fan_level
+  action:
+    service: xiaomi_miio.fan_set_fan_level
+    entity_id: fan.air_purifier_bedroom
+    data_template:
+      level: '{{ states.input_number.air_purifier_bedroom_fan_level.state | int }}'
+
+# Fan level changed
+- alias: Fan level changed
+  trigger:
+    platform: state
+    entity_id: fan.air_purifier_bedroom
+  condition:
+    condition: and
+    conditions:
+    - condition: template
+      value_template: "{{ (state_attr('fan.air_purifier_bedroom', 'fan_level') | int) != (states('input_number.air_purifier_bedroom_fan_level') | int) }}"
+  action:
+    service: input_number.set_value
+    entity_id: input_number.air_purifier_bedroom_fan_level
+    data_template:
+      value: '{{ states.fan.air_purifier_bedroom.attributes.fan_level }}'
+
+# Good AQI during the day
+- alias: Good AQI during the day
+  trigger:
+  - platform: numeric_state
+    entity_id: fan.air_purifier_bedroom
+    value_template: '{{ state.attributes.aqi }}'
+    below: 8
+    for:
+      minutes: 5
+  condition:
+    - condition: and
+      conditions:
+      - condition: state
+        entity_id: input_boolean.air_purifier_bedroom_automations_enabled
+        state: 'on'
+      - condition: state
+        entity_id: fan.air_purifier_bedroom
+        state: 'on'
+      - condition: time
+        after: "08:00:00"
+        before: "21:00:00"
+  action:
+  - service: fan.turn_off
+    entity_id: fan.air_purifier_bedroom
+  - service: notify.family
+    data: 
+      title: Bardzo dobra jakość powietrza!
+      message: "Air Purifier: Off | AQI: {{ states.sensor.air_purifier_bedroom_air_quality_pm25.state_with_unit }}"
+
+# Bad AQI during the day
+- alias: Bad AQI during the day
+  trigger:
+    platform: time_pattern
+    minutes: '/10'
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: input_boolean.air_purifier_bedroom_automations_enabled
+      state: 'on'
+    - condition: template
+      value_template: "{{ state_attr('fan.air_purifier_bedroom', 'aqi') > 10 }}"
+    - condition: time
+      after: "08:00:00"
+      before: "21:00:00"
+    - condition: or
+      conditions:
+      - condition: template
+        value_template: "{{ (state_attr('fan.air_purifier_bedroom', 'mode') | int) != 0 }}" # Auto=0
+      - condition: state
+        entity_id: fan.air_purifier_bedroom
+        state: 'off'
+  action:
+  - entity_id: fan.air_purifier_bedroom
+    service: fan.turn_on
+  - entity_id: fan.air_purifier_bedroom
+    service: fan.set_speed
+    data:
+      speed: Auto
+  - delay: 00:00:10
+  - service: notify.family
+    data:
+      title: Słaba jakość powietrza w ciągu dnia!
+      message: "Air Purifier: On | Mode: {{ states.input_select.air_purifier_bedroom_mode.state }} | AQI: {{ states.sensor.air_purifier_bedroom_air_quality_pm25.state_with_unit }}"
+
+# Good AQI at night
+- alias: Good AQI at night
+  trigger:
+  - platform: numeric_state
+    entity_id: fan.air_purifier_bedroom
+    value_template: '{{ state.attributes.aqi }}'
+    below: 3
+    for:
+      minutes: 5
+  condition:
+    - condition: and
+      conditions:
+      - condition: state
+        entity_id: input_boolean.air_purifier_bedroom_automations_enabled
+        state: 'on'
+      - condition: state
+        entity_id: fan.air_purifier_bedroom
+        state: 'on'
+      - condition: time
+        after: "21:00:00"
+        before: "08:00:00"
+  action:
+  - service: fan.turn_off
+    entity_id: fan.air_purifier_bedroom
+  - service: notify.family
+    data: 
+      title: Bardzo dobra jakość powietrza!
+      message: "Air Purifier: Off | AQI: {{ states.sensor.air_purifier_bedroom_air_quality_pm25.state_with_unit }}"
+
+# Bad AQI at night
+- alias: Bad AQI at night
+  trigger:
+    platform: time_pattern
+    minutes: '/10'
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: input_boolean.air_purifier_bedroom_automations_enabled
+      state: 'on'
+    - condition: template
+      value_template: "{{ state_attr('fan.air_purifier_bedroom', 'aqi') > 5 }}"
+    - condition: time
+      after: '21:00:00'
+      before: '08:00:00'
+    - condition: or
+      conditions:
+      - condition: template
+        value_template: "{{ (state_attr('fan.air_purifier_bedroom', 'mode') | int) != 1 }}" # Silent=1
+      - condition: state
+        entity_id: fan.air_purifier_bedroom
+        state: 'off'
+  action:
+    - service: fan.turn_on
+      entity_id: fan.air_purifier_bedroom
+    - service: fan.set_speed
+      entity_id: fan.air_purifier_bedroom
+      data:
+        speed: Silent
+    - delay: 00:00:10
+    - service: notify.family
+      data:
+        title: Słaba jakość powietrza w nocy!
+        message: "Air Purifier: On | Mode: {{ states.input_select.air_purifier_bedroom_mode.state }} | AQI: {{ states.sensor.air_purifier_bedroom_air_quality_pm25.state_with_unit }}"
