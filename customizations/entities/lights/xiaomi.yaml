@@ -8,3 +8,11 @@ light.mi_led_desk_lamp:
 light.yeelight_color_bedroom:
   friendly_name: Lampa sufitowa
   icon: mdi:lightbulb
+  
+light.gateway_light_living_room:
+  friendly_name: Gateway salon
+  icon: mdi:lightbulb
+  
+light.gateway_light_hall:
+  friendly_name: Gateway korytarz
+  icon: mdi:lightbulb

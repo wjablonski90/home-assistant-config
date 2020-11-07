@@ -1,0 +1,14 @@
+gateway_lights:
+  name: Gateway Lights
+  entities:
+    - light.gateway_light_04cf8c8f8670
+    - light.gateway_light_286c07f10803
+
+all_lights:
+  name: All Lights
+  entities:
+    - light.shelly_kitchen_desk
+    - light.shelly_kitchen_table
+    - light.gateway_light_04cf8c8f8670
+    - light.gateway_light_286c07f10803
+    - light.mi_led_desk_lamp

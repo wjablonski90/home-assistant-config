@@ -20,10 +20,20 @@ views:
           - light.shelly_kitchen_desk
           - light.shelly_kitchen_table
 
+      - title: Salon
+        type: entities
+        entities:
+          - light.gateway_light_living_room
+
       - title: Biuro
         type: entities
         entities:
           - light.mi_led_desk_lamp
+
+      - title: Korytarz
+        type: entities
+        entities:
+          - light.gateway_light_hall
 
       - title: Sypialnia
         type: entities
