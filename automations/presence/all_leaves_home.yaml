@@ -4,13 +4,36 @@
 - alias: All leaves home
   trigger:
     platform: state
-    entity_id: group.family
-    from: 'home'
-    to:  'not_home'
+    entity_id: binary_sensor.wojciech_presence
+    from: 'on'
+    to: 'off'
   action:
     - service: light.turn_off
       entity_id: group.all_lights
-    - service: notify.family
+    - service: notify.wojciech_devices
       data:
         title: "Nikogo nie ma w domu."
         message: "Wyłączam światło."
+
+# - alias: Muszu wrocil
+#   trigger:
+#     platform: state
+#     entity_id: binary_sensor.wojciech_presence
+#     from: 'off'
+#     to: 'on'
+#   action:
+#   condition:
+#     - condition: and
+#       conditions:
+#       - condition: state
+#         entity_id: binary_sensor.door_entrance
+#         to: 'on'
+#       - condition: state
+#         entity_id: group.family
+#         state: 'not_home'
+#     - service: light.turn_on
+#       entity_id: light.shelly_kitchen_desk
+#     - service: notify.wojciech_devices
+#       data:
+#         title: "Muszu wrócił."
+#         message: "Włączam światło nad blatem."
