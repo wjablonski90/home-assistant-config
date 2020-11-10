@@ -211,3 +211,20 @@
       data:
         title: Słaba jakość powietrza w nocy!
         message: "Air Purifier: On | Mode: {{ states.input_select.air_purifier_bedroom_mode.state }} | AQI: {{ states.sensor.air_purifier_bedroom_air_quality_pm25.state_with_unit }}"
+
+# Toggle automations depends on bedroom's window state
+- alias: Toggle automations depends on window open/close state
+  trigger:
+    platform: state
+    entity_id: binary_sensor.window_bedroom
+  action:
+    - service_template: >
+        {% if is_state('binary_sensor.window_bedroom', 'on') %} switch.turn_off
+        {% else %} switch.turn_on
+        {% endif %}
+      entity_id: switch.air_purifier_bedroom_automations_enabled
+    - service_template: >
+        {% if is_state('binary_sensor.window_bedroom', 'on') and is_state('fan.air_purifier_bedroom', 'on') %} fan.turn_off
+        {% else %} fan.turn_on
+        {% endif %}
+      entity_id: fan.air_purifier_bedroom
