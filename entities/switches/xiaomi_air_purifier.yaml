@@ -15,6 +15,7 @@
           data:
             entity_id: fan.air_purifier_bedroom
       icon_template: "mdi:lightbulb-outline"
+
     air_purifier_bedroom_child_lock:
       friendly_name: "Child lock"
       value_template: "{{ is_state_attr('fan.air_purifier_bedroom', 'child_lock', true) }}"
@@ -27,6 +28,7 @@
           data:
             entity_id: fan.air_purifier_bedroom
       icon_template: "mdi:lock-outline"
+
     air_purifier_bedroom_buzzer:
       friendly_name: "Buzzer"
       value_template: "{{ is_state_attr('fan.air_purifier_bedroom', 'buzzer', true) }}"
@@ -39,6 +41,7 @@
           data:
             entity_id: fan.air_purifier_bedroom
       icon_template: "mdi:volume-high"
+      
     air_purifier_bedroom_automations_enabled:
       friendly_name: "Automations enabled"
       value_template: "{{ states.input_boolean.air_purifier_bedroom_automations_enabled.state }}"

@@ -1,0 +1,137 @@
+---
+# Automations depend on Bedroom's door sensor
+
+# Pee night - turn on lights once bedroom door are open
+- alias: Pee night turn the lights on
+  trigger:
+    platform: state
+    entity_id: binary_sensor.door_bedroom
+    from: 'off'
+    to: 'on'
+  condition:
+    - condition: time
+      after: '22:00:00'
+      before: '07:00:00'
+  action:
+    - service: light.turn_on
+      entity_id: group.gateway_lights
+      data:
+        brightness: 255
+        rgb_color: [130,80,40]
+
+# Pee night - turn off lights once bedroom door are closed
+- alias: Pee night turn the lights off
+  trigger:
+    platform: state
+    entity_id: binary_sensor.door_bedroom
+    from: 'on'
+    to: 'off'
+    for:
+      seconds: 15
+  condition:
+    - condition: time
+      after: '22:00:00'
+      before: '07:00:00'
+    # - condition: state
+    #   entity_id: binary_sensor.door_bedroom
+    #   state: 'off'
+  action:
+    - service: light.turn_off
+      entity_id: group.gateway_lights
+  
+# jesli drzwi so otwarte i czujka wykryje ruch to zaswiec swiatelka, jesli sa zgaszone
+- alias: dupa
+  trigger:
+    platform: state
+    entity_id: binary_sensor.motion_sensor_left_bedroom, binary_sensor.motion_sensor_right_bedroom
+    from: 'off'
+    to: 'on'
+  condition:
+    - condition: and
+      conditions:
+      - condition: time
+        after: '22:00:00'
+        before: '07:00:00'
+      - condition: state
+        entity_id: binary_sensor.door_bedroom
+        state: 'on'
+      - condition: state
+        entity_id: group.gateway_lights
+        state: 'off'
+  action:
+    - service: light.turn_on
+      entity_id: group.gateway_lights
+      data:
+        brightness: 255
+        rgb_color: [130,80,40]
+
+# Blabla
+- alias: Pee night turn the lights on, dimm Hall after 5 sec when the Bathroom door not open
+  trigger: 
+    platform: state
+    entity_id: binary_sensor.motion_sensor_right_bedroom
+    from: 'on'
+    to: 'off'
+    for: 
+      minutes: 5
+  condition:
+    - condition: and
+      conditions:
+      - condition: time
+        after: '22:00:00'
+        before: '07:00:00'
+      - condition: state
+        entity_id: binary_sensor.door_bedroom
+        state: 'on'
+  action:
+    # - service: notify.wojciech_devices
+    #   data:
+    #     title: Wykryto ruch!
+    #     message: Musz idzie siku..
+    - service: light.turn_off
+      entity_id: group.gateway_lights
+      # data:
+      #   brightness: 255
+      #   rgb_color: [130,80,40]
+
+# wychodze z sypialni siku w nocy
+# odmykam drzwi
+# zaswiecaja sie swiatla
+# jesli w przeciagu 5 sekund nie otworze drzwi do łazienki
+# gateway hall sciemnia sie do 5%
+# jesli drzwi do lazienki sie otworzo to pozostaw bez zmian
+
+# wracam po siku do sypialni
+# zamykam drzwi
+# mam 15 sekund, zeby polozyc sie na wyro
+# swiatla gasno
+
+# drzwi do sypialki otwart bo jeszcze nie spimy i jest koteł
+# czujka ruchu z mej strony luka czy jest ruch
+# jesli jest ruch to zapala swiatelka
+
+# - alias: Xiaomi Sensor Fix
+#   trigger:
+#     - platform: state
+#       entity_id:
+#         - binary_sensor.motion_sensor_right_bedroom
+#       from: 'off'
+#       to: 'on'
+#       for: 00:00:05
+#   condition: []
+#   action:
+#     - service: python_script.set_state
+#       data_template:
+#         entity_id: "{{ trigger.entity_id }}"
+#         state: 'off'
+
+# - alias: 'Xiaomi Aqara Motion Sensors duration fix'
+#   trigger:
+#     - platform: homeassistant
+#       event: start
+#   action:
+#     - service: deconz.configure
+#       data:
+#         entity: binary_sensor.motion_sensor_name
+#         field: "/config"
+#         data: {"duration": 5}
