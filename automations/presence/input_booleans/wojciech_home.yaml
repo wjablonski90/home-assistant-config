@@ -1,0 +1,46 @@
+---
+# Determine Wojciech home presence automations
+
+- alias: Mark Wojciech Home
+  trigger:
+    - platform: state
+      entity_id: person.wojciech
+      to: 'home'
+    - platform: state
+      entity_id: input_boolean.wojciech_wifi
+      to: 'on'
+  condition:
+    - condition: state
+      entity_id: input_boolean.wojciech_home
+      state: 'off'
+  action:
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.wojciech_home
+    - service: notify.wojciech_devices
+      data:
+        title: Wojciech's in home.
+        message: He's here.
+
+- alias: Mark Wojciech Away
+  trigger:
+    - platform: state
+      entity_id: person.wojciech
+      to: 'not_home'
+      for:
+        minutes: 3
+    - platform: state
+      entity_id: input_boolean.wojciech_wifi
+      to: 'off'
+      for:
+        minutes: 3
+  condition:
+    - condition: state
+      entity_id: input_boolean.wojciech_home
+      state: 'on'
+  action:
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.wojciech_home
+    - service: notify.wojciech_devices
+      data:
+        title: Wojciech is away from home.
+        message: He's not here.

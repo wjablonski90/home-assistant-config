@@ -1,0 +1,6 @@
+---
+# Justyna Home states
+
+justyna_home:
+  name: Justyna Home
+  initial: on

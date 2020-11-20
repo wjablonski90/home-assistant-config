@@ -1,0 +1,39 @@
+---
+# Determine Wojciech home presence automations
+
+- alias: Mark Wojciech Wifi connected
+  trigger:
+    - platform: state
+      entity_id: sensor.oneplus_7_polaczenie_wi_fi
+      to: 'Niasio.net'
+    - platform: state
+      entity_id: sensor.oneplus_7_polaczenie_wi_fi
+      to: 'Niasio5G.net'
+  condition:
+    - condition: state
+      entity_id: input_boolean.wojciech_wifi
+      state: 'off'
+  action:
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.wojciech_wifi
+    - service: notify.wojciech_devices
+      data:
+        title: Wojciech connected to home wifi.
+        message: Connected.
+
+- alias: Mark Wojciech Wifi disconnected
+  trigger:
+    - platform: state
+      entity_id: sensor.oneplus_7_polaczenie_wi_fi
+      to: '<not connected>'
+  condition:
+    - condition: state
+      entity_id: input_boolean.wojciech_wifi
+      state: 'on'
+  action:
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.wojciech_wifi
+    - service: notify.wojciech_devices
+      data:
+        title: Wojciech disconnected with home wifi.
+        message: Disconnected.

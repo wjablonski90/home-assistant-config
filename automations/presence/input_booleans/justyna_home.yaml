@@ -1,0 +1,46 @@
+---
+# Determine Justyna home presence automations
+
+- alias: Mark Justyna Home
+  trigger:
+    - platform: state
+      entity_id: person.justyna
+      to: 'home'
+    - platform: state
+      entity_id: input_boolean.justyna_wifi
+      to: 'on'
+  condition:
+    - condition: state
+      entity_id: input_boolean.justyna_home
+      state: 'off'
+  action:
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.justyna_home
+    - service: notify.wojciech_devices
+      data:
+        title: Justyna's in home.
+        message: She's here!
+
+- alias: Mark Justyna Away
+  trigger:
+    - platform: state
+      entity_id: person.justyna
+      to: 'not_home'
+      for:
+        minutes: 3
+    - platform: state
+      entity_id: input_boolean.justyna_wifi
+      to: 'off'
+      for:
+        minutes: 3
+  condition:
+    - condition: state
+      entity_id: input_boolean.justyna_home
+      state: 'on'
+  action:
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.justyna_home
+    - service: notify.wojciech_devices
+      data:
+        title: Justyna is away from home.
+        message: She's not here.

@@ -1,0 +1,39 @@
+---
+# Determine Justyna home wifi connection automations
+
+- alias: Mark Justyna Wifi connected
+  trigger:
+    - platform: state
+      entity_id: sensor.oneplus_7t_polaczenie_wi_fi
+      to: 'Niasio.net'
+    - platform: state
+      entity_id: sensor.oneplus_7t_polaczenie_wi_fi
+      to: 'Niasio5G.net'
+  condition:
+    - condition: state
+      entity_id: input_boolean.justyna_wifi
+      state: 'off'
+  action:
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.justyna_wifi
+    - service: notify.wojciech_devices
+      data:
+        title: Justyna connected to home wifi.
+        message: Connected.
+
+- alias: Mark Justyna Wifi disconnected
+  trigger:
+    - platform: state
+      entity_id: sensor.oneplus_7t_polaczenie_wi_fi
+      to: '<not connected>'
+  condition:
+    - condition: state
+      entity_id: input_boolean.justyna_wifi
+      state: 'on'
+  action:
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.justyna_wifi
+    - service: notify.wojciech_devices
+      data:
+        title: Justyna disconnected with home wifi.
+        message: Disconnected.
