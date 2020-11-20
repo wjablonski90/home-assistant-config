@@ -1,0 +1,11 @@
+---
+# Windows group
+
+all_windows:
+  name: All Windows
+  entities:
+    - binary_sensor.window_kitchen_contact
+    # - binary_sensor.window_living_room_contact
+    - binary_sensor.window_office_contact
+    # - binary_sensor.window_bathroom_contact
+    - binary_sensor.window_bedroom_contact

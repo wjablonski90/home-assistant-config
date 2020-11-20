@@ -1,3 +1,6 @@
+---
+# Lights group
+
 gateway_lights:
   name: Gateway Lights
   entities:
