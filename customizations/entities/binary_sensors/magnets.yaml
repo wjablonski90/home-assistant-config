@@ -1,5 +1,0 @@
-binary_sensor.door_bedroom:
-  friendly_name: Drzwi do sypialni
-
-binary_sensor.door_entrance:
-  friendly_name: Drzwi wejściowe

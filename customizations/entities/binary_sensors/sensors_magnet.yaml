@@ -1,0 +1,29 @@
+---
+# Magnet sensors customizations
+
+binary_sensor.door_entrance_contact:
+  friendly_name: Drzwi wejściowe
+
+binary_sensor.window_kitchen_contact:
+  friendly_name: Okno w kuchni
+
+binary_sensor.door_living_room_contact:
+  friendly_name: Drzwi balkonowe
+
+binary_sensor.door_office_contact:
+  friendly_name: Drzwi do biura
+
+binary_sensor.window_office_contact:
+  friendly_name: Okno w biurze
+
+binary_sensor.door_bathroom_contact:
+  friendly_name: Drzwi do łazienki
+
+binary_sensor.window_bathroom_contact:
+  friendly_name: Okno w łazience
+
+binary_sensor.door_bedroom_contact:
+  friendly_name: Drzwi do sypialni
+
+binary_sensor.window_bedroom_contact:
+  friendly_name: Okno w sypialni
