@@ -24,12 +24,3 @@
     entity_id: light.gateway_light_living_room
 
 
-- alias: Toggle kitchen table light
-  trigger:
-    - entity_id: sensor.0x00158d000456c6f3_click
-      platform: state
-      to: single
-  action:
-    - data:
-        entity_id: light.shelly_kitchen_desk
-      service: light.toggle
