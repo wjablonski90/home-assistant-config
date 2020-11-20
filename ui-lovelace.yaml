@@ -13,6 +13,39 @@ views:
     cards:
       - type: weather-forecast
         entity: weather.dom
+      
+      - type: entity-filter
+        entities:
+          - input_boolean.justyna_home
+          - input_boolean.justyna_wifi
+          - input_boolean.wojciech_home
+          - input_boolean.wojciech_wifi
+        state_filter:
+          - 'on'
+        card:
+          type: glance
+          title: People at home
+
+      - title: Środowisko
+        type: entities
+        entities:
+          - sensor.ht_temperature_balcony
+          - sensor.ht_humidity_balcony
+          - type: divider
+          - sensor.ht_temperature_living_room
+          - sensor.ht_humidity_living_room
+          - type: divider
+          - sensor.ht_temperature_office
+          - sensor.ht_humidity_office
+          - type: divider
+          - sensor.ht_temperature_bathroom
+          - sensor.ht_humidity_bathroom
+          - type: divider
+          - sensor.air_purifier_bedroom_air_quality_pm25
+          - sensor.air_purifier_bedroom_temp
+          - sensor.air_purifier_bedroom_humidity
+        show_header_toggle: false
+        theme: default
 
       - title: Kuchnia
         type: entities
@@ -106,25 +139,3 @@ views:
           - name: Clean entire home
             service: script.clean_entire_home
             icon: "mdi:home"
-
-      - title: Środowisko
-        type: entities
-        entities:
-          - sensor.temperature_living_room
-          - sensor.humidity_living_room
-          - type: divider
-          - sensor.temperature_balcony
-          - sensor.humidity_balcony
-          - type: divider
-          - sensor.air_purifier_bedroom_air_quality_pm25
-          - sensor.air_purifier_bedroom_temp
-          - sensor.air_purifier_bedroom_humidity
-        show_header_toggle: false
-        theme: default
-
-      - entities:
-          - sensor.air_purifier_bedroom_air_quality_pm25
-        hours_to_show: 80
-        refresh_interval: 60
-        title: Jakość powietrza
-        type: history-graph
