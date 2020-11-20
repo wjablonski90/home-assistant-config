@@ -1,0 +1,16 @@
+---
+# InfluxDB integration
+# https://github.com/hassio-addons/addon-influxdb
+# https://github.com/hassio-addons/addon-grafana
+# https://www.home-assistant.io/integrations/influxdb/
+
+influxdb:
+  host: !secret influxdb-host
+  port: !secret influxdb-port
+  database: !secret influxdb-database
+  username: !secret influxdb-username
+  password: !secret influxdb-password
+  max_retries: 10
+  default_measurement: state
+  include:
+    entities: !include_dir_merge_list ../influxdb

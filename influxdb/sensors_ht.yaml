@@ -1,0 +1,14 @@
+---
+# InfluxDB Humidity & temperature sensors whitelist
+
+- sensor.ht_humidity_balcony
+- sensor.ht_temperature_balcony
+- sensor.ht_humidity_living_room
+- sensor.ht_temperature_living_room
+- sensor.ht_humidity_office
+- sensor.ht_temperature_office
+- sensor.ht_humidity_bathroom
+- sensor.ht_temperature_bathroom
+- sensor.air_purifier_bedroom_temp
+- sensor.air_purifier_bedroom_humidity
+- sensor.air_purifier_bedroom_air_quality_pm25

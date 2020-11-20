@@ -1,0 +1,5 @@
+---
+# InfluxDB Raspberry Pi whitelist entitites
+
+- sensor.cpu_temp
+- sensor.gpu_temp
