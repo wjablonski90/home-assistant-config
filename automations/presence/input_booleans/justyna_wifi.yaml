@@ -1,6 +1,7 @@
 ---
 # Determine Justyna home wifi connection automations
 
+# Turn "justyna_wifi" on
 - alias: Mark Justyna Wifi connected
   trigger:
     - platform: state
@@ -19,11 +20,8 @@
   action:
     - service: input_boolean.turn_on
       entity_id: input_boolean.justyna_wifi
-    # - service: notify.wojciech_devices
-    #   data:
-    #     title: Justyna connected to home wifi.
-    #     message: Connected.
 
+# Turn "justyna_wifi" off
 - alias: Mark Justyna Wifi disconnected
   trigger:
     - platform: state
@@ -39,7 +37,3 @@
   action:
     - service: input_boolean.turn_off
       entity_id: input_boolean.justyna_wifi
-    # - service: notify.wojciech_devices
-    #   data:
-    #     title: Justyna disconnected with home wifi.
-    #     message: Disconnected.

@@ -1,0 +1,20 @@
+---
+# Fan groups
+
+all_fans:
+  name: All Fans
+  entities:
+    - group.kitchen_fans
+    # - group.bathroom_fans
+
+kitchen_fans:
+  name: Kitchen Fans
+  entities:
+    - switch.fan_1_kitchen
+    - switch.fan_2_kitchen
+
+# bathroom_fans:
+#   name: Bathroom Fans
+#   entities:
+#     - switch.fan_1_bathroom
+#     - switch.fan_2_bathroom

@@ -1,0 +1,5 @@
+---
+  # Light switches
+  # https://www.home-assistant.io/integrations/light.switch/
+  
+  light: !include_dir_merge_list ../entities/lights

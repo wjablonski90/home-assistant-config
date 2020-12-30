@@ -1,6 +1,7 @@
 ---
 # Determine Justyna home presence automations
 
+# Turn "justyna_home" on
 - alias: Mark Justyna Home
   trigger:
     - platform: state
@@ -17,6 +18,7 @@
     - service: input_boolean.turn_on
       entity_id: input_boolean.justyna_home
 
+# Turn "justyna_home" off
 - alias: Mark Justyna Away
   trigger:
     - platform: state
@@ -24,15 +26,15 @@
       to: 'not_home'
       for:
         minutes: 2
-    - platform: state
-      entity_id: input_boolean.justyna_wifi
-      to: 'off'
-      for:
-        minutes: 2
   condition:
-    - condition: state
-      entity_id: input_boolean.justyna_home
-      state: 'on'
+    - condition: and
+      conditions:
+        - condition: state
+          entity_id: input_boolean.justyna_home
+          state: 'on'
+        - condition: state
+          entity_id: input_boolean.justyna_wifi
+          state: 'off'
   action:
     - service: input_boolean.turn_off
       entity_id: input_boolean.justyna_home

@@ -52,8 +52,8 @@ views:
         entities:
           - light.shelly_kitchen_desk
           - light.shelly_kitchen_table
-          - switch.light_1_kitchen
-          - switch.light_2_kitchen
+          - light.light_1_kitchen
+          - light.light_2_kitchen
           - switch.fan_1_kitchen
           - switch.fan_2_kitchen
 
@@ -61,7 +61,7 @@ views:
         type: entities
         entities:
           - light.gateway_light_living_room
-          - switch.coffee_table_light_living_room
+          - light.coffee_table_light_living_room
 
       - title: Biuro
         type: entities
@@ -72,7 +72,7 @@ views:
         type: entities
         entities:
           - light.gateway_light_hall
-          - switch.light_1_hall
+          - light.light_1_hall
 
       - title: Sypialnia
         type: entities

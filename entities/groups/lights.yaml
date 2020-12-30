@@ -1,17 +1,54 @@
 ---
-# Lights group
+# Light groups
+
+all_lights:
+  name: All Lights
+  entities:
+    # - group.entrance_lights
+    - group.kitchen_lights
+    - group.living_room_lights
+    - group.office_lights
+    - group.bedroom_lights
+    # - group.bathroom_lights
+    - group.gateway_lights
+
+# entrance_lights:
+#   name: Entrance Lights
+#   entities:
+#     - light.light_1_entrance
+
+kitchen_lights:
+  name: Kitchen Lights
+  entities:
+    - light.light_1_kitchen
+    - light.light_2_kitchen
+    - light.shelly_kitchen_desk
+    - light.shelly_kitchen_table
+    
+living_room_lights:
+  name: Living Room Lights
+  entities:
+    - light.light_1_hall
+    - light.coffee_table_light_living_room
+
+office_lights:
+  name: Office Lights
+  entities:
+    - light.mi_led_desk_lamp
+
+bedroom_lights:
+  name: Bedroom Lights
+  entities:
+    - light.yeelight_color_bedroom
+
+# bathroom_lights:
+#   name: Bathroom Lights
+#   entities:
+#     - light.light_1_bathroom
+#     - light.light_2_bathroom
 
 gateway_lights:
   name: Gateway Lights
   entities:
     - light.gateway_light_hall
     - light.gateway_light_living_room
-
-all_lights:
-  name: All Lights
-  entities:
-    - light.shelly_kitchen_desk
-    - light.shelly_kitchen_table
-    - light.gateway_light_hall
-    - light.gateway_light_living_room
-    - light.mi_led_desk_lamp

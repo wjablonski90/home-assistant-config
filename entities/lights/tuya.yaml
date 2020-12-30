@@ -1,0 +1,18 @@
+---
+# Tuya devices
+
+- platform: switch
+  name: Light 1 Kitchen
+  entity_id: switch.light_1_kitchen
+
+- platform: switch
+  name: Light 2 Kitchen
+  entity_id: switch.light_2_kitchen
+
+- platform: switch
+  name: Light 1 Hall
+  entity_id: switch.light_1_hall
+
+- platform: switch
+  name: Coffee Table Light Living Room
+  entity_id: switch.coffee_table_light_living_room
