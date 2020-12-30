@@ -1,0 +1,4 @@
+---
+# InfluxDB Other sensors whitelist
+
+- sensor.evaporative_humidifier_office_depth

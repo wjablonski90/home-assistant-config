@@ -1,0 +1,42 @@
+# ---
+# The tuya component enables the ability to control Tuya integration within Home Assistant.
+  
+localtuya:
+  - host: !secret tuya-kitchen-lights-host
+    device_id: !secret tuya-kitchen-lights-device-id
+    local_key: !secret tuya-kitchen-lights-local-key
+    friendly_name: Tuya Kitchen Lights
+    protocol_version: "3.3"
+    entities:
+      - platform: switch
+        id: 1
+        friendly_name: light_1_kitchen
+      - platform: switch
+        id: 2
+        friendly_name: light_2_kitchen
+
+  - host: !secret tuya-living-room-lights-host
+    device_id: !secret tuya-living-room-lights-device-id
+    local_key: !secret tuya-living-room-lights-local-key
+    friendly_name: Tuya Living Room Lights
+    protocol_version: "3.3"
+    entities:
+      - platform: switch
+        id: 1
+        friendly_name: coffee_table_light_living_room
+      - platform: switch
+        id: 2
+        friendly_name: light_1_hall
+
+  - host: !secret tuya-kitchen-fans-host
+    device_id: !secret tuya-kitchen-fans-device-id
+    local_key: !secret tuya-kitchen-fans-local-key
+    friendly_name: Tuya Kitchen Fans
+    protocol_version: "3.3"
+    entities:
+      - platform: switch
+        id: 1
+        friendly_name: fan_2_kitchen
+      - platform: switch
+        id: 2
+        friendly_name: fan_1_kitchen

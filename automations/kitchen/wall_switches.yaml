@@ -1,26 +1,68 @@
 ---
 # Kitchen wall switches automations
 
-- alias: Toggle kitchen desk light
-  trigger:
-    platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.wall_switch_kitchen_desk
-      click_type: single
-  action:
-    service: light.toggle
-    entity_id: light.shelly_kitchen_desk
+# - alias: Toggle kitchen desk light
+#   trigger:
+#     platform: event
+#     event_type: xiaomi_aqara.click
+#     event_data:
+#       entity_id: binary_sensor.wall_switch_kitchen_desk
+#       click_type: single
+#   action:
+#     service: light.toggle
+#     entity_id: light.mi_led_desk_lamp
 
-- alias: Toggle kitchen table light
-  trigger:
-    platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.wall_switch_kitchen_table
-      click_type: single
-  action:
-    service: light.toggle
-    entity_id: light.gateway_light_living_room
+# - alias: Toggle kitchen table light
+#   trigger:
+#     platform: event
+#     event_type: xiaomi_aqara.click
+#     event_data:
+#       entity_id: binary_sensor.wall_switch_kitchen_table
+#       click_type: single
+#   action:
+#     service: light.toggle
+#     entity_id: light.gateway_light_living_room
 
 
+# - alias: Toggle kitchen table light
+#   trigger:
+#     - entity_id: sensor.switch_wall_switch_kitchen_table_click
+#       platform: state
+#       to: single
+#   action:
+#     - service: light.turn_on
+#       entity_id: light.gateway_light_hall
+      
+# - alias: Toggle kitchen table light
+#   trigger:
+#     - entity_id: sensor.switch_wall_switch_kitchen_desk_click
+#       platform: state
+#       to: single
+#   action:
+#     - service: light.turn_off
+#       entity_id: light.gateway_light_hall
+      # data:
+      #   brightness: 255
+      #   rgb_color: [130,80,40]
+
+
+# - alias: Toggle kitchen desk light
+#   trigger:
+#     - entity_id: sensor.switch_wall_switch_kitchen_desk_click
+#       platform: state
+#       to: single
+#   action:
+#     - service: light.toggle
+#       entity_id: light.shelly_kitchen_desk
+
+# - alias: Toggle kitchen desk light
+#   trigger:
+#     - entity_id: sensor.switch_wall_switch_kitchen_desk_click
+#       platform: state
+#       to: double
+#   action:
+#     - service: light.toggle
+#       entity_id: light.gateway_light_living_room
+#       data:
+#         brightness: 255
+#         rgb_color: [130,80,40]

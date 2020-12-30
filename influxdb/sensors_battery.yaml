@@ -1,0 +1,22 @@
+---
+# InfluxDB Sensors battery whitelist
+
+- sensor.ht_battery_balcony
+- sensor.ht_battery_living_room
+- sensor.ht_battery_office
+- sensor.ht_battery_bathroom
+- sensor.ht_battery_bedroom
+
+- sensor.window_kitchen_battery
+- sensor.window_office_battery
+- sensor.window_bedroom_battery
+
+- sensor.door_entrance_battery
+- sensor.door_bathroom_battery
+- sensor.door_bedroom_battery
+
+- sensor.binary_sensor_motion_sensor_left_bedroom_battery
+- sensor.binary_sensor_motion_sensor_right_bedroom_battery
+
+- sensor.switch_wall_switch_kitchen_desk_battery
+- sensor.switch_wall_switch_kitchen_table_battery

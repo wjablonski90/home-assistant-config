@@ -16,10 +16,6 @@
   action:
     - service: input_boolean.turn_on
       entity_id: input_boolean.wojciech_home
-    - service: notify.wojciech_devices
-      data:
-        title: Wojciech's in home.
-        message: He's here.
 
 - alias: Mark Wojciech Away
   trigger:
@@ -27,12 +23,12 @@
       entity_id: person.wojciech
       to: 'not_home'
       for:
-        minutes: 3
+        minutes: 2
     - platform: state
       entity_id: input_boolean.wojciech_wifi
       to: 'off'
       for:
-        minutes: 3
+        minutes: 2
   condition:
     - condition: state
       entity_id: input_boolean.wojciech_home
@@ -40,7 +36,3 @@
   action:
     - service: input_boolean.turn_off
       entity_id: input_boolean.wojciech_home
-    - service: notify.wojciech_devices
-      data:
-        title: Wojciech is away from home.
-        message: He's not here.

@@ -4,6 +4,9 @@
 - alias: Mark Justyna Wifi connected
   trigger:
     - platform: state
+      entity_id: binary_sensor.oneplus_7t_ping
+      to: 'on'
+    - platform: state
       entity_id: sensor.oneplus_7t_polaczenie_wi_fi
       to: 'Niasio.net'
     - platform: state
@@ -16,13 +19,16 @@
   action:
     - service: input_boolean.turn_on
       entity_id: input_boolean.justyna_wifi
-    - service: notify.wojciech_devices
-      data:
-        title: Justyna connected to home wifi.
-        message: Connected.
+    # - service: notify.wojciech_devices
+    #   data:
+    #     title: Justyna connected to home wifi.
+    #     message: Connected.
 
 - alias: Mark Justyna Wifi disconnected
   trigger:
+    - platform: state
+      entity_id: binary_sensor.oneplus_7t_ping
+      to: 'off'
     - platform: state
       entity_id: sensor.oneplus_7t_polaczenie_wi_fi
       to: '<not connected>'
@@ -33,7 +39,7 @@
   action:
     - service: input_boolean.turn_off
       entity_id: input_boolean.justyna_wifi
-    - service: notify.wojciech_devices
-      data:
-        title: Justyna disconnected with home wifi.
-        message: Disconnected.
+    # - service: notify.wojciech_devices
+    #   data:
+    #     title: Justyna disconnected with home wifi.
+    #     message: Disconnected.

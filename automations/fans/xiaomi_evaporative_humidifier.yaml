@@ -1,0 +1,57 @@
+---
+# Xiaomi Evaporative Humidifier 
+
+# Mode change
+- alias: Mode change
+  trigger:
+    platform: state
+    entity_id: input_select.evaporative_humidifier_office_mode
+  action:
+    service: fan.set_speed
+    data_template:
+      entity_id: fan.evaporative_humidifier_office
+      speed: '{{ states.input_select.evaporative_humidifier_office_mode.state }}' 
+
+# Mode changed
+- alias: Mode changed
+  trigger:
+    platform: state
+    entity_id: fan.evaporative_humidifier_office
+  condition:
+    condition: and
+    conditions:
+    - condition: template
+      value_template: "{{ (state_attr('fan.evaporative_humidifier_office', 'speed') | string) != (states('input_select.evaporative_humidifier_office_mode') | string) }}"
+  action:
+    service: input_select.select_option
+    entity_id: input_select.evaporative_humidifier_office_mode
+    data_template:
+      option: '{{ states.fan.evaporative_humidifier_office.attributes.speed }}'
+
+# LED Brightness change
+- alias: LED Brightness change
+  trigger:
+    entity_id: input_number.evaporative_humidifier_office_led_brightness
+    platform: state
+  action:
+    service: xiaomi_miio.fan_set_led_brightness
+    data_template:
+      entity_id: fan.evaporative_humidifier_office
+      brightness: '{{ states.input_number.evaporative_humidifier_office_led_brightness.state | int }}'   
+
+# LED Brightness level changed
+- alias: LED Brightness changed
+  trigger:
+    platform: state
+    entity_id: fan.evaporative_humidifier_office
+  condition:
+    condition: and
+    conditions:
+    - condition: template
+      value_template: "{{ (state_attr('fan.evaporative_humidifier_office', 'led_brightness') | int) != (states('input_number.evaporative_humidifier_office_led_brightness') | int) }}"
+  action:
+    service: input_number.set_value
+    entity_id: input_number.evaporative_humidifier_office_led_brightness
+    data_template:
+      value: '{{ states.fan.evaporative_humidifier_office.attributes.led_brightness }}'
+

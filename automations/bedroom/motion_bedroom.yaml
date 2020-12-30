@@ -2,47 +2,47 @@
 # Automations depend on Bedroom's motion sensors
 
 # Turn the lights on once motion is detected
-- alias: Turn the lights on once motion is detected
-  trigger:
-    platform: state
-    entity_id: binary_sensor.binary_sensor_motion_sensor_left_bedroom_occupancy, binary_sensor.binary_sensor_motion_sensor_right_bedroom_occupancy
-    to: 'on'
-  condition:
-    - condition: and
-      conditions:
-        - condition: time
-          after: '19:00:00'
-          before: '07:00:00'
-        - condition: state
-          entity_id: group.gateway_lights
-          state: 'off'
-  action:
-    - service: light.turn_on
-      entity_id: group.gateway_lights
-      data:
-        brightness: 50
-        rgb_color: [130,80,40]
+# - alias: Turn the lights on once motion is detected
+#   trigger:
+#     platform: state
+#     entity_id: binary_sensor.binary_sensor_motion_sensor_left_bedroom_occupancy, binary_sensor.binary_sensor_motion_sensor_right_bedroom_occupancy
+#     to: 'on'
+#   condition:
+#     - condition: and
+#       conditions:
+#         - condition: time
+#           after: '19:00:00'
+#           before: '07:00:00'
+#         - condition: state
+#           entity_id: group.gateway_lights
+#           state: 'off'
+#   action:
+#     - service: light.turn_on
+#       entity_id: group.gateway_lights
+#       data:
+#         brightness: 50
+#         rgb_color: [130,80,40]
 
 # Turn the lights off once no motion is detected for 3 minutes
-- alias: Turn the lights off once no motion is detected for 3 minutes
-  trigger: 
-    platform: state
-    entity_id: binary_sensor.binary_sensor_motion_sensor_left_bedroom_occupancy, binary_sensor.binary_sensor_motion_sensor_right_bedroom_occupancy
-    to: 'off'
-    for: 
-      minutes: 3
-  condition:
-    - condition: and
-      conditions:
-      - condition: time
-        after: '19:00:00'
-        before: '07:00:00'
-      - condition: state
-        entity_id: binary_sensor.door_bedroom_contact
-        state: 'off'
-      - condition: state
-        entity_id: group.gateway_lights
-        state: 'on'
-  action:
-    - service: light.turn_off
-      entity_id: group.gateway_lights
+# - alias: Turn the lights off once no motion is detected for 3 minutes
+#   trigger: 
+#     platform: state
+#     entity_id: binary_sensor.binary_sensor_motion_sensor_left_bedroom_occupancy, binary_sensor.binary_sensor_motion_sensor_right_bedroom_occupancy
+#     to: 'off'
+#     for: 
+#       minutes: 3
+#   condition:
+#     - condition: and
+#       conditions:
+#       - condition: time
+#         after: '19:00:00'
+#         before: '07:00:00'
+#       # - condition: state
+#       #   entity_id: binary_sensor.door_bedroom_contact
+#       #   state: 'off'
+#       - condition: state
+#         entity_id: group.gateway_lights
+#         state: 'on'
+#   action:
+#     - service: light.turn_off
+#       entity_id: group.gateway_lights

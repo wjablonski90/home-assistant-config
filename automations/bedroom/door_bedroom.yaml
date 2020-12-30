@@ -2,44 +2,44 @@
 # Automations depend on Bedroom's door sensor
 
 # Turn the lights on once bedroom door is opened
-- alias: Turn lights on once bedroom door is opened
-  trigger:
-    platform: state
-    entity_id: binary_sensor.door_bedroom_contact
-    from: 'off'
-    to: 'on'
-  condition:
-    - condition: and
-      conditions:
-        - condition: time
-          after: '19:00:00'
-          before: '07:00:00'
-        - condition: state
-          entity_id: group.gateway_lights
-          state: 'off'
-  action:
-    - service: light.turn_on
-      entity_id: group.gateway_lights
-      data:
-        brightness: 50
-        rgb_color: [130,80,40]
+# - alias: Turn lights on once bedroom door is opened
+#   trigger:
+#     platform: state
+#     entity_id: binary_sensor.door_bedroom_contact
+#     from: 'off'
+#     to: 'on'
+#   condition:
+#     - condition: and
+#       conditions:
+#         - condition: time
+#           after: '19:00:00'
+#           before: '07:00:00'
+#         - condition: state
+#           entity_id: group.gateway_lights
+#           state: 'off'
+#   action:
+#     - service: light.turn_on
+#       entity_id: group.gateway_lights
+#       data:
+#         brightness: 50
+#         rgb_color: [130,80,40]
 
 # Turn the lights off once bedroom door is closed
-- alias: Turn lights off once bedroom door is closed
-  trigger:
-    platform: state
-    entity_id: binary_sensor.door_bedroom_contact
-    from: 'on'
-    to: 'off'
-    for:
-      seconds: 30
-  condition:
-    - condition: time
-      after: '19:00:00'
-      before: '07:00:00'
-  action:
-    - service: light.turn_off
-      entity_id: group.gateway_lights
+# - alias: Turn lights off once bedroom door is closed
+#   trigger:
+#     platform: state
+#     entity_id: binary_sensor.door_bedroom_contact
+#     from: 'on'
+#     to: 'off'
+#     for:
+#       seconds: 30
+#   condition:
+#     - condition: time
+#       after: '19:00:00'
+#       before: '07:00:00'
+#   action:
+#     - service: light.turn_off
+#       entity_id: group.gateway_lights
 
 # Run the timer once bedroom door is opened
 - alias: Run the timer once bedroom door is opened

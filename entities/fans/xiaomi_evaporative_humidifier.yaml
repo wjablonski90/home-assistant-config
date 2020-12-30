@@ -1,9 +1,9 @@
 ---
-# Xiaomi Smartmi Evaporative Humidifier
+# Xiaomi Evaporative Humidifier
 # https://www.home-assistant.io/integrations/xiaomi_miio
 
 platform: xiaomi_miio
 name: Evaporative Humidifier Office
-host: !secret xiaomi-smartmi-evaporative-humidifier-host
-token: !secret xiaomi-smartmi-evaporative-humidifier-token
+host: !secret xiaomi-evaporative-humidifier-host
+token: !secret xiaomi-evaporative-humidifier-token
 model: zhimi.humidifier.ca1

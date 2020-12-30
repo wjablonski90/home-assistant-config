@@ -1,0 +1,7 @@
+---
+# Evaporative Humidifier Office Automations Enabled
+
+evaporative_humidifier_office_automations_enabled:
+  initial: true
+  name: "Automations Enabled"
+  icon: mdi:autorenew

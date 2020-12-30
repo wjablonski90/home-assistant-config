@@ -2,47 +2,47 @@
 # Everybody's home
 
 # We're opening a door, but our phones are not connected to home wifi.
-- alias: We're back, but outdoor
-  trigger:
-    - platform: state
-      entity_id: binary_sensor.door_entrance_contact
-      to: 'on'
-  condition:
-    - condition: and
-      conditions:
-        - condition: state
-          entity_id: light.shelly_kitchen_desk
-          state: 'off'
-        - condition: state
-          entity_id: group.family_wifi
-          state: 'off'
-  action:
-    - service: light.turn_on
-      entity_id: light.shelly_kitchen_desk
-    - service: notify.wojciech_devices
-      data:
-        title: Door is opened, turning light on!
-        message: group.family_wifi=off
+# - alias: We're back, but outdoor
+#   trigger:
+#     - platform: state
+#       entity_id: binary_sensor.door_entrance_contact
+#       to: 'on'
+#   condition:
+#     - condition: and
+#       conditions:
+#         - condition: state
+#           entity_id: light.shelly_kitchen_desk
+#           state: 'off'
+#         - condition: state
+#           entity_id: group.family_wifi
+#           state: 'off'
+#   action:
+#     - service: light.turn_on
+#       entity_id: light.shelly_kitchen_desk
+#     - service: notify.wojciech_devices
+#       data:
+#         title: Door is opened, turning light on!
+#         message: group.family_wifi=off
 
 # When one of our phones will connect to home wifi, we have a 3 minutes for opening a door and lights turn on
-- alias: 3 minutes for opening a door and turn lights on
-  trigger:
-    - platform: state
-      entity_id: binary_sensor.door_entrance_contact
-      to: 'on'
-  condition:
-    - condition: and
-      conditions:
-        - condition: state
-          entity_id: light.shelly_kitchen_desk
-          state: 'off'
-        - condition: state
-          entity_id: timer.door_entrance_light_timer
-          state: 'active'
-  action:
-    - service: light.turn_on
-      entity_id: light.shelly_kitchen_desk
-    - service: notify.wojciech_devices
-      data:
-        title: Door is opened, turning light on!
-        message: timer.door_entrance_light_time=active
+# - alias: 3 minutes for opening a door and turn lights on
+#   trigger:
+#     - platform: state
+#       entity_id: binary_sensor.door_entrance_contact
+#       to: 'on'
+#   condition:
+#     - condition: and
+#       conditions:
+#         - condition: state
+#           entity_id: light.shelly_kitchen_desk
+#           state: 'off'
+#         - condition: state
+#           entity_id: timer.door_entrance_light_timer
+#           state: 'active'
+#   action:
+#     - service: light.turn_on
+#       entity_id: light.shelly_kitchen_desk
+#     - service: notify.wojciech_devices
+#       data:
+#         title: Door is opened, turning light on!
+#         message: timer.door_entrance_light_time=active

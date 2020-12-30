@@ -1,0 +1,8 @@
+---
+# Ping OnePlus 7
+
+- platform: ping
+  host: 192.168.55.5
+  name: OnePlus 7 ping
+  count: 2
+  scan_interval: 30

@@ -1,0 +1,10 @@
+---
+# Tuya devices customization
+
+switch.fan_1_kitchen:
+  friendly_name: Wiatrak 1 bieg
+  icon: mdi:fan
+
+switch.fan_2_kitchen:
+  friendly_name: Wiatrak 2 bieg
+  icon: mdi:fan

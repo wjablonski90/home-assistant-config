@@ -1,45 +1,45 @@
 ---
 # Door entrance light timer automations
 
-- alias: When OnePlus 7 is connected to wifi start door open timer
-  trigger:
-    - platform: state
-      entity_id: input_boolean.wojciech_wifi
-      to: 'on'
-  action:
-    - service: timer.cancel
-      entity_id: timer.door_entrance_light_timer
-    - service: timer.start
-      entity_id: timer.door_entrance_light_timer
-    - service: notify.wojciech_devices
-      data:
-        title: Wojciech is connected to wifi.
-        message: Timer reset and started.
+# - alias: When OnePlus 7 is connected to wifi start door open timer
+#   trigger:
+#     - platform: state
+#       entity_id: binary_sensor.oneplus_7_ping
+#       to: 'on'
+#   action:
+#     - service: timer.cancel
+#       entity_id: timer.door_entrance_light_timer
+#     - service: timer.start
+#       entity_id: timer.door_entrance_light_timer
+#     - service: notify.wojciech_devices
+#       data:
+#         title: Wojciech is connected to wifi.
+#         message: Timer reset and started.
 
-- alias: When OnePlus 7T is connected to wifi start door open timer
-  trigger:
-    - platform: state
-      entity_id: input_boolean.justyna_wifi
-      to: 'on'
-  action:
-    - service: timer.cancel
-      entity_id: timer.door_entrance_light_timer
-    - service: timer.start
-      entity_id: timer.door_entrance_light_timer
-    - service: notify.wojciech_devices
-      data:
-        title: Justyna is connected to wifi.
-        message: Timer reset and started.
+# - alias: When OnePlus 7T is connected to wifi start door open timer
+#   trigger:
+#     - platform: state
+#       entity_id: binary_sensor.oneplus_7t_ping
+#       to: 'on'
+#   action:
+#     - service: timer.cancel
+#       entity_id: timer.door_entrance_light_timer
+#     - service: timer.start
+#       entity_id: timer.door_entrance_light_timer
+#     - service: notify.wojciech_devices
+#       data:
+#         title: Justyna is connected to wifi.
+#         message: Timer reset and started.
 
-- alias: When entrance door are close
-  trigger:
-    - platform: state
-      entity_id: binary_sensor.door_entrance_contact
-      to: 'off'
-  action:
-    - service: timer.cancel
-      entity_id: timer.door_entrance_light_timer
-    - service: notify.wojciech_devices
-      data:
-        title: Door are closed.
-        message: Timer canceled.
+# - alias: When entrance door are close
+#   trigger:
+#     - platform: state
+#       entity_id: binary_sensor.door_entrance_contact
+#       to: 'off'
+#   action:
+#     - service: timer.cancel
+#       entity_id: timer.door_entrance_light_timer
+#     - service: notify.wojciech_devices
+#       data:
+#         title: Door are closed.
+#         message: Timer canceled.

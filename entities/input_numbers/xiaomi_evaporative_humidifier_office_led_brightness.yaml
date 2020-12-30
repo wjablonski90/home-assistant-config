@@ -1,0 +1,10 @@
+---
+# Evaporative Humidifier Office LED Brightness
+
+evaporative_humidifier_office_led_brightness:
+  name: "LED Brightness"
+  initial: 1
+  min: 0
+  max: 2
+  step: 1
+  icon: mdi:lightbulb-outline 

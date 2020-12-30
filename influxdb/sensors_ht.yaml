@@ -7,6 +7,8 @@
 - sensor.ht_temperature_living_room
 - sensor.ht_humidity_office
 - sensor.ht_temperature_office
+- sensor.evaporative_humidifier_office_temp
+- sensor.evaporative_humidifier_office_humidity
 - sensor.ht_humidity_bathroom
 - sensor.ht_temperature_bathroom
 - sensor.air_purifier_bedroom_temp

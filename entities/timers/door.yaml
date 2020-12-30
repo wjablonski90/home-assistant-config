@@ -1,5 +1,5 @@
-door_entrance_light_timer:
-  duration: '00:03:00'
+# door_entrance_light_timer:
+#   duration: '00:03:00'
 
-door_bathroom_light_gateway_hall_timer:
-  duration: '00:03:00'
+# door_bathroom_light_gateway_hall_timer:
+#   duration: '00:03:00'

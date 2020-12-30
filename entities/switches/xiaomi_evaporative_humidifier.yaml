@@ -1,0 +1,54 @@
+---
+# Xiaomi Evaporative Humidifier 
+
+- platform: template
+  switches:
+    evaporative_humidifier_office_child_lock:
+      friendly_name: "Child lock"
+      value_template: "{{ is_state_attr('fan.evaporative_humidifier_office', 'child_lock', true) }}"
+      turn_on:
+        - service: xiaomi_miio.fan_set_child_lock_on
+          data:
+            entity_id: fan.evaporative_humidifier_office
+      turn_off:
+        - service: xiaomi_miio.fan_set_child_lock_off
+          data:
+            entity_id: fan.evaporative_humidifier_office
+      icon_template: "mdi:lock-outline"
+
+    evaporative_humidifier_office_buzzer:
+      friendly_name: "Buzzer"
+      value_template: "{{ is_state_attr('fan.evaporative_humidifier_office', 'buzzer', true) }}"
+      turn_on:
+        - service: xiaomi_miio.fan_set_buzzer_on
+          data:
+            entity_id: fan.evaporative_humidifier_office
+      turn_off:
+        - service: xiaomi_miio.fan_set_buzzer_off
+          data:
+            entity_id: fan.evaporative_humidifier_office
+      icon_template: "mdi:volume-high"
+    
+    evaporative_humidifier_office_dry:
+      friendly_name: "Dry"
+      value_template: "{{ is_state_attr('fan.evaporative_humidifier_office', 'dry', true) }}"
+      turn_on:
+        - service: xiaomi_miio.fan_set_dry_on
+          data:
+            entity_id: fan.evaporative_humidifier_office
+      turn_off:
+        - service: xiaomi_miio.fan_set_dry_off
+          data:
+            entity_id: fan.evaporative_humidifier_office
+      icon_template: "mdi:water-off"
+
+    evaporative_humidifier_office_automations_enabled:
+      friendly_name: "Automations enabled"
+      value_template: "{{ states.input_boolean.evaporative_humidifier_office_automations_enabled.state }}"
+      turn_on:
+        - service: input_boolean.turn_on
+          entity_id: input_boolean.evaporative_humidifier_office_automations_enabled
+      turn_off:
+        - service: input_boolean.turn_off
+          entity_id: input_boolean.evaporative_humidifier_office_automations_enabled
+      icon_template: mdi:autorenew

@@ -13,18 +13,15 @@ views:
     cards:
       - type: weather-forecast
         entity: weather.dom
-      
-      - type: entity-filter
+
+      - type: entities
         entities:
+          - switch.door_entrance_contact
           - input_boolean.justyna_home
           - input_boolean.justyna_wifi
           - input_boolean.wojciech_home
           - input_boolean.wojciech_wifi
-        state_filter:
-          - 'on'
-        card:
-          type: glance
-          title: People at home
+        title: People at home
 
       - title: Środowisko
         type: entities
@@ -37,6 +34,9 @@ views:
           - type: divider
           - sensor.ht_temperature_office
           - sensor.ht_humidity_office
+          - type: divider
+          - sensor.evaporative_humidifier_office_temp
+          - sensor.evaporative_humidifier_office_humidity
           - type: divider
           - sensor.ht_temperature_bathroom
           - sensor.ht_humidity_bathroom
@@ -52,11 +52,16 @@ views:
         entities:
           - light.shelly_kitchen_desk
           - light.shelly_kitchen_table
+          - switch.light_1_kitchen
+          - switch.light_2_kitchen
+          - switch.fan_1_kitchen
+          - switch.fan_2_kitchen
 
       - title: Salon
         type: entities
         entities:
           - light.gateway_light_living_room
+          - switch.coffee_table_light_living_room
 
       - title: Biuro
         type: entities
@@ -67,6 +72,7 @@ views:
         type: entities
         entities:
           - light.gateway_light_hall
+          - switch.light_1_hall
 
       - title: Sypialnia
         type: entities
@@ -74,7 +80,22 @@ views:
           - light.yeelight_color_bedroom
           - fan.air_purifier_bedroom
 
-      - title: Oczyszczacz
+      - title: Nawilżacz powietrza
+        type: entities
+        entities:
+          - fan.evaporative_humidifier_office
+          - switch.evaporative_humidifier_office_automations_enabled
+          - input_select.evaporative_humidifier_office_mode
+          - input_number.evaporative_humidifier_office_led_brightness
+          - switch.evaporative_humidifier_office_dry
+          - switch.evaporative_humidifier_office_child_lock
+          - switch.evaporative_humidifier_office_buzzer
+          - sensor.evaporative_humidifier_office_speed
+          - sensor.evaporative_humidifier_office_depth
+        show_header_toggle: false
+        theme: default
+
+      - title: Oczyszczacz powietrza
         type: entities
         entities:
           - fan.air_purifier_bedroom
