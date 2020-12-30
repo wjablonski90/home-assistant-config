@@ -1,6 +1,7 @@
 ---
 # Determine Wojciech home presence automations
 
+# Turn "wojciech_home" on
 - alias: Mark Wojciech Home
   trigger:
     - platform: state
@@ -17,6 +18,7 @@
     - service: input_boolean.turn_on
       entity_id: input_boolean.wojciech_home
 
+# Turn "wojciech_home" off
 - alias: Mark Wojciech Away
   trigger:
     - platform: state
@@ -24,15 +26,15 @@
       to: 'not_home'
       for:
         minutes: 2
-    - platform: state
-      entity_id: input_boolean.wojciech_wifi
-      to: 'off'
-      for:
-        minutes: 2
   condition:
-    - condition: state
-      entity_id: input_boolean.wojciech_home
-      state: 'on'
+    - condition: and
+      conditions:
+        - condition: state
+          entity_id: input_boolean.wojciech_home
+          state: 'on'
+        - condition: state
+          entity_id: input_boolean.wojciech_wifi
+          state: 'off'
   action:
     - service: input_boolean.turn_off
       entity_id: input_boolean.wojciech_home
