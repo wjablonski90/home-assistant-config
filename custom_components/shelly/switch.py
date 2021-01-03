@@ -73,15 +73,13 @@ class ShellySwitch(ShellyDevice, SwitchEntity):
         """Turn on device"""
         self._dev.turn_on()
         self._state = True
-        
-        self._update_ha_state()
+        self.schedule_update_ha_state()
 
     def turn_off(self, **_kwargs):
         """Turn off device"""
         self._dev.turn_off()
         self._state = False
-        
-        self._update_ha_state()
+        self.schedule_update_ha_state()
 
     def update(self):
         """Fetch new state data for this switch."""
@@ -133,16 +131,15 @@ class ShellyFirmwareUpdate(ShellyBlock, SwitchEntity):
     async def async_turn_on(self, **_kwargs):
         """Trig the firmware update"""
         self._updating = True
-        
-        self._update_ha_state()
+        self.schedule_update_ha_state()
         await self.hass.async_add_executor_job(self._block.update_firmware, self._beta)
 
     async def async_turn_off(self, **_kwargs):
         """Do nothing"""
-        
-        self._update_ha_state()
+        self.schedule_update_ha_state()
 
     def remove(self):
+        print("REMOVE*******************")
         if self._removing:
             return
         self._removing = True

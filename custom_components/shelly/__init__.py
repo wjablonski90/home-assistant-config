@@ -25,12 +25,9 @@ from homeassistant.helpers.dispatcher import async_dispatcher_send
 from homeassistant.helpers.restore_state import RestoreStateData
 from homeassistant.helpers.storage import Store
 from homeassistant.helpers.json import JSONEncoder
-try:
-    from homeassistant.components.zeroconf import (
-        async_get_instance as zeroconf_async_get_instance
-    )
-except:
-    zeroconf_async_get_instance = None
+from homeassistant.components.zeroconf import (
+    async_get_instance as zeroconf_async_get_instance
+)
 try: #Backward compatible with HA
     from homeassistant.helpers.entity_registry import ATTR_RESTORED
 except:
@@ -45,7 +42,7 @@ from .configuration_schema import CONFIG_SCHEMA, CONFIG_SCHEMA_ROOT
 
 _LOGGER = logging.getLogger(__name__)
 
-__version__ = "0.2.1"
+__version__ = "0.2.0"
 VERSION = __version__
 
 async def async_setup(hass, config):
@@ -132,10 +129,9 @@ class ShellyInstance():
             self.conf_attributes.add(ATTRIBUTE_SWITCH + "_1")
             self.conf_attributes.add(ATTRIBUTE_SWITCH + "_2")
         sensors = self.conf.get(CONF_SENSORS, {})
-        if SENSOR_DEFAULT in sensors:
-            self.conf[CONF_SENSORS] = DEFAULT_SENSORS
         if SENSOR_ALL in sensors:
             self.conf[CONF_SENSORS] = [*ALL_SENSORS.keys()]
+
         self._debug_msg = conf.get(CONF_DEBUG_ENABLE_INFO)
 
         hass.bus.async_listen_once(EVENT_HOMEASSISTANT_STOP, self.stop)
@@ -177,8 +173,7 @@ class ShellyInstance():
         pys.password = conf.get(CONF_PASSWORD)
         pys.cloud_auth_key = conf.get(CONF_CLOUD_AUTH_KEY)
         pys.cloud_server = conf.get(CONF_CLOUD_SERVER)
-        if zeroconf_async_get_instance:
-            pys.zeroconf = await zeroconf_async_get_instance(self.hass)
+        pys.zeroconf = await zeroconf_async_get_instance(self.hass)
         tmpl_name = conf.get(CONF_TMPL_NAME)
         if tmpl_name:
             pys.tmpl_name = tmpl_name
