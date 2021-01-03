@@ -1,27 +1,45 @@
 title: Dom
 views:
-  - path: default_view
-    title: Home
+  - title: Home
+    icon: mdi:home
     badges:
-      - entity: binary_sensor.rpi_power_status
-      - entity: sensor.cpu_temp
-      - entity: sensor.gpu_temp
-      - entity: sensor.cpu_clock
-      - entity: person.wojciech
-      - entity: person.justyna
-      - entity: sun.sun
+        - entity: binary_sensor.rpi_power_status
+        - entity: sensor.cpu_temp
+        - entity: sensor.gpu_temp
+        - entity: sensor.cpu_clock
+        - entity: person.wojciech
+        - entity: person.justyna
+        - entity: sun.sun
     cards:
       - type: weather-forecast
         entity: weather.dom
-
-      - type: entities
+      - title: People at home
+        type: entities
         entities:
           - switch.door_entrance_contact
           - input_boolean.justyna_home
           - input_boolean.justyna_wifi
           - input_boolean.wojciech_home
           - input_boolean.wojciech_wifi
-        title: People at home
+
+      - type: vertical-stack
+        cards:
+          - title: Okna
+            type: glance
+            columns: 3
+            entities:
+              - binary_sensor.window_kitchen_contact
+              - binary_sensor.window_office_contact
+              - binary_sensor.window_bedroom_contact
+          - title: Drzwi
+            type: glance
+            columns: 3
+            entities:
+              - binary_sensor.door_entrance_contact
+              - binary_sensor.door_bedroom_contact
+              - binary_sensor.door_bathroom_contact
+
+
 
       - title: Środowisko
         type: entities
@@ -47,7 +65,10 @@ views:
         show_header_toggle: false
         theme: default
 
-      - title: Kuchnia
+  - title: Kuchnia
+    icon: mdi:silverware-fork-knife
+    cards:
+      - title: Światło
         type: entities
         entities:
           - light.shelly_kitchen_desk
@@ -57,29 +78,14 @@ views:
           - switch.fan_1_kitchen
           - switch.fan_2_kitchen
 
-      - title: Salon
+  - title: Salon
+    icon: mdi:sofa
+    cards:
+      - title: Światło
         type: entities
         entities:
           - light.gateway_light_living_room
           - light.coffee_table_light_living_room
-
-      - title: Biuro
-        type: entities
-        entities:
-          - light.mi_led_desk_lamp
-
-      - title: Korytarz
-        type: entities
-        entities:
-          - light.gateway_light_hall
-          - light.light_1_hall
-
-      - title: Sypialnia
-        type: entities
-        entities:
-          - light.yeelight_color_bedroom
-          - fan.air_purifier_bedroom
-
       - title: Nawilżacz powietrza
         type: entities
         entities:
@@ -94,23 +100,6 @@ views:
           - sensor.evaporative_humidifier_office_depth
         show_header_toggle: false
         theme: default
-
-      - title: Oczyszczacz powietrza
-        type: entities
-        entities:
-          - fan.air_purifier_bedroom
-          - switch.air_purifier_bedroom_automations_enabled
-          - input_select.air_purifier_bedroom_mode
-          - input_number.air_purifier_bedroom_favorite_level
-          - input_number.air_purifier_bedroom_fan_level
-          - switch.air_purifier_bedroom_child_lock
-          - switch.air_purifier_bedroom_led
-          - switch.air_purifier_bedroom_buzzer
-          - sensor.air_purifier_bedroom_speed
-          - sensor.air_purifier_bedroom_filter_remaining
-        show_header_toggle: false
-        theme: default
-
       - title: Odkurzacz
         type: "custom:vacuum-card"
         entity: vacuum.vacuum_roborock_s50
@@ -160,3 +149,43 @@ views:
           - name: Clean entire home
             service: script.clean_entire_home
             icon: "mdi:home"
+
+  - title: Biuro
+    icon: mdi:laptop-windows
+    cards:
+      - title: Światło
+        type: entities
+        entities:
+          - light.mi_led_desk_lamp
+
+  - title: Korytarz
+    icon: mdi:walk
+    cards:
+      - title: Światło
+        type: entities
+        entities:
+          - light.gateway_light_hall
+          - light.light_1_hall
+  
+  - title: Sypialnia
+    icon: mdi:bed-empty
+    cards:
+      - title: Światło
+        type: entities
+        entities:
+          - light.yeelight_color_bedroom
+      - title: Oczyszczacz powietrza
+        type: entities
+        entities:
+          - fan.air_purifier_bedroom
+          - switch.air_purifier_bedroom_automations_enabled
+          - input_select.air_purifier_bedroom_mode
+          - input_number.air_purifier_bedroom_favorite_level
+          - input_number.air_purifier_bedroom_fan_level
+          - switch.air_purifier_bedroom_child_lock
+          - switch.air_purifier_bedroom_led
+          - switch.air_purifier_bedroom_buzzer
+          - sensor.air_purifier_bedroom_speed
+          - sensor.air_purifier_bedroom_filter_remaining
+        show_header_toggle: false
+        theme: default
