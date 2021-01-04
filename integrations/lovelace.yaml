@@ -7,3 +7,7 @@ lovelace:
   resources:
   - url: /local/community/vacuum-card/vacuum-card.js
     type: module
+  - url: /local/community/mini-media-player/mini-media-player-bundle.js
+    type: module
+  - url: /local/multiple-entity-row.js?v=4.1.1
+    type: module

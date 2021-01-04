@@ -39,44 +39,91 @@ views:
               - binary_sensor.door_bedroom_contact
               - binary_sensor.door_bathroom_contact
 
-
-
       - title: Środowisko
         type: entities
         entities:
-          - sensor.ht_temperature_balcony
-          - sensor.ht_humidity_balcony
-          - type: divider
-          - sensor.ht_temperature_living_room
-          - sensor.ht_humidity_living_room
-          - type: divider
-          - sensor.ht_temperature_office
-          - sensor.ht_humidity_office
-          - type: divider
-          - sensor.evaporative_humidifier_office_temp
-          - sensor.evaporative_humidifier_office_humidity
-          - type: divider
-          - sensor.ht_temperature_bathroom
-          - sensor.ht_humidity_bathroom
-          - type: divider
-          - sensor.air_purifier_bedroom_air_quality_pm25
-          - sensor.air_purifier_bedroom_temp
-          - sensor.air_purifier_bedroom_humidity
-        show_header_toggle: false
-        theme: default
+          - entity: sensor.ht_temperature_balcony
+            type: custom:multiple-entity-row
+            name: Balkon
+            state_header: Temperatura
+            secondary_info: last-changed
+            entities:
+              - name: Wilgotność
+                entity: sensor.ht_humidity_balcony
+          - entity: sensor.ht_temperature_living_room
+            type: custom:multiple-entity-row
+            name: Salon
+            state_header: Temperatura
+            secondary_info: last-changed
+            entities:
+              - name: Wilgotność
+                entity: sensor.ht_humidity_living_room
+          - entity: sensor.ht_temperature_office
+            type: custom:multiple-entity-row
+            name: Biuro
+            state_header: Temperatura
+            secondary_info: last-changed
+            entities:
+              - name: Wilgotność
+                entity: sensor.ht_humidity_office
+          - entity: sensor.evaporative_humidifier_office_temp
+            type: custom:multiple-entity-row
+            name: Korytarz
+            state_header: Temperatura
+            secondary_info: last-changed
+            entities:
+              - name: Wilgotność
+                entity: sensor.evaporative_humidifier_office_humidity
+          - entity: sensor.ht_temperature_bathroom
+            type: custom:multiple-entity-row
+            name: Łazienka
+            state_header: Temperatura
+            secondary_info: last-changed
+            entities:
+              - name: Wilgotność
+                entity: sensor.ht_humidity_bathroom
+          - entity: sensor.air_purifier_bedroom_temp
+            type: custom:multiple-entity-row
+            name: Sypialnia
+            state_header: Temperatura
+            secondary_info: last-changed
+            entities:
+              - name: Powietrze
+                entity: sensor.air_purifier_bedroom_air_quality_pm25
+              - name: Wilgotność
+                entity: sensor.air_purifier_bedroom_humidity
 
   - title: Kuchnia
     icon: mdi:silverware-fork-knife
     cards:
       - title: Światło
+        show_header_toggle: false
         type: entities
         entities:
-          - light.shelly_kitchen_desk
+          - type: custom:multiple-entity-row
+            entity: light.light_2_kitchen
+            name: Aneks kuchenny
+            state_header: Sufit 2
+            toggle: true
+            state_color: true
+            entities:
+              - name: Blat
+                entity: light.shelly_kitchen_desk
+                toggle: true
+              - name: Sufit 1
+                entity: light.light_1_kitchen
+                toggle: true
           - light.shelly_kitchen_table
-          - light.light_1_kitchen
-          - light.light_2_kitchen
-          - switch.fan_1_kitchen
-          - switch.fan_2_kitchen
+          - type: custom:multiple-entity-row
+            entity: switch.fan_2_kitchen
+            name: Wiatrak kuchenny
+            state_header: Bieg 2
+            toggle: true
+            entities:
+              - name: Bieg 1
+                entity: switch.fan_1_kitchen
+                toggle: true
+
 
   - title: Salon
     icon: mdi:sofa
@@ -86,6 +133,13 @@ views:
         entities:
           - light.gateway_light_living_room
           - light.coffee_table_light_living_room
+      - title: Rozrywka
+        type: entities
+        entities:
+          - type: "custom:mini-media-player"
+            entity: media_player.android_tv
+            name: Android TV
+            info: short
       - title: Nawilżacz powietrza
         type: entities
         entities:
