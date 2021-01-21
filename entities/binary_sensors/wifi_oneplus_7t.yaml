@@ -1,0 +1,11 @@
+---
+# Justyna Home Wifi states
+
+- platform: template
+  sensors:
+    justyna_wifi:
+        device_class: connectivity
+        value_template: >-
+          {{ is_state('input_boolean.justyna_wifi', 'on') }}
+
+      

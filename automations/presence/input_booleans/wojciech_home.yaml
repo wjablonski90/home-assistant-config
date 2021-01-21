@@ -1,6 +1,19 @@
 ---
 # Determine Wojciech home presence automations
 
+# Init "wojciech_home" state
+- alias: Init Wojciech Home
+  trigger:
+    - platform: homeassistant
+      event: start
+  action:
+    - delay: '00:01:00'
+    - service_template: >
+        {% if is_state('person.wojciech', 'home') %} input_boolean.turn_on
+        {% else %} input_boolean.turn_off
+        {% endif %}
+      entity_id: input_boolean.wojciech_home
+
 # Turn "wojciech_home" on
 - alias: Mark Wojciech Home
   trigger:

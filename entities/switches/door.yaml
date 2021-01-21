@@ -12,4 +12,3 @@
         data:
           entity_id: binary_sensor.door_entrance_contact
           state: 'off'
-

@@ -1,0 +1,37 @@
+---
+# Projector Bedroom Off timer automations
+
+# Open exit window when 5 minutes lefts
+- alias: Five minutes before end open exit window
+  trigger: 
+    - platform: template
+      value_template: "{% if states.sensor.projector_bedroom_off_timer_remaining.state | int <= 5 %} true {% endif %}"
+  condition:
+    - condition: state
+      entity_id: switch.projector_bedroom_off_timer
+      state: 'on'
+  action:
+    - service: androidtv.adb_command
+      entity_id: media_player.projector_bedroom
+      data:
+        command: "input keyevent --longpress 26"
+
+# Turn the projector off when time is out
+- alias: The the projector off when the time is out
+  trigger: 
+    - platform: template
+      value_template: "{% if states.sensor.projector_bedroom_off_timer_remaining.state | int == 0 %} true {% endif %}"
+  condition:
+    - condition: state
+      entity_id: switch.projector_bedroom_off_timer
+      state: 'on'
+  action:
+    - service: androidtv.adb_command
+      entity_id: media_player.projector_bedroom
+      data:
+        command: "input keyevent --longpress 26 && input keyevent 22 && input keyevent 23"
+    - service: switch.turn_off
+      entity_id: switch.projector_bedroom_off_timer
+
+
+    

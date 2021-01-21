@@ -1,0 +1,12 @@
+---
+# Projector AUN Mini X2 state
+
+- platform: template
+  sensors:
+    projector_bedroom_state:
+      device_class: connectivity
+      value_template: >-
+        {{ is_state('media_player.projector_bedroom', 'on') or
+           is_state('media_player.projector_bedroom', 'idle') or
+           is_state('media_player.projector_bedroom', 'paused') or 
+           is_state('media_player.projector_bedroom', 'playing') }}

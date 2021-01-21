@@ -9,21 +9,99 @@ views:
         - entity: sensor.cpu_clock
         - entity: person.wojciech
         - entity: person.justyna
+        - entity: device_tracker.person_luna
         - entity: sun.sun
     cards:
       - type: weather-forecast
         entity: weather.dom
-      - title: People at home
+
+      - title: Rodzina
         type: entities
+        show_header_toggle: false
         entities:
-          - switch.door_entrance_contact
-          - input_boolean.justyna_home
-          - input_boolean.justyna_wifi
-          - input_boolean.wojciech_home
-          - input_boolean.wojciech_wifi
+          - entity: person.justyna
+            type: custom:multiple-entity-row
+            show_state: false
+            secondary_info:
+              entity: person.justyna
+              name: false
+            entities: 
+              - name: WiFi
+                entity: binary_sensor.justyna_wifi
+                state_color: true
+              - name: Poziom baterii
+                entity: sensor.oneplus_7t_poziom_baterii              
+              # - name: W domu
+              #   entity: input_boolean.justyna_home
+          - entity: person.wojciech
+            type: custom:multiple-entity-row
+            show_state: false
+            secondary_info:
+              entity: person.wojciech
+              name: false
+            entities:
+              - name: WiFi
+                entity: binary_sensor.wojciech_wifi
+                state_color: true
+              - name: Poziom baterii
+                entity: sensor.oneplus_7_poziom_baterii
+              # - name: W domu
+              #   entity: input_boolean.wojciech_home
+          - entity: device_tracker.person_luna
+            type: custom:multiple-entity-row
+            show_state: false
+            secondary_info:
+              entity: device_tracker.person_luna
+              name: false
+          # - switch.door_entrance_contact
+          # - input_boolean.wojciech_wifi
+          # - input_boolean.justyna_wifi
+          # - input_boolean.wojciech_home
+          # - input_boolean.justyna_home
 
       - type: vertical-stack
         cards:
+          - type: entity-filter
+            show_empty: false
+            card:
+              title: Rozrywka
+              show_header_toggle: false
+            entities:
+              - type: "custom:mini-media-player"
+                entity: media_player.android_tv
+              - type: "custom:mini-media-player"
+                entity: media_player.projector_bedroom
+                artwork: none
+                hide:
+                  controls: true
+                info: short
+                group: true
+            state_filter:
+              - 'on'
+              - 'idle'
+              - 'paused'
+              - 'playing'
+
+          - type: entity-filter
+            show_empty: false
+            card:
+              title: Światło
+              show_header_toggle: false
+            entities:
+              - light.light_1_kitchen
+              - light.light_2_kitchen
+              - light.shelly_kitchen_desk
+              - light.shelly_kitchen_table
+              - light.light_1_hall
+              - light.coffee_table_light_living_room
+              - light.mi_led_desk_lamp
+              - light.yeelight_color_bedroom
+              - light.gateway_light_hall
+              - light.gateway_light_living_room
+              - switch.fan_1_kitchen
+              - switch.fan_2_kitchen
+            state_filter: 
+              - 'on'
           - title: Okna
             type: glance
             columns: 3
@@ -124,7 +202,6 @@ views:
                 entity: switch.fan_1_kitchen
                 toggle: true
 
-
   - title: Salon
     icon: mdi:sofa
     cards:
@@ -138,8 +215,9 @@ views:
         entities:
           - type: "custom:mini-media-player"
             entity: media_player.android_tv
-            name: Android TV
+            name: Sony TV
             info: short
+            group: true
       - title: Nawilżacz powietrza
         type: entities
         entities:
@@ -228,6 +306,89 @@ views:
         type: entities
         entities:
           - light.yeelight_color_bedroom
+
+      - type: vertical-stack
+        cards:
+          - title: Rozrywka
+            type: entities
+            entities:
+              - name: Projektor 
+                type: "custom:mini-media-player"
+                entity: media_player.projector_bedroom
+                artwork: none
+                hide:
+                  controls: true
+                info: short
+                group: true
+                shortcuts:
+                  label: Aplikacje
+                  columns: 3
+                  list:
+                    - type: script
+                      name: Cda.pl
+                      id: script.projector_bedroom_run_cda
+                    - type: script
+                      name: Kodi
+                      id: script.projector_bedroom_run_kodi
+                    - type: script
+                      name: Netflix
+                      id: script.project_bedroom_run_netflix
+                  buttons:
+                    - type: service
+                      name: "30 min"
+                      id: input_number.set_value
+                      data:
+                        entity_id: input_number.projector_bedroom_off_timer
+                        value: 30
+                    - type: service
+                      name: "60 min"
+                      id: input_number.set_value
+                      data:
+                        entity_id: input_number.projector_bedroom_off_timer
+                        value: 60
+                    - type: service
+                      name: "90 min"
+                      id: input_number.set_value
+                      data:
+                        entity_id: input_number.projector_bedroom_off_timer
+                        value: 90
+              - switch.projector_bedroom_off_timer
+              - input_number.projector_bedroom_off_timer
+              - sensor.projector_bedroom_off_timer_remaining
+
+              # - type: conditional
+              #   conditions:
+              #     - entity: binary_sensor.projector_bedroom_state
+              #       state: 'on'
+              #   row: 
+              #     entity: switch.projector_bedroom_off_timer
+              # - type: conditional
+              #   conditions:
+              #     - entity: binary_sensor.projector_bedroom_state
+              #       state: 'on'
+              #   row: 
+              #     entity: input_number.projector_bedroom_off_timer
+              # - type: conditional
+              #   conditions:
+              #     - entity: binary_sensor.projector_bedroom_state
+              #       state: 'on'
+              #   row: 
+              #     entity: sensor.projector_bedroom_off_timer_remaining
+
+              # - type: conditional
+              #   group: true
+              #   conditions:
+              #     - entity: binary_sensor.projector_bedroom_state
+              #       state: 'on'
+              #   card:
+              #     type: entities
+              #     # title: Pozostalo czasu
+              #     entities:
+              #       - binary_sensor.oneplus_7_ping
+              #     # - name: Sleep timer
+              #     #   entity: binary_sensor.oneplus_7_ping
+              #     #   group: true
+
       - title: Oczyszczacz powietrza
         type: entities
         entities:

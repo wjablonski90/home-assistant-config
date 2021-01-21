@@ -1,0 +1,9 @@
+- alias: Dummy device_tracker for home pet
+  trigger:
+    - platform: homeassistant
+      event: start
+  action:
+    - service: device_tracker.see
+      data_template:
+        dev_id: person_luna
+        location_name: "home"

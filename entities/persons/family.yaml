@@ -10,3 +10,6 @@
   id: wojciech
   device_trackers:
     - device_tracker.oneplus_7
+
+- name: Luna
+  id: luna

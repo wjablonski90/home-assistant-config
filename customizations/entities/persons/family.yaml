@@ -1,0 +1,9 @@
+person.justyna:
+  entity_picture: "/local/avatars/justyna_avatar.png"
+
+person.wojciech:
+  entity_picture: "/local/avatars/wojciech_avatar.png"
+
+device_tracker.person_luna:
+  friendly_name: Niasio
+  entity_picture: "/local/avatars/cat_avatar.png"

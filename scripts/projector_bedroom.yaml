@@ -1,0 +1,9 @@
+---
+# Projector AUN Mini X2 Android 7.1.2
+
+projector_shutdown:
+  sequence:
+    - service: notify.wojciech_devices
+      data:
+        title: Shutdown simulation
+        message: OnePlus 7

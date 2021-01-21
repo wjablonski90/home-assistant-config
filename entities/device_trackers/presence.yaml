@@ -1,9 +1,9 @@
----
-# Device trackers related to presence
+# ---
+# # Device trackers related to presence
 
-- platform: ping
-  hosts:
-    oneplus_7: !secret oneplus-7-host
-    oneplus_7t: !secret oneplus-7t-host
-  count: 2
-  scan_interval: 30
+# - platform: ping
+#   hosts:
+#     oneplus_7: !secret oneplus-7-host
+#     oneplus_7t: !secret oneplus-7t-host
+#   count: 2
+#   scan_interval: 30

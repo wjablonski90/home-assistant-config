@@ -1,8 +1,10 @@
 ---
 # Ping OnePlus 7T
 
-- platform: ping
-  host: 192.168.55.6
+- platform: command_line
   name: OnePlus 7T ping
-  count: 2
+  command: 'ping -W 1 -c 3 192.168.55.6 > /dev/null 2>&1 && echo success || echo fail'
+  device_class: connectivity
+  payload_on: "success"
+  payload_off: "fail"
   scan_interval: 30

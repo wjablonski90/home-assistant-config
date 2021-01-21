@@ -1,0 +1,23 @@
+---
+# Kodi Bedroom
+  
+kodi_shutdown:
+  sequence:
+    - service: kodi.call_method
+      data:
+        entity_id: media_player.kodi_bedroom
+        method: System.Shutdown
+
+turn_off_kodi_with_cec:
+  sequence:
+    - service: media_player.media_stop
+      data:
+        entity_id: media_player.kodi_bedroom
+    - service: kodi.call_method
+      data:
+        entity_id: media_player.kodi_bedroom
+        method: Addons.ExecuteAddon
+        addonid: script.json-cec
+        params:
+          command: activate
+   

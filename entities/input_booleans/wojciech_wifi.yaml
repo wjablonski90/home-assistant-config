@@ -3,4 +3,4 @@
 
 wojciech_wifi:
   name: Wojciech Wifi
-  initial: on
+  initial: off

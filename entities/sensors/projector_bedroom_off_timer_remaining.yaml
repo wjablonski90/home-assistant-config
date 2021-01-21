@@ -1,0 +1,15 @@
+---
+# Projector Bedroom Auto-Off time remaining sensor
+
+- platform: template
+  sensors:
+    projector_bedroom_off_timer_remaining:
+      friendly_name: 'Pozostały czas'
+      icon_template: "mdi:timer-sand"
+      value_template: >
+        {% if is_state('switch.projector_bedroom_off_timer', 'on') %}
+          {{ [ (states('input_number.projector_bedroom_off_timer')|int - (as_timestamp(now()) - as_timestamp([states.switch.projector_bedroom_off_timer.last_changed, states.input_number.projector_bedroom_off_timer.last_changed] | max))/60)|round(0) ,0 ] | max }}
+        {% else %}
+          0
+        {% endif %}
+      unit_of_measurement: "min"  
