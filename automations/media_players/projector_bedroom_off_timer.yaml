@@ -15,6 +15,11 @@
       entity_id: media_player.projector_bedroom
       data:
         command: "input keyevent --longpress 26"
+    - delay: 00:00:30
+    - service: androidtv.adb_command
+      entity_id: media_player.projector_bedroom
+      data:
+        command: "input keyevent 23"
 
 # Turn the projector off when time is out
 - alias: The the projector off when the time is out
@@ -26,12 +31,16 @@
       entity_id: switch.projector_bedroom_off_timer
       state: 'on'
   action:
-    - service: androidtv.adb_command
-      entity_id: media_player.projector_bedroom
-      data:
-        command: "input keyevent --longpress 26 && input keyevent 22 && input keyevent 23"
+    - repeat:
+        until:
+          - condition: state
+            entity_id: binary_sensor.projector_bedroom_ping
+            state: 'off'
+        sequence:
+          - service: androidtv.adb_command
+            entity_id: media_player.projector_bedroom
+            data:
+              command: "input keyevent --longpress 26 && input keyevent 22 && input keyevent 23"
+          - delay: 00:01:00
     - service: switch.turn_off
-      entity_id: switch.projector_bedroom_off_timer
-
-
-    
+      entity_id: switch.projector_bedroom_off_timer    
