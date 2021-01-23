@@ -1,0 +1,18 @@
+---
+# Shelly integration via MQTT
+
+- platform: mqtt
+  name: "Shelly Desk Kitchen"
+  state_topic: "shellies/shellyswitch25-40F52004ED40/relay/0"
+  command_topic: "shellies/shellyswitch25-40F52004ED40/relay/0/command"
+  payload_on: "on"
+  payload_off: "off"
+  retain: false
+
+- platform: mqtt
+  name: "Shelly Table Kitchen"
+  state_topic: "shellies/shellyswitch25-40F52004ED40/relay/1"
+  command_topic: "shellies/shellyswitch25-40F52004ED40/relay/1/command"
+  payload_on: "on"
+  payload_off: "off"
+  retain: false
