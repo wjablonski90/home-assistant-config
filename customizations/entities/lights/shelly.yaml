@@ -1,10 +1,10 @@
 ---
 # Shelly devices customization
 
-light.shelly_kitchen_desk:
+light.light_desk_kitchen:
   friendly_name: Aneks kuchenny
   icon: mdi:lightbulb
   
-light.shelly_kitchen_table:
+light.light_table_kitchen:
   friendly_name: Lampa nad stołem
   icon: mdi:lightbulb

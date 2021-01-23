@@ -1,7 +1,20 @@
-# ---
+---
 # The tuya component enables the ability to control Tuya integration within Home Assistant.
   
 localtuya:
+  - host: !secret tuya-entrance-lights-host
+    device_id: !secret tuya-entrance-lights-device-id
+    local_key: !secret tuya-entrance-lights-local-key
+    friendly_name: Tuya Entrance Lights
+    protocol_version: "3.3"
+    entities:
+      - platform: switch
+        id: 1
+        friendly_name: light_1_kitchen_entrance
+      - platform: switch
+        id: 2
+        friendly_name: light_1_entrance
+
   - host: !secret tuya-kitchen-lights-host
     device_id: !secret tuya-kitchen-lights-device-id
     local_key: !secret tuya-kitchen-lights-local-key
@@ -10,10 +23,10 @@ localtuya:
     entities:
       - platform: switch
         id: 1
-        friendly_name: light_1_kitchen
+        friendly_name: light_2_kitchen
       - platform: switch
         id: 2
-        friendly_name: light_2_kitchen
+        friendly_name: light_1_kitchen
 
   - host: !secret tuya-living-room-lights-host
     device_id: !secret tuya-living-room-lights-device-id

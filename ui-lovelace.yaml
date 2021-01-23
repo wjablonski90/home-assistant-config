@@ -90,8 +90,8 @@ views:
             entities:
               - light.light_1_kitchen
               - light.light_2_kitchen
-              - light.shelly_kitchen_desk
-              - light.shelly_kitchen_table
+              - light.light_desk_kitchen
+              - light.light_table_kitchen
               - light.light_1_hall
               - light.coffee_table_light_living_room
               - light.mi_led_desk_lamp
@@ -186,12 +186,12 @@ views:
             state_color: true
             entities:
               - name: Blat
-                entity: light.shelly_kitchen_desk
+                entity: light.light_desk_kitchen
                 toggle: true
               - name: Sufit 1
                 entity: light.light_1_kitchen
                 toggle: true
-          - light.shelly_kitchen_table
+          - light.light_table_kitchen
           - type: custom:multiple-entity-row
             entity: switch.fan_2_kitchen
             name: Wiatrak kuchenny

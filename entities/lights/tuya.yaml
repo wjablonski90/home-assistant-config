@@ -1,5 +1,13 @@
----
+# ---
 # Tuya devices
+
+- platform: switch
+  name: Light 1 Entrance
+  entity_id: switch.light_1_entrance
+
+- platform: switch
+  name: Light 1 Kitchen Entrance
+  entity_id: switch.light_1_kitchen_entrance
 
 - platform: switch
   name: Light 1 Kitchen
