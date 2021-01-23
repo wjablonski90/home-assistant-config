@@ -171,6 +171,14 @@ views:
               - name: Wilgotność
                 entity: sensor.air_purifier_bedroom_humidity
 
+  - title: Wejście
+    icon: mdi:door
+    cards:
+      - title: Światło
+        type: entities
+        entities:
+          - light.light_1_entrance
+
   - title: Kuchnia
     icon: mdi:silverware-fork-knife
     cards:

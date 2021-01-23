@@ -1,6 +1,10 @@
 ---
 # Tuya devices customization
 
+light.light_1_entrance:
+  friendly_name: Przedpokój
+  icon: mdi:lightbulb
+
 light.light_1_kitchen:
   friendly_name: Aneks kuchenny sufit 1
   icon: mdi:lightbulb  
