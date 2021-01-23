@@ -1449,5 +1449,22 @@
                 "file": "/opt/node_modules/node-red-node-twitter/27-twitter.js"
             }
         }
+    },
+    "node-red-contrib-join-wait": {
+        "name": "node-red-contrib-join-wait",
+        "version": "0.3.5",
+        "local": true,
+        "nodes": {
+            "join-wait": {
+                "name": "join-wait",
+                "types": [
+                    "join-wait"
+                ],
+                "enabled": true,
+                "local": true,
+                "module": "node-red-contrib-join-wait",
+                "file": "/config/node-red/node_modules/node-red-contrib-join-wait/join-wait.js"
+            }
+        }
     }
 }
