@@ -1,4 +1,4 @@
-# ---
+---
 # Tuya devices
 
 - platform: switch
@@ -6,21 +6,41 @@
   entity_id: switch.light_1_entrance
 
 - platform: switch
-  name: Light 1 Kitchen Entrance
-  entity_id: switch.light_1_kitchen_entrance
+  name: Light 1 Ceiling Kitchen Entrance
+  entity_id: switch.light_1_ceiling_kitchen_entrance
 
 - platform: switch
-  name: Light 1 Kitchen
-  entity_id: switch.light_1_kitchen
+  name: Light 1 Ceiling Kitchen
+  entity_id: switch.light_1_ceiling_kitchen
 
 - platform: switch
-  name: Light 2 Kitchen
-  entity_id: switch.light_2_kitchen
+  name: Light 2 Ceiling Kitchen
+  entity_id: switch.light_2_ceiling_kitchen
 
 - platform: switch
   name: Light 1 Hall
   entity_id: switch.light_1_hall
 
+# - platform: switch
+#   name: Light 1 Hall
+#   entity_id: switch.light_2_hall
+
 - platform: switch
-  name: Coffee Table Light Living Room
-  entity_id: switch.coffee_table_light_living_room
+  name: Light Coffee Table Living Room
+  entity_id: switch.light_coffee_table_living_room
+
+- platform: switch
+  name: Light Desk Kitchen
+  entity_id: switch.light_desk_kitchen
+
+- platform: switch
+  name: Light Table Kitchen
+  entity_id: switch.light_table_kitchen
+
+- platform: switch
+  name: Light 1 Ceiling Kitchen Kitchen
+  entity_id: switch.light_1_ceiling_kitchen_kitchen
+
+- platform: switch
+  name: Light 2 Ceiling Kitchen Kitchen
+  entity_id: switch.light_2_ceiling_kitchen_kitchen

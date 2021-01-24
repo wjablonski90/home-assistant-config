@@ -4,7 +4,7 @@
 all_lights:
   name: All Lights
   entities:
-    # - group.entrance_lights
+    - group.entrance_lights
     - group.kitchen_lights
     - group.living_room_lights
     - group.office_lights
@@ -12,24 +12,24 @@ all_lights:
     # - group.bathroom_lights
     - group.gateway_lights
 
-# entrance_lights:
-#   name: Entrance Lights
-#   entities:
-#     - light.light_1_entrance
+entrance_lights:
+  name: Entrance Lights
+  entities:
+    - light.light_1_entrance
 
 kitchen_lights:
   name: Kitchen Lights
   entities:
-    - light.light_1_kitchen
-    - light.light_2_kitchen
-    - light.shelly_kitchen_desk
-    - light.shelly_kitchen_table
+    - light.light_1_ceiling_kitchen
+    - light.light_2_ceiling_kitchen
+    - light.light_desk_kitchen
+    - light.light_table_kitchen
     
 living_room_lights:
   name: Living Room Lights
   entities:
     - light.light_1_hall
-    - light.coffee_table_light_living_room
+    - light.light_coffee_table_living_room
 
 office_lights:
   name: Office Lights

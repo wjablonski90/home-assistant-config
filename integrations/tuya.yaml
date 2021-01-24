@@ -10,23 +10,23 @@ localtuya:
     entities:
       - platform: switch
         id: 1
-        friendly_name: light_1_kitchen_entrance
+        friendly_name: light_1_ceiling_kitchen_entrance
       - platform: switch
         id: 2
         friendly_name: light_1_entrance
 
-  - host: !secret tuya-kitchen-lights-host
-    device_id: !secret tuya-kitchen-lights-device-id
-    local_key: !secret tuya-kitchen-lights-local-key
-    friendly_name: Tuya Kitchen Lights
+  - host: !secret tuya-kitchen-ceiling-lights-host
+    device_id: !secret tuya-kitchen-ceiling-lights-device-id
+    local_key: !secret tuya-kitchen-ceiling-lights-local-key
+    friendly_name: Tuya Kitchen Ceiling Lights
     protocol_version: "3.3"
     entities:
       - platform: switch
         id: 1
-        friendly_name: light_2_kitchen
+        friendly_name: light_2_ceiling_kitchen
       - platform: switch
         id: 2
-        friendly_name: light_1_kitchen
+        friendly_name: light_1_ceiling_kitchen
 
   - host: !secret tuya-living-room-lights-host
     device_id: !secret tuya-living-room-lights-device-id
@@ -36,7 +36,7 @@ localtuya:
     entities:
       - platform: switch
         id: 1
-        friendly_name: coffee_table_light_living_room
+        friendly_name: light_coffee_table_living_room
       - platform: switch
         id: 2
         friendly_name: light_1_hall
@@ -53,3 +53,29 @@ localtuya:
       - platform: switch
         id: 2
         friendly_name: fan_1_kitchen
+
+  - host: !secret tuya-kitchen-1-lights-host
+    device_id: !secret tuya-kitchen-1-lights-device-id
+    local_key: !secret tuya-kitchen-1-lights-local-key
+    friendly_name: Tuya Kitchen 1 Lights
+    protocol_version: "3.3"
+    entities:
+      - platform: switch
+        id: 1
+        friendly_name: light_desk_kitchen
+      - platform: switch
+        id: 2
+        friendly_name: light_table_kitchen
+
+  - host: !secret tuya-kitchen-2-lights-host
+    device_id: !secret tuya-kitchen-2-lights-device-id
+    local_key: !secret tuya-kitchen-2-lights-local-key
+    friendly_name: Tuya Kitchen 2 Lights
+    protocol_version: "3.3"
+    entities:
+      - platform: switch
+        id: 1
+        friendly_name: light_1_ceiling_kitchen_kitchen
+      - platform: switch
+        id: 2
+        friendly_name: light_2_ceiling_kitchen_kitchen

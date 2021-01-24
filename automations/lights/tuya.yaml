@@ -1,12 +1,32 @@
 ---
 # Tuya Lights automations
 
-- alias: Light 1 Kitchen, Light 1 Kitchen Entrance - two-way switch automation
+- alias: Light 1 Ceiling Kitchen, Light 1 Ceiling Kitchen Entrance - two-way switch
   trigger:
     - platform: state
-      entity_id: light.light_1_kitchen
+      entity_id: light.light_1_ceiling_kitchen
     - platform: state
-      entity_id: light.light_1_kitchen_entrance
+      entity_id: light.light_1_ceiling_kitchen_entrance
   action:
     - service_template: light.turn_{{trigger.to_state.state}}
-      entity_id: light.light_1_kitchen, light.light_1_kitchen_entrance
+      entity_id: light.light_1_ceiling_kitchen, light.light_1_ceiling_kitchen_entrance
+
+- alias: Light 1 Ceiling Kitchen, Light 1 Ceiling Kitchen Kitchen - two-way switch
+  trigger:
+    - platform: state
+      entity_id: light.light_1_ceiling_kitchen
+    - platform: state
+      entity_id: light.light_1_ceiling_kitchen_kitchen
+  action:
+    - service_template: light.turn_{{trigger.to_state.state}}
+      entity_id: light.light_1_ceiling_kitchen, light.light_1_ceiling_kitchen_kitchen
+
+- alias: Light 2 Ceiling Kitchen, Light 2 Ceiling Kitchen Kitchen - two-way switch
+  trigger:
+    - platform: state
+      entity_id: light.light_2_ceiling_kitchen
+    - platform: state
+      entity_id: light.light_2_ceiling_kitchen_kitchen
+  action:
+    - service_template: light.turn_{{trigger.to_state.state}}
+      entity_id: light.light_2_ceiling_kitchen, light.light_2_ceiling_kitchen_kitchen

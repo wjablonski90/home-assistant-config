@@ -6,7 +6,7 @@ light.mi_led_desk_lamp:
   icon: mdi:desk-lamp
   
 light.yeelight_color_bedroom:
-  friendly_name: Lampa sufitowa
+  friendly_name: Sufit
   icon: mdi:lightbulb
   
 light.gateway_light_living_room:

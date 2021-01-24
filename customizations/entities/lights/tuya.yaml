@@ -5,11 +5,11 @@ light.light_1_entrance:
   friendly_name: Przedpokój
   icon: mdi:lightbulb
 
-light.light_1_kitchen:
+light.light_1_ceiling_kitchen:
   friendly_name: Aneks kuchenny sufit 1
   icon: mdi:lightbulb  
 
-light.light_2_kitchen:
+light.light_2_ceiling_kitchen:
   friendly_name: Aneks kuchenny sufit 2
   icon: mdi:lightbulb
   
@@ -17,6 +17,14 @@ light.light_1_hall:
   friendly_name: Korytarz 1 
   icon: mdi:lightbulb
 
-light.coffee_table_light_living_room:
+light.light_coffee_table_living_room:
   friendly_name: Stolik kawowy
+  icon: mdi:lightbulb
+
+light.light_desk_kitchen:
+  friendly_name: Aneks kuchenny
+  icon: mdi:lightbulb
+  
+light.light_table_kitchen:
+  friendly_name: Stół
   icon: mdi:lightbulb
