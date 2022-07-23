@@ -28,3 +28,7 @@ light.light_desk_kitchen:
 light.light_table_kitchen:
   friendly_name: Stół
   icon: mdi:lightbulb
+
+light.light_1_office:
+  friendly_name: Sufit
+  icon: mdi:lightbulb

@@ -1,0 +1,8 @@
+---
+# Wojciech Laptop work WOL
+
+- platform: wake_on_lan
+  name: Wojciech Laptop Work WOL
+  host: !secret wojciech-laptop-work-ip
+  mac: !secret wojciech-laptop-work-mac
+  broadcast_address: !secret wojciech-laptop-work-broadcast

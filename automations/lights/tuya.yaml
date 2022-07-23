@@ -30,3 +30,11 @@
   action:
     - service_template: light.turn_{{trigger.to_state.state}}
       entity_id: light.light_2_ceiling_kitchen, light.light_2_ceiling_kitchen_kitchen
+
+# - alias: Light Desk Kitchen, Light 2 Office - two-way switch
+#   trigger:
+#     - platform: state
+#       entity_id: light.light_desk_kitchen
+#   action:
+#     - service_template: light.turn_{{trigger.to_state.state}}
+#       entity_id: light.light_desk_kitchen, light.light_2_office

@@ -44,7 +44,7 @@ views:
                 entity: binary_sensor.wojciech_wifi
                 state_color: true
               - name: Poziom baterii
-                entity: sensor.oneplus_7_poziom_baterii
+                entity: sensor.oneplus_7_battery_level
               # - name: W domu
               #   entity: input_boolean.wojciech_home
           - entity: device_tracker.person_luna
@@ -53,7 +53,7 @@ views:
             secondary_info:
               entity: device_tracker.person_luna
               name: false
-          # - switch.door_entrance_contact
+          # - switch.wardrobe_entrance_contact
           # - input_boolean.wojciech_wifi
           # - input_boolean.justyna_wifi
           # - input_boolean.wojciech_home
@@ -101,6 +101,7 @@ views:
               - light.gateway_light_living_room
               - switch.fan_1_kitchen
               - switch.fan_2_kitchen
+              - light.light_1_office
             state_filter: 
               - 'on'
           - title: Okna
@@ -112,11 +113,13 @@ views:
               - binary_sensor.window_bedroom_contact
           - title: Drzwi
             type: glance
-            columns: 3
+            columns: 4
             entities:
               - binary_sensor.door_entrance_contact
               - binary_sensor.door_bedroom_contact
               - binary_sensor.door_bathroom_contact
+              - binary_sensor.door_cat_toilet_contact
+              - binary_sensor.wardrobe_entrance_contact
 
       - title: Środowisko
         type: entities
@@ -265,10 +268,10 @@ views:
             - attribute: cleaning_time
               unit: minutes
               subtitle: Cleaning time
-        actions:
+        shortcuts:
           - name: Clean entrance
             service: script.clean_entrance
-            icon: "mdi:door"
+            icon: 'mdi:door'
           - name: Clean hall
             service: script.clean_hall
             icon: "mdi:walk"
@@ -297,6 +300,8 @@ views:
       - title: Światło
         type: entities
         entities:
+          - light.light_1_office
+          - light.light_2_office
           - light.mi_led_desk_lamp
 
   - title: Korytarz
@@ -343,24 +348,15 @@ views:
                       name: Netflix
                       id: script.project_bedroom_run_netflix
                   buttons:
-                    - type: service
+                    - type: script
                       name: "30 min"
-                      id: input_number.set_value
-                      data:
-                        entity_id: input_number.projector_bedroom_off_timer
-                        value: 30
-                    - type: service
+                      id: script.projector_30_minutes_off
+                    - type: script
                       name: "60 min"
-                      id: input_number.set_value
-                      data:
-                        entity_id: input_number.projector_bedroom_off_timer
-                        value: 60
-                    - type: service
+                      id: script.projector_60_minutes_off
+                    - type: script
                       name: "90 min"
-                      id: input_number.set_value
-                      data:
-                        entity_id: input_number.projector_bedroom_off_timer
-                        value: 90
+                      id: script.projector_90_minutes_off
               - switch.projector_bedroom_off_timer
               - input_number.projector_bedroom_off_timer
               - sensor.projector_bedroom_off_timer_remaining

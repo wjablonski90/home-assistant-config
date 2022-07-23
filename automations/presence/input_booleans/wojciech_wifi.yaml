@@ -19,26 +19,27 @@
   trigger:
     - platform: state
       entity_id: binary_sensor.oneplus_7_ping
-    - platform: state
-      entity_id: sensor.oneplus_7_polaczenie_wi_fi
-      to: 'Niasio.net'
-    - platform: state
-      entity_id: sensor.oneplus_7_polaczenie_wi_fi
-      to: 'Niasio5G.net'
-  condition:
-    - condition: and
-      conditions:
-      - condition: state
-        entity_id: binary_sensor.oneplus_7_ping
-        state: 'on'
-      - condition: or
-        conditions:
-        - condition: state
-          entity_id: input_boolean.wojciech_wifi
-          state: 'off'
-        - condition: state
-          entity_id: input_boolean.wojciech_home
-          state: 'off'
+      to: 'on'
+  #   - platform: state
+  #     entity_id: sensor.oneplus_7_polaczenie_wi_fi
+  #     to: 'Niasio.net'
+  #   - platform: state
+  #     entity_id: sensor.oneplus_7_polaczenie_wi_fi
+  #     to: 'Niasio5G.net'
+  # condition:
+  #   - condition: and
+  #     conditions:
+  #     - condition: state
+  #       entity_id: binary_sensor.oneplus_7_ping
+  #       state: 'on'
+  #     - condition: or
+  #       conditions:
+  #       - condition: state
+  #         entity_id: input_boolean.wojciech_wifi
+  #         state: 'off'
+  #       - condition: state
+  #         entity_id: input_boolean.wojciech_home
+  #         state: 'off'
   action:
     - service: input_boolean.turn_on
       entity_id: input_boolean.wojciech_wifi, input_boolean.wojciech_home
@@ -48,18 +49,19 @@
   trigger:
     - platform: state
       entity_id: binary_sensor.oneplus_7_ping
-    - platform: state
-      entity_id: sensor.oneplus_7_polaczenie_wi_fi
-      to: '<not connected>'
-  condition:
-    - condition: and
-      conditions:
-      - condition: state
-        entity_id: binary_sensor.oneplus_7_ping
-        state: 'off'
-      - condition: state
-        entity_id: input_boolean.wojciech_wifi
-        state: 'on'
+      to: 'off'
+  #   - platform: state
+  #     entity_id: sensor.oneplus_7_polaczenie_wi_fi
+  #     to: '<not connected>'
+  # condition:
+  #   - condition: and
+  #     conditions:
+  #     - condition: state
+  #       entity_id: binary_sensor.oneplus_7_ping
+  #       state: 'off'
+  #     - condition: state
+  #       entity_id: input_boolean.wojciech_wifi
+  #       state: 'on'
   action:
     - service: input_boolean.turn_off
       entity_id: input_boolean.wojciech_wifi

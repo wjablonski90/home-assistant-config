@@ -1,0 +1,10 @@
+---
+# Cat toilet ligts automations
+
+- alias: When cat toilet door are open, then turn the Entrance and Hall lights on
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.door_cat_toilet_contact
+  action:
+    - service_template: light.turn_{{trigger.to_state.state}}
+      entity_id: light.light_1_entrance, light.light_1_hall

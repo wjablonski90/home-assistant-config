@@ -55,3 +55,77 @@
     data_template:
       value: '{{ states.fan.evaporative_humidifier_office.attributes.led_brightness }}'
 
+# Turn the Humidifier on when humidity is below 50%
+- alias: Turn Humidifier on
+  trigger:
+    - platform: time_pattern
+      minutes: '/10'
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: switch.evaporative_humidifier_office_automations_enabled
+        state: 'on'
+      - condition: state
+        entity_id: fan.evaporative_humidifier_office
+        state: 'off'
+      - condition: numeric_state
+        entity_id: sensor.ht_humidity_living_room
+        below: '50'
+      - condition: numeric_state
+        entity_id: sensor.evaporative_humidifier_office_depth
+        above: '15'
+  action:
+    - service: fan.turn_on
+      entity_id: fan.evaporative_humidifier_office
+    - service: fan.set_speed
+      entity_id: fan.evaporative_humidifier_office
+      data:
+        speed: Auto
+
+# Turn the Humidifier off when humidity is above 60
+- alias: Turn Humidifer off
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.ht_humidity_living_room
+      above: '57'
+      for:
+        minutes: 2
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: switch.evaporative_humidifier_office_automations_enabled
+        state: 'on'
+      - condition: state
+        entity_id: fan.evaporative_humidifier_office
+        state: 'on'
+  action:
+    - service: fan.turn_off
+      entity_id: fan.evaporative_humidifier_office
+    - service: notify.wojciech_devices
+      data: 
+        title: Wylaczam nawilzacz!
+        message: "Za wilgotno.."
+
+# Turn the Humidifier off when depth of water is below 15
+- alias: Turn Humidifier off when depth is below than defined
+  trigger:
+    - platform: time_pattern
+      minutes: '/10'
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: switch.evaporative_humidifier_office_automations_enabled
+        state: 'on'
+      - condition: state
+        entity_id: fan.evaporative_humidifier_office
+        state: 'on'
+      - condition: numeric_state
+        entity_id: sensor.evaporative_humidifier_office_depth
+        below: '35'
+  action:
+    - service: fan.turn_off
+      entity_id: fan.evaporative_humidifier_office
+

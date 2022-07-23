@@ -27,3 +27,9 @@ binary_sensor.door_bedroom_contact:
 
 binary_sensor.window_bedroom_contact:
   friendly_name: Okno w sypialni
+
+binary_sensor.door_cat_toilet_contact:
+  friendly_name: Drzwiczki do kuwety
+
+binary_sensor.wardrobe_entrance_contact:
+  friendly_name: Szafa wejściowa

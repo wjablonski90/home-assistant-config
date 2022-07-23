@@ -19,26 +19,27 @@
   trigger:
     - platform: state
       entity_id: binary_sensor.oneplus_7t_ping
-    - platform: state
-      entity_id: sensor.oneplus_7t_polaczenie_wi_fi
-      to: 'Niasio.net'
-    - platform: state
-      entity_id: sensor.oneplus_7t_polaczenie_wi_fi
-      to: 'Niasio5G.net'
-  condition: 
-    - condition: and
-      conditions:
-        - condition: state
-          entity_id: binary_sensor.oneplus_7t_ping
-          state: 'on'
-        - condition: or
-          conditions:
-          - condition: state
-            entity_id: input_boolean.justyna_wifi
-            state: 'off'
-          - condition: state
-            entity_id: input_boolean.justyna_home
-            state: 'off'
+      to: 'on'
+  #   - platform: state
+  #     entity_id: sensor.oneplus_7t_polaczenie_wi_fi
+  #     to: 'Niasio.net'
+  #   - platform: state
+  #     entity_id: sensor.oneplus_7t_polaczenie_wi_fi
+  #     to: 'Niasio5G.net'
+  # condition: 
+  #   - condition: and
+  #     conditions:
+  #       - condition: state
+  #         entity_id: binary_sensor.oneplus_7t_ping
+  #         state: 'on'
+  #       - condition: or
+  #         conditions:
+  #         - condition: state
+  #           entity_id: input_boolean.justyna_wifi
+  #           state: 'off'
+  #         - condition: state
+  #           entity_id: input_boolean.justyna_home
+  #           state: 'off'
   action:
     - service: input_boolean.turn_on
       entity_id: input_boolean.justyna_wifi, input_boolean.justyna_home
@@ -48,22 +49,19 @@
   trigger:
     - platform: state
       entity_id: binary_sensor.oneplus_7t_ping
-    - platform: state
-      entity_id: sensor.oneplus_7t_polaczenie_wi_fi
-      to: '<not connected>'
-  condition:
-    - condition: and
-      conditions:
-        - condition: state
-          entity_id: binary_sensor.oneplus_7t_ping
-          state: 'off'
-        - condition: state
-          entity_id: input_boolean.justyna_wifi
-          state: 'on'
+      to: 'off'
+  #   - platform: state
+  #     entity_id: sensor.oneplus_7t_polaczenie_wi_fi
+  #     to: '<not connected>'
+  # condition:
+  #   - condition: and
+  #     conditions:
+  #       - condition: state
+  #         entity_id: binary_sensor.oneplus_7t_ping
+  #         state: 'off'
+  #       - condition: state
+  #         entity_id: input_boolean.justyna_wifi
+  #         state: 'on'
   action:
     - service: input_boolean.turn_off
       entity_id: input_boolean.justyna_wifi
-    - service: notify.wojciech_devices
-      data:
-        title: justyna wifi off
-        message: ping

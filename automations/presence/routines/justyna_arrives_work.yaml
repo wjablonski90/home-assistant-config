@@ -21,3 +21,24 @@
       data:
         title: Justyś dotarła do pracy.
         message: "Ciężko pracuje, by kot miał godne życie :)"
+
+- alias: Presence - Wojciech get ride Justyna to work
+  trigger:
+    platform: state
+    entity_id: person.wojciech
+    to: 'ryvu'
+  condition:
+    - condition: time
+      after: '15:00:00'
+      before: '19:00:00'
+      weekday:
+        - mon
+        - tue
+        - wed
+        - thu
+        - fri
+  action:
+    - service: notify.justyna_devices
+      data:
+        title: Muszek już czeka
+        message: "Czem prędzej wsiadaj do Audiczki! :)"

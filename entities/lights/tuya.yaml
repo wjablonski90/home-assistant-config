@@ -44,3 +44,11 @@
 - platform: switch
   name: Light 2 Ceiling Kitchen Kitchen
   entity_id: switch.light_2_ceiling_kitchen_kitchen
+
+- platform: switch
+  name: Light 1 Office
+  entity_id: switch.light_1_office
+
+- platform: switch
+  name: Light 2 Office
+  entity_id: switch.light_2_office

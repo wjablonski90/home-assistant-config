@@ -5,4 +5,4 @@
   host: 192.168.55.10
   name: Projector Bedroom ping
   count: 2
-  scan_interval: 30
+  scan_interval: 15

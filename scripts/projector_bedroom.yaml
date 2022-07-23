@@ -7,3 +7,36 @@ projector_shutdown:
       data:
         title: Shutdown simulation
         message: OnePlus 7
+
+projector_30_minutes_off:
+  sequence:
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.projector_bedroom_off_timer
+      data: 
+        value: 30
+    - service: switch.turn_on
+      target:
+        entity_id: switch.projector_bedroom_off_timer
+
+projector_60_minutes_off:
+  sequence:
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.projector_bedroom_off_timer
+      data: 
+        value: 60
+    - service: switch.turn_on
+      target:
+        entity_id: switch.projector_bedroom_off_timer
+
+projector_90_minutes_off:
+  sequence:
+    - service: input_number.set_value
+      target:
+        entity_id: input_number.projector_bedroom_off_timer
+      data: 
+        value: 90
+    - service: switch.turn_on
+      target:
+        entity_id: switch.projector_bedroom_off_timer

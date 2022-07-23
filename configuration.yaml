@@ -1,7 +1,25 @@
 homeassistant:
   # Load packages
   packages: !include_dir_named integrations
-  
+  media_dirs:
+    local: /media
+
+# http:
+#   ssl_certificate: /ssl/fullchain.pem
+#   ssl_key: /ssl/privkey.pem
+
+http:
+  # ssl_certificate: fullchain.pem
+  # ssl_key: privkey.pem
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - 127.0.0.1
+    - 172.16.0.0/12
+    - ::1
+    - 172.30.32.0/24 
+
 python_script:
+
+
 
 default_config:

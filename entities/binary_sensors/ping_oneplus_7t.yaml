@@ -7,4 +7,4 @@
   device_class: connectivity
   payload_on: "success"
   payload_off: "fail"
-  scan_interval: 30
+  scan_interval: 15

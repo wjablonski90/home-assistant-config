@@ -79,3 +79,16 @@ localtuya:
       - platform: switch
         id: 2
         friendly_name: light_2_ceiling_kitchen_kitchen
+
+  - host: !secret tuya-office-lights-host
+    device_id: !secret tuya-office-lights-device-id
+    local_key: !secret tuya-office-lights-local-key
+    friendly_name: Tuya Office Lights
+    protocol_version: "3.3"
+    entities:
+      - platform: switch
+        id: 1
+        friendly_name: light_1_office
+      - platform: switch
+        id: 2
+        friendly_name: light_2_office
