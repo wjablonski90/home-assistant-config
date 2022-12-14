@@ -1,34 +1,34 @@
 ---
 # Tuya devices customization
 
-light.light_1_entrance:
+switch.light_1_entrance:
   friendly_name: Przedpokój
   icon: mdi:lightbulb
 
-light.light_1_ceiling_kitchen:
+switch.light_1_ceiling_kitchen:
   friendly_name: Aneks kuchenny sufit 1
   icon: mdi:lightbulb  
 
-light.light_2_ceiling_kitchen:
+switch.light_2_ceiling_kitchen:
   friendly_name: Aneks kuchenny sufit 2
   icon: mdi:lightbulb
   
-light.light_1_hall:
+switch.light_1_hall:
   friendly_name: Korytarz 1 
   icon: mdi:lightbulb
 
-light.light_coffee_table_living_room:
+switch.light_coffee_table_living_room:
   friendly_name: Stolik kawowy
   icon: mdi:lightbulb
 
-light.light_desk_kitchen:
+switch.light_desk_kitchen:
   friendly_name: Aneks kuchenny
   icon: mdi:lightbulb
   
-light.light_table_kitchen:
+switch.light_table_kitchen:
   friendly_name: Stół
   icon: mdi:lightbulb
 
-light.light_1_office:
+switch.light_1_office:
   friendly_name: Sufit
   icon: mdi:lightbulb

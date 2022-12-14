@@ -20,10 +20,10 @@
       data:
         scene_id: scene_door_cat_toilet_opens_kitchen_living_room_lights_revert
         snapshot_entities: 
-          - light.light_1_entrance
-          - light.light_1_hall
-    - service: light.turn_on
-      entity_id: light.light_1_entrance, light.light_1_hall
+          - switch.light_1_entrance
+          - switch.light_1_hall
+    - service: switch.turn_on
+      entity_id: switch.light_1_entrance, switch.light_1_hall
 
 - alias: When cat toilet door closed, then restore previous state of all lights
   trigger:

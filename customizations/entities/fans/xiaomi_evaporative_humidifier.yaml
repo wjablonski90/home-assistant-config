@@ -1,10 +1,10 @@
 ---
 # Xiaomi Evaporative Humidifier customization
 
-fan.evaporative_humidifier_office:
+humidifier.evaporative_humidifier_office:
   friendly_name: Xiaomi Evaporative Humidifier
 
-sensor.evaporative_humidifier_office_temp:
+sensor.evaporative_humidifier_office_temperature:
   friendly_name: Korytarz - Temperatura
   
 sensor.evaporative_humidifier_office_humidity:
@@ -16,10 +16,10 @@ switch.evaporative_humidifier_office_automations_enabled:
 input_select.evaporative_humidifier_office_mode:
   friendly_name: Tryb pracy
 
-input_number.evaporative_humidifier_office_led_brightness:
-  friendly_name: Jasność diody
+switch.evaporative_humidifier_office_led:
+  friendly_name: LED
 
-switch.evaporative_humidifier_office_dry:
+switch.evaporative_humidifier_office_dry_mode:
   friendly_name: Osuszanie
 
 switch.evaporative_humidifier_office_child_lock:
@@ -28,8 +28,8 @@ switch.evaporative_humidifier_office_child_lock:
 switch.evaporative_humidifier_office_buzzer:
   friendly_name: Głośnik
 
-sensor.evaporative_humidifier_office_depth:
+sensor.evaporative_humidifier_office_water_level:
   friendly_name: Poziom wody
 
-sensor.evaporative_humidifier_office_speed:
+sensor.evaporative_humidifier_office_motor_speed:
   friendly_name: Prędkość wiatraka

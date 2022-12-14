@@ -4,37 +4,37 @@
 - alias: Light 1 Ceiling Kitchen, Light 1 Ceiling Kitchen Entrance - two-way switch
   trigger:
     - platform: state
-      entity_id: light.light_1_ceiling_kitchen
+      entity_id: switch.light_2_ceiling_kitchen
     - platform: state
-      entity_id: light.light_1_ceiling_kitchen_entrance
+      entity_id: switch.light_1_ceiling_kitchen_entrance
   action:
-    - service_template: light.turn_{{trigger.to_state.state}}
-      entity_id: light.light_1_ceiling_kitchen, light.light_1_ceiling_kitchen_entrance
+    - service_template: switch.turn_{{trigger.to_state.state}}
+      entity_id: switch.light_2_ceiling_kitchen, switch.light_1_ceiling_kitchen_entrance
 
 - alias: Light 1 Ceiling Kitchen, Light 1 Ceiling Kitchen Kitchen - two-way switch
   trigger:
     - platform: state
-      entity_id: light.light_1_ceiling_kitchen
+      entity_id: switch.light_2_ceiling_kitchen
     - platform: state
-      entity_id: light.light_1_ceiling_kitchen_kitchen
+      entity_id: switch.light_1_ceiling_kitchen_kitchen
   action:
-    - service_template: light.turn_{{trigger.to_state.state}}
-      entity_id: light.light_1_ceiling_kitchen, light.light_1_ceiling_kitchen_kitchen
+    - service_template: switch.turn_{{trigger.to_state.state}}
+      entity_id: switch.light_2_ceiling_kitchen, switch.light_1_ceiling_kitchen_kitchen
 
 - alias: Light 2 Ceiling Kitchen, Light 2 Ceiling Kitchen Kitchen - two-way switch
   trigger:
     - platform: state
-      entity_id: light.light_2_ceiling_kitchen
+      entity_id: switch.light_1_ceiling_kitchen
     - platform: state
-      entity_id: light.light_2_ceiling_kitchen_kitchen
+      entity_id: switch.light_2_ceiling_kitchen_kitchen
   action:
-    - service_template: light.turn_{{trigger.to_state.state}}
-      entity_id: light.light_2_ceiling_kitchen, light.light_2_ceiling_kitchen_kitchen
+    - service_template: switch.turn_{{trigger.to_state.state}}
+      entity_id: switch.light_1_ceiling_kitchen, switch.light_2_ceiling_kitchen_kitchen
 
 # - alias: Light Desk Kitchen, Light 2 Office - two-way switch
 #   trigger:
 #     - platform: state
-#       entity_id: light.light_desk_kitchen
+#       entity_id: switch.light_desk_kitchen
 #   action:
-#     - service_template: light.turn_{{trigger.to_state.state}}
-#       entity_id: light.light_desk_kitchen, light.light_2_office
+#     - service_template: switch.turn_{{trigger.to_state.state}}
+#       entity_id: switch.light_desk_kitchen, switch.light_2_office

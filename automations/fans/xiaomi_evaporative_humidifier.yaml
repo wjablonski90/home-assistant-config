@@ -7,53 +7,26 @@
     platform: state
     entity_id: input_select.evaporative_humidifier_office_mode
   action:
-    service: fan.set_speed
+    service: humidifer.set_mode
     data_template:
-      entity_id: fan.evaporative_humidifier_office
-      speed: '{{ states.input_select.evaporative_humidifier_office_mode.state }}' 
+      entity_id: humidifier.evaporative_humidifier_office
+      mode: '{{ states.input_select.evaporative_humidifier_office_mode.state }}' 
 
 # Mode changed
 - alias: Mode changed
   trigger:
     platform: state
-    entity_id: fan.evaporative_humidifier_office
+    entity_id: humidifier.evaporative_humidifier_office
   condition:
     condition: and
     conditions:
     - condition: template
-      value_template: "{{ (state_attr('fan.evaporative_humidifier_office', 'speed') | string) != (states('input_select.evaporative_humidifier_office_mode') | string) }}"
+      value_template: "{{ (state_attr('humidifier.evaporative_humidifier_office', 'mode') | string) != (states('input_select.evaporative_humidifier_office_mode') | string) }}"
   action:
     service: input_select.select_option
     entity_id: input_select.evaporative_humidifier_office_mode
     data_template:
-      option: '{{ states.fan.evaporative_humidifier_office.attributes.speed }}'
-
-# LED Brightness change
-- alias: LED Brightness change
-  trigger:
-    entity_id: input_number.evaporative_humidifier_office_led_brightness
-    platform: state
-  action:
-    service: xiaomi_miio.fan_set_led_brightness
-    data_template:
-      entity_id: fan.evaporative_humidifier_office
-      brightness: '{{ states.input_number.evaporative_humidifier_office_led_brightness.state | int }}'   
-
-# LED Brightness level changed
-- alias: LED Brightness changed
-  trigger:
-    platform: state
-    entity_id: fan.evaporative_humidifier_office
-  condition:
-    condition: and
-    conditions:
-    - condition: template
-      value_template: "{{ (state_attr('fan.evaporative_humidifier_office', 'led_brightness') | int) != (states('input_number.evaporative_humidifier_office_led_brightness') | int) }}"
-  action:
-    service: input_number.set_value
-    entity_id: input_number.evaporative_humidifier_office_led_brightness
-    data_template:
-      value: '{{ states.fan.evaporative_humidifier_office.attributes.led_brightness }}'
+      option: '{{ states.humidifier.evaporative_humidifier_office.attributes.mode }}'
 
 # Turn the Humidifier on when humidity is below 50%
 - alias: Turn Humidifier on
@@ -67,21 +40,21 @@
         entity_id: switch.evaporative_humidifier_office_automations_enabled
         state: 'on'
       - condition: state
-        entity_id: fan.evaporative_humidifier_office
+        entity_id: humidifier.evaporative_humidifier_office
         state: 'off'
       - condition: numeric_state
         entity_id: sensor.ht_humidity_living_room
         below: '50'
       - condition: numeric_state
-        entity_id: sensor.evaporative_humidifier_office_depth
+        entity_id: sensor.evaporative_humidifier_office_water_level
         above: '15'
   action:
-    - service: fan.turn_on
-      entity_id: fan.evaporative_humidifier_office
-    - service: fan.set_speed
-      entity_id: fan.evaporative_humidifier_office
+    - service: humidifier.turn_on
+      entity_id: humidifier.evaporative_humidifier_office
+    - service: humidifier.set_mode
+      entity_id: humidifier.evaporative_humidifier_office
       data:
-        speed: Auto
+        mode: Auto
 
 # Turn the Humidifier off when humidity is above 60
 - alias: Turn Humidifer off
@@ -98,11 +71,11 @@
         entity_id: switch.evaporative_humidifier_office_automations_enabled
         state: 'on'
       - condition: state
-        entity_id: fan.evaporative_humidifier_office
+        entity_id: humidifier.evaporative_humidifier_office
         state: 'on'
   action:
-    - service: fan.turn_off
-      entity_id: fan.evaporative_humidifier_office
+    - service: humidifier.turn_off
+      entity_id: humidifier.evaporative_humidifier_office
     - service: notify.wojciech_devices
       data: 
         title: Wylaczam nawilzacz!
@@ -120,12 +93,12 @@
         entity_id: switch.evaporative_humidifier_office_automations_enabled
         state: 'on'
       - condition: state
-        entity_id: fan.evaporative_humidifier_office
+        entity_id: humidifier.evaporative_humidifier_office
         state: 'on'
       - condition: numeric_state
-        entity_id: sensor.evaporative_humidifier_office_depth
+        entity_id: sensor.evaporative_humidifier_office_water_level
         below: '35'
   action:
-    - service: fan.turn_off
-      entity_id: fan.evaporative_humidifier_office
+    - service: humidifier.turn_off
+      entity_id: humidifier.evaporative_humidifier_office
 

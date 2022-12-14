@@ -68,20 +68,20 @@ views:
               title: Światło
               show_header_toggle: false
             entities:
-              - light.light_1_entrance
-              - light.light_1_ceiling_kitchen
-              - light.light_2_ceiling_kitchen
-              - light.light_desk_kitchen
-              - light.light_table_kitchen
-              - light.light_1_hall
-              - light.light_coffee_table_living_room
+              - switch.light_1_entrance
+              - switch.light_1_ceiling_kitchen
+              - switch.light_2_ceiling_kitchen
+              - switch.light_desk_kitchen
+              - switch.light_table_kitchen
+              - switch.light_1_hall
+              - switch.light_coffee_table_living_room
               - light.mi_led_desk_lamp
               - light.yeelight_color_bedroom
               - light.gateway_light_hall
               - light.gateway_light_living_room
               - switch.fan_1_kitchen
               - switch.fan_2_kitchen
-              - light.light_1_office
+              - switch.light_1_office
             state_filter: 
               - 'on'
           - type: entity-filter
@@ -91,14 +91,13 @@ views:
               show_header_toggle: false
             entities:
               - type: "custom:mini-media-player"
-                entity: media_player.android_tv
+                entity: media_player.sony_kdl_50w809c
+                hide:
+                  source: true
               - type: "custom:mini-media-player"
                 entity: media_player.projector_bedroom
-                artwork: none
                 hide:
-                  controls: true
-                info: short
-                group: true
+                  source: true
             state_filter:
               - 'on'
               - 'idle'
@@ -149,7 +148,7 @@ views:
             entities:
               - name: Wilgotność
                 entity: sensor.ht_humidity_office
-          - entity: sensor.evaporative_humidifier_office_temp
+          - entity: sensor.evaporative_humidifier_office_temperature
             type: custom:multiple-entity-row
             name: Korytarz
             state_header: Temperatura
@@ -165,14 +164,14 @@ views:
             entities:
               - name: Wilgotność
                 entity: sensor.ht_humidity_bathroom
-          - entity: sensor.air_purifier_bedroom_temp
+          - entity: sensor.air_purifier_bedroom_temperature
             type: custom:multiple-entity-row
             name: Sypialnia
             state_header: Temperatura
             secondary_info: last-changed
             entities:
               - name: Powietrze
-                entity: sensor.air_purifier_bedroom_air_quality_pm25
+                entity: sensor.air_purifier_bedroom_pm2_5
               - name: Wilgotność
                 entity: sensor.air_purifier_bedroom_humidity
 
@@ -182,7 +181,7 @@ views:
       - title: Światło
         type: entities
         entities:
-          - light.light_1_entrance
+          - switch.light_1_entrance
 
   - title: Kuchnia
     icon: mdi:silverware-fork-knife
@@ -192,19 +191,19 @@ views:
         type: entities
         entities:
           - type: custom:multiple-entity-row
-            entity: light.light_2_ceiling_kitchen
+            entity: switch.light_2_ceiling_kitchen
             name: Aneks kuchenny
             state_header: Sufit 2
             toggle: true
             state_color: true
             entities:
               - name: Blat
-                entity: light.light_desk_kitchen
+                entity: switch.light_desk_kitchen
                 toggle: true
               - name: Sufit 1
-                entity: light.light_1_ceiling_kitchen
+                entity: switch.light_1_ceiling_kitchen
                 toggle: true
-          - light.light_table_kitchen
+          - switch.light_table_kitchen
           - type: custom:multiple-entity-row
             entity: switch.fan_2_kitchen
             name: Wiatrak kuchenny
@@ -222,51 +221,56 @@ views:
         type: entities
         entities:
           - light.gateway_light_living_room
-          - light.light_coffee_table_living_room
+          - switch.light_coffee_table_living_room
       - title: Rozrywka
         type: entities
         entities:
-          - type: "custom:mini-media-player"
-            entity: media_player.android_tv
+          - type: custom:mini-media-player
+            entity: media_player.sony_kdl_50w809c
             name: Sony TV
-            info: short
-            group: true
+            hide:
+              source: true
       - title: Nawilżacz powietrza
         type: entities
         entities:
-          - fan.evaporative_humidifier_office
+          - humidifier.evaporative_humidifier_office
           - switch.evaporative_humidifier_office_automations_enabled
           - input_select.evaporative_humidifier_office_mode
-          - input_number.evaporative_humidifier_office_led_brightness
-          - switch.evaporative_humidifier_office_dry
+          - switch.evaporative_humidifier_office_led
+          - switch.evaporative_humidifier_office_dry_mode
           - switch.evaporative_humidifier_office_child_lock
           - switch.evaporative_humidifier_office_buzzer
-          - sensor.evaporative_humidifier_office_speed
-          - sensor.evaporative_humidifier_office_depth
+          - sensor.evaporative_humidifier_office_motor_speed
+          - sensor.evaporative_humidifier_office_water_level
         show_header_toggle: false
         theme: default
       - title: Odkurzacz
         type: "custom:vacuum-card"
         entity: vacuum.vacuum_roborock_s50
+        compact_view: false
         stats:
           default:
-            - attribute: filter_left
+            - entity_id: sensor.vacuum_roborock_s50_main_brush_left
+              value_template: '{{ (value | float(0) / 3600) | round(1) }}'
               unit: hours
-              subtitle: Filter
-            - attribute: side_brush_left
+              subtitle: Szczotka główna
+            - entity_id: sensor.vacuum_roborock_s50_side_brush_left
+              value_template: '{{ (value | float(0) / 3600) | round(1) }}'
               unit: hours
-              subtitle: Side brush
-            - attribute: main_brush_left
+              subtitle: Szczotka boczna
+            - entity_id: sensor.vacuum_roborock_s50_filter_left
+              value_template: '{{ (value | float(0) / 3600) | round(1) }}'
               unit: hours
-              subtitle: Main brush
-            - attribute: sensor_dirty_left
+              subtitle: Filtr powietrza
+            - entity_id: sensor.vacuum_roborock_s50_sensor_dirty_left
+              value_template: '{{ (value | float(0) / 3600) | round(1) }}'
               unit: hours
-              subtitle: Sensors
+              subtitle: Czujniki
           cleaning:
-            - attribute: cleaned_area
+            - entity_id: sensor.vacuum_roborock_s50_current_clean_area
               unit: m2
               subtitle: Cleaning area
-            - attribute: cleaning_time
+            - entity_id: sensor.vacuum_roborock_s50_current_clean_duration
               unit: minutes
               subtitle: Cleaning time
         shortcuts:
@@ -284,7 +288,7 @@ views:
             icon: "mdi:sofa"
           - name: Clean office
             service: script.clean_office
-            icon: "mdi:laptop-windows"
+            icon: "mdi:laptop"
           - name: Clean bathroom
             service: script.clean_bathroom
             icon: "mdi:shower"
@@ -296,13 +300,13 @@ views:
             icon: "mdi:home"
 
   - title: Biuro
-    icon: mdi:laptop-windows
+    icon: mdi:laptop
     cards:
       - title: Światło
         type: entities
         entities:
-          - light.light_1_office
-          - light.light_2_office
+          - switch.light_1_office
+          - switch.light_2_office
           - light.mi_led_desk_lamp
 
   - title: Korytarz
@@ -312,7 +316,7 @@ views:
         type: entities
         entities:
           - light.gateway_light_hall
-          - light.light_1_hall
+          - switch.light_1_hall
   
   - title: Sypialnia
     icon: mdi:bed-empty
@@ -330,24 +334,10 @@ views:
               - name: Projektor 
                 type: "custom:mini-media-player"
                 entity: media_player.projector_bedroom
-                artwork: none
                 hide:
-                  controls: true
-                info: short
-                group: true
+                  source: true
                 shortcuts:
-                  label: Aplikacje
                   columns: 3
-                  list:
-                    - type: script
-                      name: Cda.pl
-                      id: script.projector_bedroom_run_cda
-                    - type: script
-                      name: Kodi
-                      id: script.projector_bedroom_run_kodi
-                    - type: script
-                      name: Netflix
-                      id: script.project_bedroom_run_netflix
                   buttons:
                     - type: script
                       name: "30 min"
@@ -362,51 +352,18 @@ views:
               - input_number.projector_bedroom_off_timer
               - sensor.projector_bedroom_off_timer_remaining
 
-              # - type: conditional
-              #   conditions:
-              #     - entity: binary_sensor.projector_bedroom_state
-              #       state: 'on'
-              #   row: 
-              #     entity: switch.projector_bedroom_off_timer
-              # - type: conditional
-              #   conditions:
-              #     - entity: binary_sensor.projector_bedroom_state
-              #       state: 'on'
-              #   row: 
-              #     entity: input_number.projector_bedroom_off_timer
-              # - type: conditional
-              #   conditions:
-              #     - entity: binary_sensor.projector_bedroom_state
-              #       state: 'on'
-              #   row: 
-              #     entity: sensor.projector_bedroom_off_timer_remaining
-
-              # - type: conditional
-              #   group: true
-              #   conditions:
-              #     - entity: binary_sensor.projector_bedroom_state
-              #       state: 'on'
-              #   card:
-              #     type: entities
-              #     # title: Pozostalo czasu
-              #     entities:
-              #       - binary_sensor.oneplus_7_ping
-              #     # - name: Sleep timer
-              #     #   entity: binary_sensor.oneplus_7_ping
-              #     #   group: true
-
       - title: Oczyszczacz powietrza
         type: entities
         entities:
           - fan.air_purifier_bedroom
           - switch.air_purifier_bedroom_automations_enabled
           - input_select.air_purifier_bedroom_mode
-          - input_number.air_purifier_bedroom_favorite_level
-          - input_number.air_purifier_bedroom_fan_level
+          - number.air_purifier_bedroom_favorite_level
+          - number.air_purifier_bedroom_fan_level
           - switch.air_purifier_bedroom_child_lock
           - switch.air_purifier_bedroom_led
           - switch.air_purifier_bedroom_buzzer
-          - sensor.air_purifier_bedroom_speed
-          - sensor.air_purifier_bedroom_filter_remaining
+          - sensor.air_purifier_bedroom_motor_speed
+          - sensor.air_purifier_bedroom_filter_life_remaining
         show_header_toggle: false
         theme: default

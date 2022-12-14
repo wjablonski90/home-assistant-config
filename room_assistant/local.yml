@@ -1,0 +1,30 @@
+# You don't need to add the MQTT details for Home Assistant with the add-on installation, it will be auto-discovered!
+# global:
+#   instanceName: officemqtt
+#   integrations:
+#     - homeAssistant
+#     - bluetoothClassic
+#     - bluetoothLowEnergy
+# bluetoothLowEnergy:
+#   hciDeviceId: 0
+#   allowlist:
+#     - dca632aca5a4
+#     - def7cf706876
+#     - 2f4a78af7240
+#     - 291f1db93dcc
+#     - 5cfb7c279218
+#     - 29dfddf06d44
+#     - e765771ec600
+#     - 681401154d0c
+#     - 50765cb7d9ea4e2199a4fa879613a492-34518-60122
+#     - 076688b32d80
+#     - 38f97c59e14a
+#     - 38cd5ddacd2e
+#     - 1f99c8944322
+#     - 0fde7dde6be0 
+#     - 3cf831e88a99 
+#     - 5dd8787d7bfe
+#     - 119249233df9
+#     - 4801c50c978d
+
+

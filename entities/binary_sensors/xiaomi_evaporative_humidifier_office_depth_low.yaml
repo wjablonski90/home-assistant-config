@@ -4,5 +4,5 @@
 - platform: template
   sensors:
     evaporative_humidifier_office_depth_low:
-      value_template: "{{ state_attr('fan.evaporative_humidifier_office', 'depth') < 15 and is_state('switch.evaporative_humidifier_office_automations_enabled', 'on')}}"
+      value_template: "{{ states('sensor.evaporative_humidifier_office_water_level') | int < 15 and is_state('switch.evaporative_humidifier_office_automations_enabled', 'on') }}"
       friendly_name: "Niski poziom wody"

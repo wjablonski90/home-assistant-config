@@ -4,7 +4,7 @@
 - alias: Turn off kitchen lights after 3 minutes when Justyna not home
   trigger:
     - platform: state
-      entity_id: light.light_desk_kitchen
+      entity_id: switch.light_desk_kitchen
       to: 'on'
       for: '00:03:00'
   condition:
@@ -14,6 +14,6 @@
           entity_id: person.justyna
           state: 'home'
   action:
-    - service: light.turn_off
-      entity_id: light.light_desk_kitchen
+    - service: switch.turn_off
+      entity_id: switch.light_desk_kitchen
 

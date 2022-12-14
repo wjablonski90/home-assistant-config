@@ -4,9 +4,4 @@
 platform: androidtv
 host: 192.168.55.10
 name: Projector Bedroom
-adb_server_ip: 127.0.0.1
-adb_server_port: 5555
-turn_off_command: "input keyevent --longpress 26 && input keyevent 22 && input keyevent 23"
-apps:
-  com.netlifx.mediaclient: "Netflix"
-  pl.cda: "CDA"
+# turn_off_command: "input keyevent --longpress 26 && input keyevent 22 && input keyevent 23"

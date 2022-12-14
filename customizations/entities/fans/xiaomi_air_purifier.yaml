@@ -4,10 +4,10 @@
 fan.air_purifier_bedroom:
   friendly_name: Xiaomi Air Purifier 3
 
-sensor.air_purifier_bedroom_air_quality_pm25:
+sensor.air_purifier_bedroom_pm2_5:
   friendly_name: Sypialnia - Jakość powietrza
   
-sensor.air_purifier_bedroom_temp:
+sensor.air_purifier_bedroom_temperature:
   friendly_name: Sypialnia - Temperatura
   
 sensor.air_purifier_bedroom_humidity:
@@ -19,10 +19,10 @@ switch.air_purifier_bedroom_automations_enabled:
 input_select.air_purifier_bedroom_mode:
   friendly_name: Tryb pracy
 
-input_number.air_purifier_bedroom_favorite_level:
+number.air_purifier_bedroom_favorite_level:
   friendly_name: Ulubiony poziom
 
-input_number.air_purifier_bedroom_fan_level:
+number.air_purifier_bedroom_fan_level:
   friendly_name: Poziom wiatraka
 
 switch.air_purifier_bedroom_child_lock:
@@ -34,8 +34,8 @@ switch.air_purifier_bedroom_led:
 switch.air_purifier_bedroom_buzzer:
   friendly_name: Głośnik
 
-sensor.air_purifier_bedroom_speed:
+sensor.air_purifier_bedroom_motor_speed:
   friendly_name: Prędkość wiatraka
 
-sensor.air_purifier_bedroom_filter_remaining:
+sensor.air_purifier_bedroom_filter_life_remaining:
   friendly_name: Filtr
