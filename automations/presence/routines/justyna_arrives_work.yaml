@@ -22,7 +22,7 @@
         title: Justyś dotarła do pracy.
         message: "Ciężko pracuje, by kot miał godne życie :)"
 
-- alias: Presence - Wojciech get ride Justyna to work
+- alias: Presence - Wojciech gives a lift Justyna to work
   trigger:
     platform: state
     entity_id: person.wojciech

@@ -1,10 +1,36 @@
 ---
 # Cat toilet ligts automations
 
-- alias: When cat toilet door are open, then turn the Entrance and Hall lights on
+# - alias: When cat toilet door are open, then turn the Entrance and Hall lights on
+#   trigger:
+#     - platform: state
+#       entity_id: binary_sensor.door_cat_toilet_contact
+#   action:
+#     - service_template: light.turn_{{trigger.to_state.state}}
+#       entity_id: light.light_1_entrance, light.light_1_hall
+
+
+- alias: When cat toilet door opened, then turn the Entrance and Hall lights on
   trigger:
     - platform: state
       entity_id: binary_sensor.door_cat_toilet_contact
+      to: "on"
   action:
-    - service_template: light.turn_{{trigger.to_state.state}}
+    - service: scene.create
+      data:
+        scene_id: scene_door_cat_toilet_opens_kitchen_living_room_lights_revert
+        snapshot_entities: 
+          - light.light_1_entrance
+          - light.light_1_hall
+    - service: light.turn_on
       entity_id: light.light_1_entrance, light.light_1_hall
+
+- alias: When cat toilet door closed, then restore previous state of all lights
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.door_cat_toilet_contact
+      to: "off"
+  action: 
+    - service: scene.turn_on
+      data:
+        entity_id: scene.scene_door_cat_toilet_opens_kitchen_living_room_lights_revert

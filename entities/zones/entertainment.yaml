@@ -1,0 +1,17 @@
+---
+# Cracow entertainment zones
+
+- name: CinemaCity Zakopianka
+  latitude: 50.01647148972688
+  longitude: 19.930583238601688
+  radius: 58.24173624065965
+
+- name: Solvay Park
+  latitude: 50.01417961099209
+  longitude: 19.927482604980472
+  radius: 64.55496121357322
+
+- name: Bonarka City Center
+  latitude: 50.027884443372706
+  longitude: 19.950957298278812
+  radius: 175.57175703120322

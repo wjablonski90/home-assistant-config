@@ -1,3 +1,49 @@
 {
-  "nodes": {}
+  "nodes": {
+    "411b9b60_17bb34": {
+      "isEnabled": true
+    },
+    "d688b247_5a754": {
+      "isEnabled": true
+    },
+    "8cfe5142_226f4": {
+      "isEnabled": true
+    },
+    "1f915034_cefa": {
+      "isEnabled": true
+    },
+    "edea4d63_790ba": {
+      "isEnabled": true
+    },
+    "e45e0715_5ce568": {
+      "isEnabled": true
+    },
+    "cf1fd15c_e6f37": {
+      "isEnabled": true
+    },
+    "2cbba153_5acf0e": {
+      "isEnabled": true
+    },
+    "245e2faf_785a9": {
+      "isEnabled": true
+    },
+    "3cc47352_8f68bc": {
+      "isEnabled": true
+    },
+    "6339ced0_09e7d": {
+      "isEnabled": true
+    },
+    "949233_97626dd": {
+      "isEnabled": true
+    },
+    "e7ce3561_1a6438": {
+      "isEnabled": true
+    },
+    "af166154_4ac01": {
+      "isEnabled": true
+    },
+    "8645367ccce56aed": {
+      "isEnabled": true
+    }
+  }
 }

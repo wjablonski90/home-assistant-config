@@ -14,74 +14,54 @@ views:
     cards:
       - type: weather-forecast
         entity: weather.dom
-
-      - title: Rodzina
-        type: entities
-        show_header_toggle: false
-        entities:
-          - entity: person.justyna
-            type: custom:multiple-entity-row
-            show_state: false
-            secondary_info:
-              entity: person.justyna
-              name: false
-            entities: 
-              - name: WiFi
-                entity: binary_sensor.justyna_wifi
-                state_color: true
-              - name: Poziom baterii
-                entity: sensor.oneplus_7t_poziom_baterii              
-              # - name: W domu
-              #   entity: input_boolean.justyna_home
-          - entity: person.wojciech
-            type: custom:multiple-entity-row
-            show_state: false
-            secondary_info:
-              entity: person.wojciech
-              name: false
-            entities:
-              - name: WiFi
-                entity: binary_sensor.wojciech_wifi
-                state_color: true
-              - name: Poziom baterii
-                entity: sensor.oneplus_7_battery_level
-              # - name: W domu
-              #   entity: input_boolean.wojciech_home
-          - entity: device_tracker.person_luna
-            type: custom:multiple-entity-row
-            show_state: false
-            secondary_info:
-              entity: device_tracker.person_luna
-              name: false
-          # - switch.wardrobe_entrance_contact
-          # - input_boolean.wojciech_wifi
-          # - input_boolean.justyna_wifi
-          # - input_boolean.wojciech_home
-          # - input_boolean.justyna_home
-
       - type: vertical-stack
         cards:
-          - type: entity-filter
-            show_empty: false
-            card:
-              title: Rozrywka
-              show_header_toggle: false
+          - title: Rodzina
+            type: entities
+            show_header_toggle: false
             entities:
-              - type: "custom:mini-media-player"
-                entity: media_player.android_tv
-              - type: "custom:mini-media-player"
-                entity: media_player.projector_bedroom
-                artwork: none
-                hide:
-                  controls: true
-                info: short
-                group: true
-            state_filter:
-              - 'on'
-              - 'idle'
-              - 'paused'
-              - 'playing'
-
+              - entity: person.justyna
+                type: custom:multiple-entity-row
+                show_state: false
+                secondary_info:
+                  entity: person.justyna
+                  name: false
+                entities: 
+                  - name: WiFi
+                    entity: binary_sensor.justyna_wifi
+                    state_color: true
+                  - name: Poziom baterii
+                    entity: sensor.oneplus_7t_poziom_baterii              
+                  # - name: W domu
+                  #   entity: input_boolean.justyna_home
+              - entity: person.wojciech
+                type: custom:multiple-entity-row
+                show_state: false
+                secondary_info:
+                  entity: person.wojciech
+                  name: false
+                entities:
+                  - name: WiFi
+                    entity: binary_sensor.wojciech_wifi
+                    state_color: true
+                  - name: Poziom baterii
+                    entity: sensor.oneplus_7_battery_level
+                  # - name: W domu
+                  #   entity: input_boolean.wojciech_home
+              - entity: device_tracker.person_luna
+                type: custom:multiple-entity-row
+                show_state: false
+                secondary_info:
+                  entity: device_tracker.person_luna
+                  name: false
+                entities:
+                  - name: Ruch w kuwecie
+                    entity: binary_sensor.binary_sensor_motion_sensor_door_entrance_occupancy
+              # - switch.wardrobe_entrance_contact
+              # - input_boolean.wojciech_wifi
+              # - input_boolean.justyna_wifi
+              # - input_boolean.wojciech_home
+              # - input_boolean.justyna_home
           - type: entity-filter
             show_empty: false
             card:
@@ -104,6 +84,28 @@ views:
               - light.light_1_office
             state_filter: 
               - 'on'
+          - type: entity-filter
+            show_empty: false
+            card:
+              title: Rozrywka
+              show_header_toggle: false
+            entities:
+              - type: "custom:mini-media-player"
+                entity: media_player.android_tv
+              - type: "custom:mini-media-player"
+                entity: media_player.projector_bedroom
+                artwork: none
+                hide:
+                  controls: true
+                info: short
+                group: true
+            state_filter:
+              - 'on'
+              - 'idle'
+              - 'paused'
+              - 'playing'
+      - type: vertical-stack
+        cards:
           - title: Okna
             type: glance
             columns: 3
@@ -120,7 +122,6 @@ views:
               - binary_sensor.door_bathroom_contact
               - binary_sensor.door_cat_toilet_contact
               - binary_sensor.wardrobe_entrance_contact
-
       - title: Środowisko
         type: entities
         entities:
