@@ -15,21 +15,21 @@ all_lights:
 entrance_lights:
   name: Entrance Lights
   entities:
-    - light.light_1_entrance
+    - switch.light_1_entrance
 
 kitchen_lights:
   name: Kitchen Lights
   entities:
-    - light.light_1_ceiling_kitchen
-    - light.light_2_ceiling_kitchen
-    - light.light_desk_kitchen
-    - light.light_table_kitchen
+    - switch.light_1_ceiling_kitchen
+    - switch.light_2_ceiling_kitchen
+    - switch.light_desk_kitchen
+    - switch.light_table_kitchen
     
 living_room_lights:
   name: Living Room Lights
   entities:
-    - light.light_1_hall
-    - light.light_coffee_table_living_room
+    - switch.light_1_hall
+    - switch.light_coffee_table_living_room
 
 office_lights:
   name: Office Lights

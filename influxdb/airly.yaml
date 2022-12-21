@@ -1,0 +1,10 @@
+---
+# Airly sensors
+
+- sensor.airly_cz_maki_caqi
+- sensor.airly_cz_maki_pm1
+- sensor.airly_cz_maki_pm10
+- sensor.airly_cz_maki_pm2_5
+- sensor.airly_cz_maki_temperature
+- sensor.airly_cz_maki_humidity
+- sensor.airly_cz_maki_pressure

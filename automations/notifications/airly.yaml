@@ -1,0 +1,16 @@
+---
+# Airly notifications automations
+
+- alias: Send notification about air condition to family
+  trigger:
+    - platform: time
+      at: '08:00:00'
+    - platform: time
+      at: '15:00:00'
+    - platform: time
+      at: '22:00:00'
+  action:
+    - service: notify.family
+      data:
+        title: "Airly - Czerwone Maki"
+        message: "Warunki atmosferyczne:  {{ states.sensor.airly_cz_maki_temperature.state + states.sensor.airly_cz_maki_temperature.attributes.unit_of_measurement }}, {{ states.sensor.airly_cz_maki_humidity.state + states.sensor.airly_cz_maki_humidity.attributes.unit_of_measurement }}, {{ states.sensor.airly_cz_maki_pressure.state_with_unit }}\nCAQI: {{ states.sensor.airly_cz_maki_caqi.state }} | PM1: {{ states.sensor.airly_cz_maki_pm1.state_with_unit }} | PM2.5: {{ states.sensor.airly_cz_maki_pm2_5.state_with_unit }} | PM10: {{ states.sensor.airly_cz_maki_pm10.state_with_unit }}"

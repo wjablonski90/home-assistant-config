@@ -7,3 +7,9 @@ person.wojciech:
 device_tracker.person_luna:
   friendly_name: Niasio
   entity_picture: "/local/avatars/cat_avatar.png"
+
+device_tracker.person_wojciech_wifi:
+  source_type: router
+
+device_tracker.person_justyna_wifi:
+  source_type: router

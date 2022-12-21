@@ -65,3 +65,16 @@
   action:
     - service: input_boolean.turn_off
       entity_id: input_boolean.wojciech_wifi
+
+- alias: Mark Device Tracker Person Wojciech Wifi
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.wojciech_wifi
+  action:
+    - service: device_tracker.see
+      data:
+        dev_id: person_wojciech_wifi
+        location_name: >
+          {% if is_state('binary_sensor.wojciech_wifi', 'on') %} home
+          {% else %} not_home
+          {% endif %}

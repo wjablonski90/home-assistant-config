@@ -13,7 +13,12 @@
         - condition: state
           entity_id: person.justyna
           state: 'home'
+        - condition: time
+          # after: '07:00:00'
+          # before: '09:30:00'
+          weekday:
+           - sat
+           - sun
   action:
     - service: switch.turn_off
       entity_id: switch.light_desk_kitchen
-

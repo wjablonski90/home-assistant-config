@@ -2,7 +2,7 @@
 # Ping Laptop LAN
 
 - platform: ping
-  host: 192.168.55.108
+  host: 192.168.55.12
   name: Laptop Wojciech ping
   count: 2
   scan_interval: 30

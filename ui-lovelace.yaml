@@ -62,6 +62,43 @@ views:
               # - input_boolean.justyna_wifi
               # - input_boolean.wojciech_home
               # - input_boolean.justyna_home
+          - title: Airly
+            state_color: false
+            type: entities
+            entities:
+              - sensor.airly_cz_maki_caqi
+              - sensor.airly_cz_maki_pm1
+              - sensor.airly_cz_maki_pm2_5
+              - sensor.airly_cz_maki_pm10
+              - sensor.airly_cz_maki_temperature
+              - sensor.airly_cz_maki_humidity
+              - sensor.airly_cz_maki_pressure
+            # header:
+            #   type: graph
+            #   entity: sensor.airly_cz_maki_pm2_5
+            #   hours_to_show: 120
+
+          - type: entity-filter
+            show_empty: false
+            card:
+              title: Rozrywka
+              show_header_toggle: false
+            entities:
+              - type: "custom:mini-media-player"
+                entity: media_player.sony_kdl_50w809c
+                hide:
+                  source: true
+              - type: "custom:mini-media-player"
+                entity: media_player.projector_bedroom
+                hide:
+                  source: true
+            state_filter:
+              - 'on'
+              - 'idle'
+              - 'paused'
+              - 'playing'
+      - type: vertical-stack
+        cards:
           - type: entity-filter
             show_empty: false
             card:
@@ -84,27 +121,6 @@ views:
               - switch.light_1_office
             state_filter: 
               - 'on'
-          - type: entity-filter
-            show_empty: false
-            card:
-              title: Rozrywka
-              show_header_toggle: false
-            entities:
-              - type: "custom:mini-media-player"
-                entity: media_player.sony_kdl_50w809c
-                hide:
-                  source: true
-              - type: "custom:mini-media-player"
-                entity: media_player.projector_bedroom
-                hide:
-                  source: true
-            state_filter:
-              - 'on'
-              - 'idle'
-              - 'paused'
-              - 'playing'
-      - type: vertical-stack
-        cards:
           - title: Okna
             type: glance
             columns: 3

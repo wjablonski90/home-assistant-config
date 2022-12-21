@@ -5,11 +5,13 @@
   id: justyna
   device_trackers:
     - device_tracker.oneplus_7t
+    - device_tracker.person_justyna_wifi
 
 - name: Wojciech
   id: wojciech
   device_trackers:
     - device_tracker.oneplus_7
+    - device_tracker.person_wojciech_wifi
 
 - name: Luna
   id: luna

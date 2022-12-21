@@ -4,11 +4,12 @@
 family:
   name: Family
   entities:
-    - input_boolean.justyna_home
-    - input_boolean.wojciech_home
+    - person.justyna
+    - person.wojciech
 
 family_wifi:
   name: Family Wifi
   entities:
-    - input_boolean.justyna_wifi
-    - input_boolean.wojciech_wifi
+    - device_tracker.person_justyna_wifi
+    - device_tracker.person_wojciech_wifi
+

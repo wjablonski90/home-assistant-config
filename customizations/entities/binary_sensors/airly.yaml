@@ -1,0 +1,20 @@
+sensor.airly_cz_maki_caqi:
+  friendly_name: Indeks jakości powietrza
+
+sensor.airly_cz_maki_pm1:
+  friendly_name: Pyłki zawieszone PM1
+
+sensor.airly_cz_maki_pm10:
+  friendly_name: Pyłki zawieszone PM10
+
+sensor.airly_cz_maki_pm2_5:
+  friendly_name: Pyłki zawieszone PM2.5
+
+sensor.airly_cz_maki_temperature:
+  friendly_name: Temperatura
+
+sensor.airly_cz_maki_humidity:
+  friendly_name: Wilgotność
+
+sensor.airly_cz_maki_pressure:
+  friendly_name: Ciśnienie atmosferyczne
