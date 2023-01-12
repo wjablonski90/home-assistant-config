@@ -1,6 +1,7 @@
 title: Dom
 views:
   - title: Home
+    path: tab-home
     icon: mdi:home
     badges:
         - entity: binary_sensor.rpi_power_status
@@ -31,7 +32,7 @@ views:
                     entity: binary_sensor.justyna_wifi
                     state_color: true
                   - name: Poziom baterii
-                    entity: sensor.oneplus_7t_poziom_baterii              
+                    entity: sensor.iphone_justyna_battery_level              
                   # - name: W domu
                   #   entity: input_boolean.justyna_home
               - entity: person.wojciech
@@ -56,7 +57,7 @@ views:
                   name: false
                 entities:
                   - name: Ruch w kuwecie
-                    entity: binary_sensor.binary_sensor_motion_sensor_door_entrance_occupancy
+                    entity: binary_sensor.cat_toilet_activity
               # - switch.wardrobe_entrance_contact
               # - input_boolean.wojciech_wifi
               # - input_boolean.justyna_wifi
@@ -383,3 +384,672 @@ views:
           - sensor.air_purifier_bedroom_filter_life_remaining
         show_header_toggle: false
         theme: default
+  
+  - title: Test
+    path: tab-test
+    icon: mdi:progress-alert
+    cards:
+      - type: vertical-stack
+        cards:
+          # User info
+          - type: custom:mushroom-title-card
+            title: |
+              {% set time=now().hour %} 
+              {% if time >= 18 %} Dobry wieczór, {{ user }}!
+              {% else %} Dzień dobry, {{ user }}!
+              {% endif %}
+
+          # Weather panel
+          - type: custom:simple-weather-card
+            entity: weather.dom
+            name: w Krakowie
+            primary_info:
+              - humidity
+              - pressure
+            custom:
+              - temp: sensor.airly_cz_maki_temperature
+              - humidity: sensor.airly_cz_maki_humidity
+              - pressure: sensor.airly_cz_maki_pressure
+            card_mod:
+              style: |
+                ha-card {
+                  box-shadow: none;
+                  background: none;
+                  border-style: none;
+                }
+
+          # Air polution panel
+          - type: horizontal-stack
+            cards:
+              - type: custom:mushroom-chips-card
+                alignment: center
+                card_mod:
+                  style: |
+                    ha-card {
+                      --chip-spacing: none;
+                      --chip-box-shadow: none;
+                      --chip-background: none;
+                      --chip-border-style: none;
+                      --chip-border-width: 0px;
+                    }
+                chips:
+                  - type: template
+                    entity: sensor.airly_cz_maki_caqi
+                    icon: mdi:air-filter
+                    content: "AQI: {{ states.sensor.airly_cz_maki_caqi.state_with_unit }}"
+                  - type: template
+                    entity: sensor.airly_cz_maki_pm1
+                    icon: mdi:blur
+                    content: "PM1: {{ states.sensor.airly_cz_maki_pm1.state_with_unit }}"
+                  - type: template
+                    entity: sensor.airly_cz_maki_pm2_5
+                    icon: mdi:blur
+                    content: "PM2.5: {{ states.sensor.airly_cz_maki_pm2_5.state_with_unit }}"
+                  - type: template
+                    entity: sensor.airly_cz_maki_pm10
+                    icon: mdi:blur
+                    content: "PM10: {{ states.sensor.airly_cz_maki_pm10.state_with_unit }}"
+                    card_mod:
+                      style: |
+                        ha-card {
+
+                        }
+
+          # Family card
+          - type: horizontal-stack
+            cards:
+              # Wojciech
+              - type: custom:stack-in-card
+                card_mod:
+                  style: |
+                    ha-card {
+                      height: 100%;
+                      --mush-chip-spacing: 0px;
+                      --mush-chip-padding: 0px 5px;
+                    }
+                cards:
+                  # Person Wojciech
+                  - type: custom:mushroom-person-card
+                    entity: person.wojciech
+                    use_entity_picture: true
+                    name: Wojciech
+                    card_mod:
+                      style: |
+                        ha-card {
+                          border-style: none;
+                        }
+                  - type: custom:mushroom-chips-card
+                    alignment: center
+                    chips:
+                      # Bateria Oneplus 7
+                      - type: template
+                        entity: sensor.oneplus_7_battery_level
+                        content: "{{ states.sensor.oneplus_7_battery_level.state_with_unit }}"
+                        icon: |-
+                          {% set state=states('sensor.oneplus_7_battery_level') | int %}
+                          {% if state == 100 %} mdi:battery
+                          {% elif state >= 90 and state < 100 %} mdi:battery-90
+                          {% elif state >= 80 and state < 90 %} mdi:battery-80
+                          {% elif state >= 70 and state < 80 %} mdi:battery-70
+                          {% elif state >= 60 and state < 70 %} mdi:battery-60
+                          {% elif state >= 50 and state < 60 %} mdi:battery-50
+                          {% elif state >= 40 and state < 50 %} mdi:battery-40
+                          {% elif state >= 30 and state < 40 %} mdi:battery-30
+                          {% elif state >= 20 and state < 30 %} mdi:battery-20
+                          {% elif state >= 10 and state < 20 %} mdi:battery-10
+                          {% elif state >= 0 and state < 10 %} mdi:battery-outline
+                          {% endif %}
+                        icon_color: |-
+                          {% set state=states('sensor.oneplus_7_battery_level') | int %}
+                          {% if state > 75 %} green
+                          {% elif state < 75 and state > 15 %} orange
+                          {% elif state <= 15 %} red
+                          {% endif %}
+                        card_mod:
+                          style: |
+                            ha-card {
+                              border-style: none;
+                            }
+                      # Połączenie WiFi
+                      - type: conditional
+                        conditions:
+                          - entity: binary_sensor.wojciech_wifi
+                            state: 'on'
+                        chip:
+                          type: template
+                          entity: binary_sensor.wojciech_wifi
+                          content: |-
+                            {% set state=states('binary_sensor.wojciech_wifi') %}
+                            {% if state == 'on' %} {{ states.sensor.oneplus_7_wifi_connection.state }}
+                            {% endif %}
+                          icon: mdi:wifi
+                          icon_color: |-
+                            {% set state=states('binary_sensor.wojciech_wifi') %}
+                            {% if state == 'on' %} green
+                            {% endif %}
+                          tap_action:
+                            action: none
+                          card_mod:
+                            style: |
+                              ha-card {
+                                border-style: none;
+                              }
+              # Justyna
+              - type: custom:stack-in-card
+                card_mod:
+                  style: |
+                    ha-card {
+                      height: 100%;
+                      --mush-chip-spacing: 0px;
+                      --mush-chip-padding: 0px 5px;
+                    }
+                cards:
+                  # Person Justyna
+                  - type: custom:mushroom-person-card
+                    entity: person.justyna
+                    use_entity_picture: true
+                    name: Justyna
+                    card_mod:
+                      style: |
+                        ha-card {
+                            border-style: none;
+                        }
+                  - type: custom:mushroom-chips-card
+                    alignment: center
+                    chips:
+                      # Bateria iPhone 14 Pro Max
+                      - type: template
+                        entity: sensor.iphone_justyna_battery_level
+                        content: "{{ states.sensor.iphone_justyna_battery_level.state_with_unit }}"
+                        icon: |-
+                          {% set state=states('sensor.iphone_justyna_battery_level') | int %}
+                          {% if state == 100 %} mdi:battery
+                          {% elif state >= 90 and state < 100 %} mdi:battery-90
+                          {% elif state >= 80 and state < 90 %} mdi:battery-80
+                          {% elif state >= 70 and state < 80 %} mdi:battery-70
+                          {% elif state >= 60 and state < 70 %} mdi:battery-60
+                          {% elif state >= 50 and state < 60 %} mdi:battery-50
+                          {% elif state >= 40 and state < 50 %} mdi:battery-40
+                          {% elif state >= 30 and state < 40 %} mdi:battery-30
+                          {% elif state >= 20 and state < 30 %} mdi:battery-20
+                          {% elif state >= 10 and state < 20 %} mdi:battery-10
+                          {% elif state >= 0 and state < 10 %} mdi:battery-outline
+                          {% endif %}
+                        icon_color: |-
+                          {% set state=states('sensor.iphone_justyna_battery_level') | int %}
+                          {% if state >= 75 %} green
+                          {% elif state < 75 and state > 15 %} orange
+                          {% elif state <= 15 %} red
+                          {% endif %}
+                        card_mod:
+                          style: |
+                            ha-card {
+                                border-style: none;
+                            }
+                      # Połączenie WiFi
+                      - type: conditional
+                        conditions:
+                          - entity: binary_sensor.justyna_wifi
+                            state: 'on'
+                        chip:
+                          type: template
+                          entity: binary_sensor.justyna_wifi
+                          content: |-
+                            {% set state=states('binary_sensor.justyna_wifi') %}
+                            {% if state == 'on' %} {{ states.sensor.iphone_justyna_ssid.state }}
+                            {% endif %}
+                          icon: mdi:wifi
+                          icon_color: |-
+                            {% set state=states('binary_sensor.justyna_wifi') %}
+                            {% if state == 'on' %} green
+                            {% endif %}
+                          tap_action:
+                            action: none
+                          card_mod:
+                            style: |
+                              ha-card {
+                                  border-style: none;
+                              }
+              # Niasio
+              - type: custom:stack-in-card
+                card_mod:
+                  style: |
+                    ha-card {
+                      height: 100%;
+                    }
+                cards:
+                  # Device_tracker
+                  - type: custom:mushroom-person-card
+                    entity: device_tracker.person_luna
+                    use_entity_picture: true
+                    name: Niasio
+                    card_mod:
+                      style: |
+                        ha-card {
+                          border-style: none;
+                        }
+                  # Kuweta
+                  - type: custom:mushroom-chips-card
+                    alignment: center
+                    chips:
+                      - type: template
+                        entity: binary_sensor.cat_toilet_activity
+                        content: |-
+                          {% set state=states('binary_sensor.cat_toilet_activity') %}
+                          {% set time=relative_time(states.binary_sensor.cat_toilet_activity.last_changed) %}
+                          {% if state == 'off' %} brak ({{ time }} ago)
+                          {% endif %}
+                        icon: mdi:leak
+                        card_mod:
+                          style: |
+                            ha-card {
+                                border-style: none;
+                            }
+            square: false
+            columns: 3
+      
+          # Buttons panel
+          - type: horizontal-stack
+            cards:
+              - type: custom:mushroom-template-card
+                secondary: Dom
+                icon: mdi:home
+                layout: vertical
+                icon_color: blue
+                tap_action:
+                  action: navigate
+                  navigation_path: /lovelace/tab-test
+                card_mod:
+                  style: |
+                    ha-card {
+                      background: var(--card-background-color);
+                      width: 66px;
+                      border-radius: 30px;
+                      margin-left: auto;
+                      margin-right: auto;
+                      margin-bottom: 2px;
+                    }
+              - type: custom:mushroom-template-card
+                secondary: Światło
+                icon: mdi:lightbulb
+                layout: vertical
+                icon_color: amber
+                tap_action:
+                  action: navigate
+                  navigation_path: /lovelace/tab-lights
+                card_mod:
+                  style: |
+                    ha-card {
+                      background: var(--card-background-color);
+                      width: 66px;
+                      border-radius: 30px;
+                      margin-left: auto;
+                      margin-right: auto;
+                      margin-bottom: 2px;
+                    }
+              - type: custom:mushroom-template-card
+                secondary: Powietrze
+                icon: mdi:fan
+                layout: vertical
+                icon_color: green
+                tap_action:
+                  action: navigate
+                  navigation_path: /lovelace/tab-fans
+                card_mod:
+                  style: |
+                    ha-card {
+                      background: var(--card-background-color);
+                      width: 66px;
+                      border-radius: 30px;
+                      margin-left: auto;
+                      margin-right: auto;
+                      margin-bottom: 2px;
+                    }
+              - type: custom:mushroom-template-card
+                secondary: Media
+                icon: mdi:speaker
+                layout: vertical
+                icon_color: red
+                tap_action:
+                  action: navigate
+                  navigation_path: /lovelace/tab-fans
+                card_mod:
+                  style: |
+                    ha-card {
+                      background: var(--card-background-color);
+                      width: 66px;
+                      border-radius: 30px;
+                      margin-left: auto;
+                      margin-right: auto;
+                      margin-bottom: 2px;
+                    }
+              - type: custom:mushroom-template-card
+                secondary: Sieć
+                icon: mdi:wan
+                layout: vertical
+                icon_color: orange
+                tap_action:
+                  action: navigate
+                  navigation_path: /lovelace/tab-vacuum
+                card_mod:
+                  style: |
+                    ha-card {
+                      background: var(--card-background-color);
+                      width: 66px;
+                      border-radius: 30px;
+                      margin-left: auto;
+                      margin-right: auto;
+                      margin-bottom: 2px;
+                    }
+              - type: custom:mushroom-template-card
+                secondary: Ustawienia
+                icon: mdi:cog-outline
+                layout: vertical
+                icon_color: grey
+                tap_action:
+                  action: navigate
+                  navigation_path: /lovelace/tab-vacuum
+                card_mod:
+                  style: |
+                    ha-card {
+                      background: var(--card-background-color);
+                      width: 66px;
+                      border-radius: 30px;
+                      margin-left: auto;
+                      margin-right: auto;
+                      margin-bottom: 2px;
+                    }
+
+      # Rooms title card
+      # - type: custom:mushroom-title-card
+      #   title: Pomieszczenia
+     
+      # Rooms cards
+      # - type: custom:layout-card
+      #   layout_type: grid
+      #   layout:
+      #     grid-template-rows: auto auto
+      #     width: 100%
+      #     margin: 0px
+      #     padding: 0px
+      #   cards:
+      #     # Entrance
+      #     - type: custom:stack-in-card
+      #       cards:
+      #         - type: custom:mushroom-template-card
+      #           icon: mdi:door
+      #           primary: Wejście                
+      #         - type: custom:mushroom-chips-card
+      #           chips:
+      #             - type: template
+      #               entity: switch.light_1_entrance
+      #               icon: mdi:lightbulb
+      #               icon_color: |-
+      #                 {% if is_state('switch.light_1_entrance', 'on') %} amber
+      #                 {% endif %}
+      #               card_mod:
+      #                 style: |
+      #                   ha-card {
+      #                       border-style: none;
+      #                   }
+      #     # Living Room with kitchen desk
+      #     - type: custom:stack-in-card
+      #       cards:
+      #         - type: custom:mushroom-template-card
+      #           icon: mdi:silverware-fork-knife
+      #           primary: Salon z aneksem kuchennym
+      #           secondary: "Temperatura: {{ states.sensor.ht_temperature_living_room.state_with_unit }} | Wilgotność: {{ states.sensor.ht_humidity_living_room.state_with_unit }}"
+      #         - type: custom:mushroom-chips-card
+      #           chips:
+      #             - type: template
+      #               entity: switch.light_1_ceiling_kitchen
+      #               icon: mdi:ceiling-light
+      #               icon_color: |-
+      #                 {% if is_state('switch.light_1_ceiling_kitchen', 'on') %} amber
+      #                 {% endif %}
+      #               card_mod:
+      #                 style: |
+      #                   ha-card {
+      #                       border-style: none;
+      #                   }
+      #             - type: template
+      #               entity: switch.light_2_ceiling_kitchen
+      #               icon: mdi:ceiling-light-multiple
+      #               icon_color: |-
+      #                 {% if is_state('switch.light_2_ceiling_kitchen', 'on') %} amber
+      #                 {% endif %}
+      #               card_mod:
+      #                 style: |
+      #                   ha-card {
+      #                       border-style: none;
+      #                   }
+      #             - type: template
+      #               entity: switch.light_desk_kitchen
+      #               icon: mdi:countertop-outline
+      #               icon_color: |-
+      #                 {% if is_state('switch.light_desk_kitchen', 'on') %} amber
+      #                 {% endif %}
+      #               card_mod:
+      #                 style: |
+      #                   ha-card {
+      #                       border-style: none;
+      #                   }
+      #             - type: template
+      #               entity: switch.light_table_kitchen
+      #               icon: mdi:table-chair
+      #               icon_color: |-
+      #                 {% if is_state('switch.light_table_kitchen', 'on') %} amber
+      #                 {% endif %}
+      #               card_mod:
+      #                 style: |
+      #                   ha-card {
+      #                       border-style: none;
+      #                   }
+      #             - type: template
+      #               entity: switch.light_1_hall
+      #               icon: mdi:walk
+      #               icon_color: |-
+      #                 {% if is_state('switch.light_1_hall', 'on') %} amber
+      #                 {% endif %}
+      #               card_mod:
+      #                 style: |
+      #                   ha-card {
+      #                       border-style: none;
+      #                   }
+      #             - type: template
+      #               entity: switch.fan_1_kitchen
+      #               icon: mdi:fan-speed-1
+      #               icon_color: |-
+      #                 {% if is_state('switch.fan_1_kitchen', 'on') %} amber
+      #                 {% endif %}
+      #               card_mod:
+      #                 style: |
+      #                   ha-card {
+      #                       border-style: none;
+      #                   }
+      #             - type: template
+      #               entity: switch.fan_2_kitchen
+      #               icon: mdi:fan-speed-2
+      #               icon_color: |-
+      #                 {% if is_state('switch.fan_2_kitchen', 'on') %} amber
+      #                 {% endif %}
+      #               card_mod:
+      #                 style: |
+      #                   ha-card {
+      #                       border-style: none;
+      #                   }
+      #             - type: template
+      #               entity: switch.light_coffee_table_living_room
+      #               icon: mdi:coffee
+      #               icon_color: |-
+      #                 {% if is_state('switch.light_coffee_table_living_room', 'on') %} amber
+      #                 {% endif %}
+      #               card_mod:
+      #                 style: |
+      #                   ha-card {
+      #                       border-style: none;
+      #                   }
+      #             - type: template
+      #               entity: light.gateway_light_living_room
+      #               icon: mdi:circle-double
+      #               icon_color: |-
+      #                 {% if is_state('light.gateway_light_living_room', 'on') %} amber
+      #                 {% endif %}
+      #               card_mod:
+      #                 style: |
+      #                   ha-card {
+      #                       border-style: none;
+      #                   }
+      #             - type: template
+      #               entity: light.gateway_light_hall
+      #               icon: mdi:circle-double
+      #               icon_color: |-
+      #                 {% if is_state('light.gateway_light_hall', 'on') %} amber
+      #                 {% endif %}
+      #               card_mod:
+      #                 style: |
+      #                   ha-card {
+      #                       border-style: none;
+      #                   }
+      #           card_mod:
+      #             style: |
+      #               ha-card {
+      #                 border-style: none;
+      #               }
+      #               :host {
+      #                 --mush-chip-spacing: -8px;
+      #               }
+
+      #     # Office
+      #     - type: custom:stack-in-card
+      #       cards:      
+      #       - type: custom:mushroom-template-card
+      #         icon: mdi:wifi
+      #         primary: Biuro
+
+      #     # Living Room with kitchen desk
+      #     - type: custom:stack-in-card
+      #       cards:      
+      #       - type: custom:mushroom-template-card
+      #         icon: mdi:wifi
+      #         primary: Łazienka
+
+      #     # Living Room with kitchen desk
+      #     - type: custom:stack-in-card
+      #       cards:      
+      #       - type: custom:mushroom-template-card
+      #         icon: mdi:wifi
+      #         primary: Sypialnia
+      #   square: false
+
+  - title: Swiatlo
+    path: tab-lights
+    icon: mdi:lightbulb
+    cards:
+      - type: vertical-stack
+        cards:
+          # Przedpokój
+          - type: custom:mushroom-title-card
+            title: Przedpokój
+          - type: horizontal-stack
+            cards:
+                # - type: custom:mushroom-chips-card
+                # alignment: center
+                # card_mod:
+                #   style: |
+                #     ha-card {
+                #       --chip-spacing: none;
+                #       --chip-box-shadow: none;
+                #       --chip-background: none;
+                #       --chip-border-style: none;
+                #       --chip-border-width: 0px;
+                #     }
+                # chips:
+              - type: custom:mushroom-light-card
+                entity: switch.light_1_entrance
+                name: Sufit
+
+          # Kuchnia
+          - type: custom:mushroom-title-card
+            title: Kuchnia
+          - type: vertical-stack
+            cards:
+              - type: horizontal-stack
+                cards:
+                  - type: custom:mushroom-light-card
+                    entity: switch.light_1_ceiling_kitchen
+                    name: Sufit 1
+                  - type: custom:mushroom-light-card
+                    entity: switch.light_2_ceiling_kitchen
+                    name: Sufit 2
+              - type: horizontal-stack
+                cards:  
+                  - type: custom:mushroom-light-card
+                    entity: switch.light_desk_kitchen
+                    name: Blat
+                  - type: custom:mushroom-light-card
+                    entity: switch.light_table_kitchen
+                    name: Stół
+              - type: horizontal-stack
+                cards:  
+                  - type: custom:mushroom-light-card
+                    entity: switch.fan_1_kitchen
+                    name: Wiatrak 1
+                  - type: custom:mushroom-light-card
+                    entity: switch.fan_2_kitchen
+                    name: Wiatrak 2
+
+          # Salon
+          - type: custom:mushroom-title-card
+            title: Salon
+          - type: vertical-stack
+            cards:
+              - type: horizontal-stack
+                cards:
+                  - type: custom:mushroom-light-card
+                    entity: switch.light_coffee_table_living_room
+                    name: Stolik
+                  - type: custom:mushroom-light-card
+                    entity: light.gateway_light_living_room
+                    name: Gateway
+
+          # Korytarz
+          - type: custom:mushroom-title-card
+            title: Korytarz
+          - type: vertical-stack
+            cards:
+              - type: horizontal-stack
+                cards:
+                  - type: custom:mushroom-light-card
+                    entity: switch.light_1_hall
+                    name: Sufit 1
+                  - type: custom:mushroom-light-card
+                    entity: light.gateway_light_hall
+                    name: Gateway
+
+          # Biuro
+          - type: custom:mushroom-title-card
+            title: Biuro
+          - type: vertical-stack
+            cards:
+              - type: horizontal-stack
+                cards:
+                  - type: custom:mushroom-light-card
+                    entity: switch.light_1_office
+                    name: Sufit
+                  - type: custom:mushroom-light-card
+                    entity: light.mi_led_desk_lamp
+                    name: Lampka
+
+          # Sypialnia
+          - type: custom:mushroom-title-card
+            title: Sypialnia
+          - type: vertical-stack
+            cards:
+              - type: horizontal-stack
+                cards:
+                  - type: custom:mushroom-light-card
+                    entity: light.yeelight_color_bedroom
+                    name: Sufit
+
+

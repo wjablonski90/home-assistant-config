@@ -11,3 +11,15 @@ lovelace:
     type: module
   - url: /local/multiple-entity-row.js?v=4.4.1
     type: module
+  - url: /hacsfiles/lovelace-mushroom/mushroom.js
+    type: module
+  - url: /local/stack-in-card.js
+    type: module
+  - url: /local/vertical-stack-in-card.js?v=0.4.4
+    type: js
+  - url: /hacsfiles/lovelace-card-mod/card-mod.js
+    type: module
+  - url: /hacsfiles/lovelace-layout-card/layout-card.js
+    type: module
+  - url: /hacsfiles/simple-weather-card/simple-weather-card-bundle.js
+    type: module
