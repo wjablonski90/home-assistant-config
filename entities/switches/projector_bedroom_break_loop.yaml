@@ -1,0 +1,13 @@
+- platform: template
+  switches:
+    projector_bedroom_break_loop:
+      friendly_name: Przerwij wyłączanie
+      icon_template: "mdi:timer-off"
+      value_template: >
+        {{ is_state('input_boolean.projector_bedroom_break_loop', 'on') }}
+      turn_on:
+        - service: input_boolean.turn_on
+          entity_id: input_boolean.projector_bedroom_break_loop
+      turn_off:
+        - service: input_boolean.turn_off
+          entity_id: input_boolean.projector_bedroom_break_loop

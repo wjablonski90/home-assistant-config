@@ -1,0 +1,8 @@
+---
+# Ping Xiaomi Roborock S50
+
+- platform: ping
+  host: 192.168.55.9
+  name: Xiaomi Roborock S50 ping
+  count: 2
+  scan_interval: 30

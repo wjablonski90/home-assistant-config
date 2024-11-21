@@ -42,3 +42,14 @@
       data:
         title: Muszek już czeka
         message: "Czem prędzej wsiadaj do Audiczki! :)"
+
+- alias: Justyna is driving
+  trigger:
+    platform: state
+    entity_id: sensor.iphone_justyna_activity
+    to: 'Automotive'
+  action:
+    - service: notify.wojciech_devices
+      data:
+        title: info
+        message: JID

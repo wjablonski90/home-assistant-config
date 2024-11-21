@@ -21,6 +21,7 @@
 #       data:
 #         command: "input keyevent 23"
 
+# Ask whether projector timer should be started
 - alias: Ask whether projector timer should be started
   trigger:
     - platform: template
@@ -77,6 +78,7 @@
           - action: "90 min"
             title: +90 min
 
+# Action for "30 min" event
 - alias: "Response for 30 min"
   trigger: 
     - platform: event
@@ -104,6 +106,7 @@
         title: "Projektor"
         message: "Zaplanowano wyłączenie o godzinie {{ (now().strftime('%s') | int + states.sensor.projector_bedroom_off_timer_remaining.state | int * 60)  | timestamp_custom('%H:%M', false) }}"
 
+# Action for "60 min" event
 - alias: "Response for 60 min"
   trigger: 
     - platform: event
@@ -131,6 +134,7 @@
         title: "Projektor"
         message: "Zaplanowano wyłączenie o godzinie {{ (now().strftime('%s') | int + states.sensor.projector_bedroom_off_timer_remaining.state | int * 60) | timestamp_custom('%H:%M', false) }}"
 
+# Action for "90 min" event
 - alias: "Response for 90 min"
   trigger: 
     - platform: event
@@ -158,35 +162,72 @@
         title: "Projektor"
         message: "Zaplanowano wyłączenie o godzinie {{ (now().strftime('%s') | int + states.sensor.projector_bedroom_off_timer_remaining.state | int * 60) | timestamp_custom('%H:%M', false) }}"
 
-# Turn the projector off when time is out
+# Notify about the scheduled shutdown and ask if you want to extend
+- alias: Notify about the scheduled shutdown and ask if want to extend
+  trigger: 
+    - platform: template
+      value_template: "{% if states.sensor.projector_bedroom_off_timer_remaining.state | int == 0 %} true {% endif %}"
+    - platform: time
+      at: '01:00'
+  condition: [] 
+#    - condition: state
+#      entity_id: switch.projector_bedroom_off_timer
+#      state: 'on'
+  action:
+    - service: notify.family
+      data:
+        title: "Wyłączanie projektora"
+        message: "Za chwilę nastąpi wyłączenie. Czy chcesz przerwać?"
+        data:
+          actions:
+            - action: "cancel_projector_shutting_down"
+              title: Tak, przerwij
+
+# Turn the projector off when time is out for 2 minutes
 - alias: Turn the projector off when the time is out
   trigger: 
     - platform: template
       value_template: "{% if states.sensor.projector_bedroom_off_timer_remaining.state | int == 0 %} true {% endif %}"
+      for: 
+        minutes: 1
   condition:
-    - condition: state
-      entity_id: switch.projector_bedroom_off_timer
-      state: 'on'
   action:
     - repeat:
-        until:
-          - condition: state
-            entity_id: binary_sensor.projector_bedroom_ping
-            state: 'off'
+        while:
+          - condition: and
+            conditions:
+              - condition: state
+                entity_id: binary_sensor.projector_bedroom_ping
+                state: 'on'
+              - condition: state
+                entity_id: switch.projector_bedroom_off_timer
+                state: 'on'
+              - condition: state
+                entity_id: switch.projector_bedroom_break_loop
+                state: 'off'
         sequence:
           - service: androidtv.adb_command
             entity_id: media_player.projector_bedroom
             data:
-              command: "input keyevent --longpress 26 && input keyevent 22 && input keyevent 23"
-          - delay: 00:00:30
+              command: "input keyevent --longpress 26"
+          - delay: 00:00:10
+          - service: androidtv.adb_command
+            entity_id: media_player.projector_bedroom
+            data:
+              command: "input keyevent 22 && input keyevent 23"
+          - delay: 00:00:15
+    - service: media_player.turn_off
+      entity_id: media_player.sypialnia_2
     - service: switch.turn_off
       entity_id: switch.projector_bedroom_off_timer
+    - service: switch.turn_off
+      entity_id: switch.projector_bedroom_break_loop
 
-# Turn the projector off at 12am and when timer is not set
-- alias: Turn the projector off at 12 am and when the timer is not set
+# Turn the projector off at 1 am and when timer is not set
+- alias: Turn the projector off at 1 am and when the timer is not set
   trigger: 
     - platform: time
-      at: '00:00'
+      at: '01:00'
   condition:
     - condition: state
       entity_id: switch.projector_bedroom_off_timer
@@ -194,14 +235,45 @@
   action:
     - repeat:
         until:
-          - condition: state
-            entity_id: binary_sensor.projector_bedroom_ping
-            state: 'off'
+          - condition: or
+            conditions:
+              - condition: state
+                entity_id: binary_sensor.projector_bedroom_ping
+                state: 'off'
+              - condition: state
+                entity_id: switch.projector_bedroom_break_loop
+                state: 'on'
         sequence:
           - service: androidtv.adb_command
             entity_id: media_player.projector_bedroom
             data:
-              command: "input keyevent --longpress 26 && input keyevent 22 && input keyevent 23"
+              command: "input keyevent --longpress 26"
+          - delay: 00:00:15
+          - service: androidtv.adb_command
+            entity_id: media_player.projector_bedroom
+            data:
+              command: "input keyevent 22 && input keyevent 23"
           - delay: 00:00:30
+    - service: media_player.turn_off
+      entity_id: media_player.sypialnia_2
     - service: switch.turn_off
       entity_id: switch.projector_bedroom_off_timer
+    - service: switch.turn_off
+      entity_id: switch.projector_bedroom_break_loop
+
+# Action for "cancel_projector_shutting_down" event
+- alias: "Response for cancel_projector_shutting_down"
+  trigger: 
+    - platform: event
+      event_type: mobile_app_notification_action
+      event_data:
+        action: "cancel_projector_shutting_down"
+  action:
+    - service: switch.turn_off
+      entity_id: switch.projector_bedroom_off_timer
+    - service: switch.turn_on
+      entity_id: switch.projector_bedroom_break_loop
+    - service: notify.family
+      data_template:
+        title: "Projektor"
+        message: "Przerwano wyłączanie. Pamiętaj, aby ustawić timer!"

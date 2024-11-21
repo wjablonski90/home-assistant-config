@@ -1,16 +1,12 @@
 homeassistant:
+  external_url: "https://sweethomeha.duckdns.org"
+
   # Load packages
   packages: !include_dir_named integrations
   media_dirs:
     local: /media
 
-# http:
-#   ssl_certificate: /ssl/fullchain.pem
-#   ssl_key: /ssl/privkey.pem
-
 http:
-  # ssl_certificate: fullchain.pem
-  # ssl_key: privkey.pem
   use_x_forwarded_for: true
   trusted_proxies:
     - 127.0.0.1
@@ -18,8 +14,26 @@ http:
     - ::1
     - 172.30.32.0/24 
 
+logger:
+  default: warning
+  logs:
+    custom_components.xiaomi_miot: debug
+
 python_script:
 
+# xiaomi_miot:
+#   username: !secret xiaomi-cloud-username
+#   password: !secret xiaomi-cloud-password
+#   server_country: cn
+#   device_customizes:
+#     mmgg.feeder.fi1:
+#       chunk_properties: 1
+#       exclude_miot_services: ''
+#       exclude_miot_properties: contrycode,factory_result
 
+#     fan.zhimi_ma4_708e_air_purifier:
+#       interval_seconds: 30
+#       chunk_properties: 10
+#       miot_local: true
 
 default_config:

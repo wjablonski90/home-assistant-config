@@ -9,24 +9,24 @@
   action:
     service: fan.set_preset_mode
     data_template:
-      entity_id: fan.air_purifier_bedroom
+      entity_id: fan.zhimi_ma4_air_purifier
       preset_mode: '{{ states.input_select.air_purifier_bedroom_mode.state }}' 
 
 # Mode changed
 - alias: Mode changed
   trigger:
     platform: state
-    entity_id: fan.air_purifier_bedroom
+    entity_id: fan.zhimi_ma4_air_purifier
   condition:
     condition: and
     conditions:
     - condition: template
-      value_template: "{{ (state_attr('fan.air_purifier_bedroom', 'preset_mode') | string) != (states('input_select.air_purifier_bedroom_mode') | string) }}"
+      value_template: "{{ (state_attr('fan.zhimi_ma4_air_purifier', 'preset_mode') | string) != (states('input_select.air_purifier_bedroom_mode') | string) }}"
   action:
     service: input_select.select_option
     entity_id: input_select.air_purifier_bedroom_mode
     data_template:
-      option: '{{ states.fan.air_purifier_bedroom.attributes.preset_mode }}'
+      option: '{{ states.fan.zhimi_ma4_air_purifier.attributes.preset_mode }}'
 
 # Toggle automations depends on windows state
 - alias: Toggle automations depends on window open/close state
@@ -38,9 +38,9 @@
         {% if is_state('group.all_windows', 'on') %} switch.turn_off
         {% else %} switch.turn_on
         {% endif %}
-      entity_id: switch.air_purifier_bedroom_automations_enabled
+      entity_id: switch.zhimi_ma4_air_purifier_automations_enabled
     - service_template: >
-        {% if is_state('group.all_windows', 'on') and is_state('fan.air_purifier_bedroom', 'on') %} fan.turn_off
+        {% if is_state('group.all_windows', 'on') and is_state('fan.zhimi_ma4_air_purifier', 'on') %} fan.turn_off
         {% else %} fan.turn_on
         {% endif %}
-      entity_id: fan.air_purifier_bedroom
+      entity_id: fan.zhimi_ma4_air_purifier

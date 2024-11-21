@@ -1,0 +1,8 @@
+---
+# Ping Xiaomi Evaporative Humidifier
+
+- platform: ping
+  host: 192.168.55.103
+  name: Xiaomi Evaporative Humidifier ping
+  count: 2
+  scan_interval: 30

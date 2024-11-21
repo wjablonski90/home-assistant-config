@@ -5,8 +5,16 @@
   latitude: !secret ryvu-zone-latitude
   longitude: !secret ryvu-zone-longitude
   radius: 60
+  icon: mdi:briefcase
 
 - name: Columbus
   latitude: !secret cg-zone-latitude
   longitude: !secret cg-zone-longitude
   radius: 41
+  icon: mdi:briefcase
+
+- name: PAN
+  latitude: 50.092462041895615
+  longitude: 19.885039329528812
+  radius: 41
+  icon: mdi:flask

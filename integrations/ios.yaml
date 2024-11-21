@@ -1,0 +1,19 @@
+ios:
+    actions:
+    - name: Turn Lights Off
+      background_color: "#000000"
+      label:
+        text: All Lights Off
+        color: "#ff0000"
+      icon:
+        icon: lightbulb_off
+        color: "#ffffff"
+        
+    - name: Turn Gateway Lights On
+      background_color: "#000000"
+      label:
+        text: Turn Gateway Lights On
+        color: "#ff0000"
+      icon:
+        icon: lightbulb
+        color: "#ffffff"

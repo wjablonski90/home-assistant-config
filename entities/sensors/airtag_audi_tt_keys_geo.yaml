@@ -1,0 +1,35 @@
+- platform: rest
+  name: airtag_audi_tt_keys_geo
+  value_template: >
+    {% set address = states('input_text.airtag').split('Klucze (Justyna)')[1].split('•')[0] %}
+    {% set street, city = address.split(', ') %}
+    {% set street = street | replace("ą", "a") | replace("ć", "c") | replace("ę", "e") | replace("ł", "l") | replace("ń", "n") | replace("ó", "o") | replace("ś", "s") | replace("ź", "z") | replace("ż", "z") %}
+    {% set city = city | replace("ą", "a") | replace("ć", "c") | replace("ę", "e") | replace("ł", "l") | replace("ń", "n") | replace("ó", "o") | replace("ś", "s") | replace("ź", "z") | replace("ż", "z") %}
+
+    {% set address_result = value_json.results | selectattr("street", "in", street) | selectattr("city", "in", city) | list %}
+    {% set found_index = value_json.results.index(address_result[0]) if address_result | length > 0 else -1 %}
+
+    {% set lon = value_json.results[found_index].lon | string %}
+    {% set lat = value_json.results[found_index].lat | string %}
+
+    {{ value_json.results[found_index].formatted + " | " + "Lon: " + lon + " | " + "Lat: " + lat}}
+  verify_ssl: true
+  scan_interval: 60 # every 15 min
+  force_update: true
+  resource_template: >
+    {% set address = states('input_text.airtag').split('Klucze (Justyna)')[1].split('•')[0] %}
+    {% if address == "Dom" %}
+      {% set home = "Jana Kantego Federowicza 29, 30-392 Kraków, Polska" %}
+      {{
+        "https://api.geoapify.com/v1/geocode/search?text="
+        + home | urlencode
+        + "&apiKey=e32fa5fbcdaa4507abcb546dbd931226&format=json"
+      }}
+    {% else %}
+      {% set fix = address + "" %}
+      {{
+        "https://api.geoapify.com/v1/geocode/search?text="
+        + fix | urlencode
+        + "&apiKey=e32fa5fbcdaa4507abcb546dbd931226&format=json"
+      }}
+    {% endif %}

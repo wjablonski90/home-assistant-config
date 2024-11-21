@@ -1,0 +1,55 @@
+{
+    "config": {
+        "abort": {
+            "already_configured": "Device is already configured"
+        },
+        "error": {
+            "parcel_locker_no_data": "This parcel locker doesn't have air quality data",
+            "unknown_parcel_locker": "Couldn't find parcel locker with this ID"
+        },
+        "step": {
+            "user": {
+                "data": {
+                    "parcelLockerId": "Parcel Locker ID"
+                }
+            }
+        }
+    },
+    "entity": {
+        "sensor": {
+            "humidity": {
+                "name": "Humidity"
+            },
+            "no2": {
+                "name": "NO2"
+            },
+            "o3": {
+                "name": "O3"
+            },
+            "pm1": {
+                "name": "PM 1"
+            },
+            "pm10": {
+                "name": "PM 10"
+            },
+            "pm10_norm": {
+                "name": "PM 10 norm"
+            },
+            "pm25": {
+                "name": "PM 2.5"
+            },
+            "pm25_norm": {
+                "name": "PM 2.5 norm"
+            },
+            "pm4": {
+                "name": "PM 4"
+            },
+            "pressure": {
+                "name": "Pressure"
+            },
+            "temperature": {
+                "name": "Temperature"
+            }
+        }
+    }
+}

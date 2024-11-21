@@ -1,0 +1,14 @@
+---
+# Xiaomi Feeder
+
+- platform: template
+  sensors:
+    pet_feeder_feedplan_control:
+      icon_template: "mdi:calendar-clock"
+      value_template: >
+          {{ is_state_attr('sensor.mmgg_fi1_2f28_pet_feeder', 'feedplanserve.feedplan_contr', 1) }}
+
+    pet_feeder_feed_today:
+      icon_template: "mdi:calendar-clock"
+      value_template: >
+              {{ is_state_attr('sensor.mmgg_fi1_2f28_pet_feeder', 'feedplanserve.feedplan_contr', 1) }}

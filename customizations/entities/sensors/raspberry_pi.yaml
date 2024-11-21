@@ -1,0 +1,6 @@
+---
+# Raspberry Pi customization
+
+sensor.cpu_temp1:
+  friendly_name: RPi CPU Temp
+  

@@ -2,13 +2,13 @@
 # Raspberry Pi 4B
 
 - platform: command_line
-  name: GPU Temp
+  name: GPU Temp1
   command: "/opt/vc/bin/vcgencmd measure_temp"
   unit_of_measurement: "°C"
   value_template: '{{ value | regex_findall_index("=([0-9]*\.[0-9]*)", 0) }}'
 
 - platform: command_line
-  name: CPU Temp
+  name: CPU Temp1
   command: "cat /sys/class/thermal/thermal_zone0/temp"  
   unit_of_measurement: "°C"
   value_template: "{{ value | multiply(0.001) | round(1) }}"

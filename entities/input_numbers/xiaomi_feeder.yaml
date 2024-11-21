@@ -1,0 +1,7 @@
+mmgg_petfeeder_fi1_2f28_feed_amount:
+  name: "Pet Feeder Amount"
+  min: 1
+  max: 30
+  step: 1
+  unit_of_measurement: portion(s)
+  mode: slider

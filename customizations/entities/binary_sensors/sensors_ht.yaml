@@ -7,11 +7,11 @@ sensor.ht_humidity_living_room:
 sensor.ht_temperature_living_room:
   friendly_name: Salon - temperatura
 
-sensor.ht_humidity_balcony:
-  friendly_name: Balkon - wilgotność
+sensor.ht_humidity_entrance:
+  friendly_name: Przedpokój - wilgotność
 
-sensor.ht_temperature_balcony:
-  friendly_name: Balkon - temperatura
+sensor.ht_temperature_entrance:
+  friendly_name: Przedpokój - temperatura
 
 sensor.ht_humidity_office:
   friendly_name: Biuro - wilgotność
@@ -24,3 +24,9 @@ sensor.ht_humidity_bathroom:
 
 sensor.ht_temperature_bathroom:
   friendly_name: Łazienka - temperatura
+
+sensor.ht_humidity_average_entire_home:
+  icon: mdi:thermometer
+
+sensor.ht_temperature_average_entire_home:
+  icon: mdi:thermometer

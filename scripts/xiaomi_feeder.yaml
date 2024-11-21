@@ -1,0 +1,179 @@
+---
+# Xiaomi Feeder
+
+# mmgg_feeder_dispense:
+#   mode: queued
+#   alias: '[PetFeeder] - Dispense Food'
+#   description: Dispenses food from the feeder
+#   icon: mdi:bowl-mix
+#   fields:
+#     entity_id:
+#       description: ID of the PetFeeder
+#       required: true
+#       example: sensor.mmgg_petfeeder_bf89_pet_feeder
+#       selector:
+#         entity:
+#           integration: xiaomi_miot
+#           domain: sensor
+#     units:
+#       name: units
+#       description: Number of units to dispense
+#       required: false
+#       default: 1
+#       example: '1'
+#       selector:
+#         number:
+#           min: 1
+#           max: 30
+#           step: 1
+#           unit_of_measurement: units(s)
+#           mode: slider
+#     units_id:
+#       name: units_id
+#       description: ID for input_number holding portion value
+#       example: input_number.mmgg_petfeeder_bf89_feed_amount
+#       required: false
+#       selector:
+#         entity:
+#           domain: input_number
+#   sequence:
+#   - service: xiaomi_miot.send_command
+#     data_template:
+#       entity_id: '{{ entity_id }}'
+#       method: outfood
+#       params:
+#       - '{{ expand(units_id)[0].state | int(0) }}'
+#   max: 10
+
+# mmgg_feeder_reset_dryer:
+#   mode: single
+#   alias: '[PetFeeder] - Reset Desicant Age'
+#   description: Resets the descicant age, use when replaced
+#   icon: mdi:calendar-clock
+#   fields:
+#     entity_id:
+#       description: ID of the PetFeeder
+#       required: true
+#       example: sensor.mmgg_petfeeder_bf89_pet_feeder
+#       selector:
+#         entity:
+#           integration: xiaomi_miot
+#           domain: sensor
+#   sequence:
+#   - service: xiaomi_miot.send_command
+#     data_template:
+#       entity_id: '{{ entity_id }}'
+#       method: resetdryer
+#       params: []
+
+# mmgg_feeder_set_key_lock:
+#   mode: single
+#   alias: '[PetFeeder] - Lock Dispense Food Button'
+#   description: Lock Dispense Food Button
+#   icon: mdi:gesture-tap-button
+#   fields:
+#     entity_id:
+#       description: ID of the PetFeeder
+#       required: true
+#       example: sensor.mmgg_petfeeder_bf89_pet_feeder
+#       selector:
+#         entity:
+#           integration: xiaomi_miot
+#           domain: sensor
+#     state:
+#       description: Status
+#       required: true
+#       default: false
+#       example: 'false'
+#       selector:
+#         boolean:
+#   sequence:
+#   - service: xiaomi_miot.send_command
+#     data_template:
+#       entity_id: '{{ entity_id }}'
+#       method: keylock
+#       params:
+#       - '{{ not state | int }}'
+
+# mmgg_feeder_set_wifi_led:
+#   mode: single
+#   alias: '[PetFeeder] - Set WiFi indicator state '
+#   description: Turn on/off WiFi status led state
+#   icon: mdi:led-on
+#   fields:
+#     entity_id:
+#       description: ID of the PetFeeder
+#       required: true
+#       example: sensor.mmgg_petfeeder_bf89_pet_feeder
+#       selector:
+#         entity:
+#           integration: xiaomi_miot
+#           domain: sensor
+#     state:
+#       description: Status
+#       required: true
+#       default: false
+#       example: 'false'
+#       selector:
+#         boolean:
+#   sequence:
+#   - service: xiaomi_miot.send_command
+#     data_template:
+#       entity_id: '{{ entity_id }}'
+#       method: wifiledon
+#       params:
+#       - '{{ state | int }}'
+
+# mmgg_feeder_set_auto_feed:
+#   mode: single
+#   alias: '[PetFeeder] - Set automatic feeding state '
+#   description: Turn on/off automatic feeding
+#   icon: mdi:clock
+#   fields:
+#     entity_id:
+#       description: ID of the PetFeeder
+#       required: true
+#       example: sensor.mmgg_petfeeder_bf89_pet_feeder
+#       selector:
+#         entity:
+#           integration: xiaomi_miot
+#           domain: sensor
+#     state:
+#       description: Status
+#       required: true
+#       default: true
+#       example: 'true'
+#       selector:
+#         boolean:
+#   sequence:
+#   - service: xiaomi_miot.send_command
+#     data_template:
+#       entity_id: '{{ entity_id }}'
+#       method: stopfeed
+#       params:
+#       - '{{ not state | int }}'
+
+get_data_from_xiaomi_api_feeder:
+  sequence:
+    - service: xiaomi_miot.request_xiaomi_api
+      data:
+        entity_id: sensor.mmgg_fi1_2f28_pet_feeder
+        api: /user/get_user_device_data
+        data:
+          did: "467634482"
+          uid: "6236379903"
+          key: "4.2"
+          type: event
+          group: raw
+          time_start: 1698012000
+          time_end: 1698620399
+          limit: 1000
+        method: POST
+        crypt: true
+        sid: xiaomiio
+      target: sensor.pet_feeder_feed_today
+
+    # - service: sensor.set
+    #   data:
+    #     entity_id: sensor.temporary_sensor  # Zastąp odpowiednią encją sensora
+    #     state: "{{ state_attr('xiaomi_miot.12345', 'result')['return'][0] }}"  # Zastąp 12345 odpowiednim identyfikatorem urządzenia Xiaomi

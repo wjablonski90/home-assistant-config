@@ -28,3 +28,13 @@
         - service: input_boolean.turn_off
           entity_id: input_boolean.evaporative_humidifier_office_automations_enabled
       icon_template: mdi:autorenew
+
+    evaporative_humidifier_office_state:
+      value_template: "{{ is_state('humidifier.evaporative_humidifier_office', 'on') }}"
+      turn_on:
+        - service: humidifier.turn_on
+          entity_id: humidifier.evaporative_humidifier_office
+      turn_off:
+        - service: humidifier.turn_off
+          entity_id: humidifier.evaporative_humidifier_office
+          

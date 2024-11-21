@@ -34,6 +34,7 @@ living_room_lights:
 office_lights:
   name: Office Lights
   entities:
+    - switch.light_1_office	
     - light.mi_led_desk_lamp
 
 bedroom_lights:

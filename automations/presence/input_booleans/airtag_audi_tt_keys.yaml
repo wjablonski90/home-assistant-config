@@ -1,0 +1,5 @@
+- alias: AirTag Audi TT keys device tracker
+  use_blueprint:
+    path: TitoTB/Airtag_Device_Tracker_v2.yaml
+    input:
+      airtag: sensor.airtag_audi_tt_keys

@@ -4,5 +4,5 @@
 name: family
 platform: group
 services:
-  - service: mobile_app_oneplus_7
-  - service: mobile_app_oneplus_7t
+  - service: mobile_app_iphone_wojciech
+  - service: mobile_app_iphone_justyna

@@ -7,10 +7,10 @@
     platform: state
     entity_id: input_select.evaporative_humidifier_office_mode
   action:
-    service: humidifer.set_mode
+    service: humidifier.set_mode
     data_template:
-      entity_id: humidifier.evaporative_humidifier_office
       mode: '{{ states.input_select.evaporative_humidifier_office_mode.state }}' 
+      entity_id: humidifier.evaporative_humidifier_office
 
 # Mode changed
 - alias: Mode changed
@@ -43,11 +43,11 @@
         entity_id: humidifier.evaporative_humidifier_office
         state: 'off'
       - condition: numeric_state
-        entity_id: sensor.ht_humidity_living_room
-        below: '50'
+        entity_id: sensor.ht_humidity_average_entire_home
+        below: 50
       - condition: numeric_state
         entity_id: sensor.evaporative_humidifier_office_water_level
-        above: '15'
+        above: 15
   action:
     - service: humidifier.turn_on
       entity_id: humidifier.evaporative_humidifier_office
@@ -60,8 +60,8 @@
 - alias: Turn Humidifer off
   trigger:
     - platform: numeric_state
-      entity_id: sensor.ht_humidity_living_room
-      above: '57'
+      entity_id: sensor.ht_humidity_average_entire_home
+      above: 57
       for:
         minutes: 2
   condition:
@@ -80,6 +80,7 @@
       data: 
         title: Wylaczam nawilzacz!
         message: "Za wilgotno.."
+  mode: single
 
 # Turn the Humidifier off when depth of water is below 15
 - alias: Turn Humidifier off when depth is below than defined

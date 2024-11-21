@@ -1,6 +1,0 @@
----
-# Wojciech Home states
-
-wojciech_home:
-  name: Wojciech Home
-  initial: off

@@ -1,0 +1,8 @@
+---
+# Ping Xiaomi Air Purifier
+
+- platform: ping
+  host: 192.168.55.101
+  name: Xiaomi Air Purifier Bedroom ping
+  count: 2
+  scan_interval: 30

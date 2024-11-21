@@ -20,3 +20,8 @@
   latitude: 50.05221348651257
   longitude: 19.948913455009464
   radius: 12
+
+- name: Drukarnia
+  latitude: 50.04613022851899
+  longitude: 19.949213862419132
+  radius: 50

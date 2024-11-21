@@ -1,0 +1,61 @@
+---
+# Xiaomi Feeder
+
+- platform: template
+  switches:
+    pet_feeder_feedplan_control:
+      value_template: "{{ is_state('sensor.pet_feeder_feedplan_control', 'True') }}"
+      turn_on:
+        - service: xiaomi_miot.call_action
+          data:
+            entity_id: sensor.mmgg_fi1_2f28_pet_feeder
+            siid: 5
+            aiid: 5
+            params:
+              - 1
+      turn_off:
+        - service: xiaomi_miot.call_action
+          data:
+            entity_id: sensor.mmgg_fi1_2f28_pet_feeder
+            siid: 5
+            aiid: 5
+            params:
+              - 0
+      icon_template: "mdi:calendar-clock"
+
+    mmgg_petfeeder_bf89_wifi_led_1:
+      friendly_name: "Pet Feeder Wifi Status led"
+      unique_id: "mmgg_petfeeder_bf89_wifi_led_1"
+      value_template: "{{ is_state('binary_sensor.mmgg_petfeeder_bf89_wifi_led', 'on') }}"
+      icon_template: >
+        {% if is_state('binary_sensor.mmgg_petfeeder_bf89_wifi_led', 'on')  %}
+          mdi:led-on
+        {% else %}
+          mdi:led-off
+        {% endif %}
+      turn_on:
+        service: script.mmgg_feeder_set_wifi_led
+        data:
+          entity_id: sensor.mmgg_petfeeder_bf89_pet_feeder
+          state: true
+      turn_off:
+        service: script.mmgg_feeder_set_wifi_led
+        data:
+          entity_id: sensor.mmgg_petfeeder_bf89_pet_feeder
+          state: false
+
+    mmgg_petfeeder_bf89_feed_plan_1:
+      friendly_name: "Pet Feeder Automatic Feeding"
+      unique_id: "mmgg_petfeeder_bf89_feed_plan_1"
+      icon_template: mdi:refresh-auto
+      value_template: "{{ is_state('binary_sensor.mmgg_petfeeder_bf89_feed_plan','on') }}"
+      turn_on:
+        service: script.mmgg_feeder_set_auto_feed
+        data:
+          entity_id: sensor.mmgg_petfeeder_bf89_pet_feeder
+          state: true
+      turn_off:
+        service: script.mmgg_feeder_set_auto_feed
+        data:
+          entity_id: sensor.mmgg_petfeeder_bf89_pet_feeder
+          state: false

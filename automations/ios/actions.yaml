@@ -1,0 +1,23 @@
+  - alias: "Action Turn Lights Off"
+    initial_state: true
+    trigger:
+      - platform: event
+        event_type: ios.action_fired
+        event_data:
+          actionName: "Turn Lights Off"
+    action:
+      - action: switch.turn_off
+        entity_id: group.all_lights
+      - action: light.turn_off
+        entity_id: group.all_lights
+        
+  - alias: "Action Turn Gateway Lights On"
+    initial_state: true
+    trigger:
+      - platform: event
+        event_type: ios.action_fired
+        event_data:
+          actionName: "Turn Gateway Lights On"
+    action:
+      - action: light.toggle
+        entity_id: light.gateway_light_living_room, light.gateway_light_hall

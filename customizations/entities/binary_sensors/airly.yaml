@@ -1,20 +1,20 @@
-sensor.airly_cz_maki_caqi:
+sensor.airly_na_leszczu_caqi:
   friendly_name: Indeks jakości powietrza
 
-sensor.airly_cz_maki_pm1:
+sensor.airly_na_leszczu_pm1:
   friendly_name: Pyłki zawieszone PM1
 
-sensor.airly_cz_maki_pm10:
+sensor.airly_na_leszczu_pm10:
   friendly_name: Pyłki zawieszone PM10
 
-sensor.airly_cz_maki_pm2_5:
+sensor.airly_na_leszczu_pm2_5:
   friendly_name: Pyłki zawieszone PM2.5
 
-sensor.airly_cz_maki_temperature:
+sensor.airly_na_leszczu_temperature:
   friendly_name: Temperatura
 
-sensor.airly_cz_maki_humidity:
+sensor.airly_na_leszczu_humidity:
   friendly_name: Wilgotność
 
-sensor.airly_cz_maki_pressure:
+sensor.airly_na_leszczu_pressure:
   friendly_name: Ciśnienie atmosferyczne

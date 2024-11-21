@@ -1,6 +1,0 @@
----
-# Justyna Home Wifi states
-
-justyna_wifi:
-  name: Justyna Wifi
-  initial: off

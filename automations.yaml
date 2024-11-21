@@ -1,0 +1,64 @@
+- id: '1674717681175'
+  alias: Justyna leaves Ryvu
+  description: ''
+  use_blueprint:
+    path: homeassistant/notify_leaving_zone.yaml
+    input:
+      person_entity: person.justyna
+      zone_entity: zone.ryvu
+      notify_device: 389db5ff0d8511eb9d0ae3a92f804a6b
+- id: '1730461293603'
+  alias: Lights off
+  description: ''
+  triggers:
+  - event_data:
+      actionID: 52AB5599-FE7C-46FF-91EE-3C9CCB90A394
+    event_type: ios.action_fired
+    trigger: event
+  conditions: []
+  actions: []
+  mode: single
+- id: '1730461531857'
+  alias: Lights off
+  description: ''
+  triggers:
+  - event_type: ios.action_fired
+    event_data:
+      actionID: 52AB5599-FE7C-46FF-91EE-3C9CCB90A394
+    trigger: event
+  conditions: []
+  actions:
+  - action: switch.turn_off
+    metadata: {}
+    data: {}
+    target:
+      entity_id: group.all_lights
+  mode: single
+- id: '1730461769949'
+  alias: Lights off
+  description: ''
+  triggers:
+  - event_data:
+      actionID: 52AB5599-FE7C-46FF-91EE-3C9CCB90A394
+    event_type: ios.action_fired
+    trigger: event
+  conditions: []
+  actions:
+  - action: switch.turn_off
+    metadata: {}
+    data: {}
+  mode: single
+- id: '1730889203150'
+  alias: AirTag - Audi TT keys
+  description: ''
+  use_blueprint:
+    path: TitoTB/Airtag_Device_Tracker_v2.yaml
+    input:
+      airtag: sensor.airtag_klucze
+- id: '1730891785120'
+  alias: "\U0001F4CD AirTag Audi TT keys"
+  description: ''
+  use_blueprint:
+    path: TitoTB/Airtag_Device_Tracker_v2.yaml
+    input:
+      airtag: sensor.airtag_audi_tt_keys

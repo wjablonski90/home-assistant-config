@@ -1,0 +1,18 @@
+---
+# Ping ARP device trackers
+
+- platform: ping_arp
+  count: 1
+  scan_interval: 10
+  consider_home: 20
+  iface: eth0
+  hosts:
+    iphone_wojciech_arp: 192.168.55.5
+
+- platform: ping_arp
+  count: 1
+  scan_interval: 10
+  consider_home: 20
+  iface: eth0
+  hosts:
+    iphone_justyna_arp: 192.168.55.6

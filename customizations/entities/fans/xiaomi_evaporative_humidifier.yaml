@@ -1,8 +1,9 @@
 ---
 # Xiaomi Evaporative Humidifier customization
 
-humidifier.evaporative_humidifier_office:
+switch.evaporative_humidifier_office_state:
   friendly_name: Xiaomi Evaporative Humidifier
+  icon: mdi:air-humidifier
 
 sensor.evaporative_humidifier_office_temperature:
   friendly_name: Korytarz - Temperatura

@@ -1,17 +1,17 @@
 ---
 # Xiaomi Air Purifier customization
 
-fan.air_purifier_bedroom:
+fan.zhimi_ma4_air_purifier:
   friendly_name: Xiaomi Air Purifier 3
 
 sensor.air_purifier_bedroom_pm2_5:
-  friendly_name: Sypialnia - Jakość powietrza
+  friendly_name: Jakość powietrza
   
 sensor.air_purifier_bedroom_temperature:
-  friendly_name: Sypialnia - Temperatura
+  friendly_name: Temperatura
   
 sensor.air_purifier_bedroom_humidity:
-  friendly_name: Sypialnia - Wilgotność
+  friendly_name: Wilgotność
 
 switch.air_purifier_bedroom_automations_enabled:
   friendly_name: Automatyzacja
@@ -19,23 +19,23 @@ switch.air_purifier_bedroom_automations_enabled:
 input_select.air_purifier_bedroom_mode:
   friendly_name: Tryb pracy
 
-number.air_purifier_bedroom_favorite_level:
+number.zhimi_ma4_favorite_fan_level:
   friendly_name: Ulubiony poziom
 
 number.air_purifier_bedroom_fan_level:
   friendly_name: Poziom wiatraka
 
-switch.air_purifier_bedroom_child_lock:
+switch.zhimi_ma4_physical_control_locked:
   friendly_name: Blokada rodzicielska
 
-switch.air_purifier_bedroom_led:
+light.zhimi_ma4_switch_status:
   friendly_name: LED
 
-switch.air_purifier_bedroom_buzzer:
+switch.zhimi_ma4_alarm:
   friendly_name: Głośnik
 
 sensor.air_purifier_bedroom_motor_speed:
   friendly_name: Prędkość wiatraka
 
-sensor.air_purifier_bedroom_filter_life_remaining:
+sensor.zhimi_ma4_filter_life_level:
   friendly_name: Filtr

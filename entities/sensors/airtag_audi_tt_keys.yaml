@@ -1,0 +1,47 @@
+- platform: template
+  sensors:
+    airtag_audi_tt_keys:
+      friendly_name: "AirTag Audi TT keys" 
+      value_template: >
+        {% set home = "Dom" %} 
+        {% if ":" in states('input_text.airtag').split('Klucze (Justyna)')[1].split('•')[0] %} 
+        {{ states('input_text.airtag').split('Klucze (Justyna)')[1].split('•')[0].split(',')[0] }}
+        {% elif home in states('input_text.airtag').split('Klucze (Justyna)')[1].split('•')[0] %}Home
+        {% else %}
+        {{ states('sensor.airtag_audi_tt_keys_geo') }}
+        {% endif %}
+      attribute_templates:
+        latitude: >
+          {% if ":" in states('input_text.airtag').split('Klucze (Justyna)')[1].split('•')[0] %}
+            null
+          {% else %}
+            {% set formatted_value = states('sensor.airtag_audi_tt_keys_geo') %}
+            {% set lat_start = formatted_value.find('Lat: ') %}
+            {% if lat_start != -1 %}
+              {% set lat_end = formatted_value.find(' | ', lat_start) %}
+              {% set latitude = formatted_value[lat_start + 5:lat_end] %}
+              {{ latitude }}
+            {% else %}
+              null
+            {% endif %}
+          {% endif %}
+        longitude: >
+          {% if ":" in states('input_text.airtag').split('Klucze (Justyna)')[1].split('•')[0] %}
+            null
+          {% else %}
+            {% set formatted_value = states('sensor.airtag_audi_tt_keys_geo') %}
+            {% set lon_start = formatted_value.find('Lon: ') %}
+            {% if lon_start != -1 %}
+              {% set lon_end = formatted_value.find(' | ', lon_start) %}
+              {% set longitude = formatted_value[lon_start + 5:lon_end] %}
+              {{ longitude }}
+            {% else %}
+              null
+            {% endif %}
+          {% endif %}
+        status: >
+          {% if ":" in states('input_text.airtag').split('Klucze (Justyna)')[1].split('•')[0] %}unavailable
+          {% else %}available
+          {% endif %}
+        last_update: "{{ as_timestamp(states.input_text.airtag.last_updated)|timestamp_custom ('%d/%m/%Y %H:%Mh') }}"
+      icon_template: mdi:car-key

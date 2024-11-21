@@ -1,2 +1,32 @@
 input_number.projector_bedroom_off_timer:
   friendly_name: Czas
+
+# sensor.mmgg_fi1_2f28_pet_feeder:
+#   miio_cloud_records: event.feedStats:500
+#   miio_event_feedStats_template: |
+#     {%- set dat = namespace(today=0,week=0,month=0) %}
+#     {%- set tim = now() %}
+#     {%- set hour = tim.replace(minute=0, second=0) %}
+#     {%- set today = hour.replace(hour=0) %}
+#     {%- set week = (today - timedelta(days=7)) | as_timestamp | int(0) %}
+#     {%- set month = (today - timedelta(days=tim.day-1)) | as_timestamp | int(0) %}
+#     {%- set today = today | as_timestamp | int(0) %}
+#     {%- for d in (result or []) %}
+#     {%-   set t = d.time | default(0) | int(0) %}
+#     {%-   if t >= month %}"
+#     {%-     set v = (d.value | default('[]') | string | from_json) or [] %}
+#     {%-     set n = v[0] | default(0) %}
+#     {%-     if t >= week %}
+#     {%-       set dat.week = dat.week + n %}
+#     {%-       if t >= today %}
+#     {%-         set dat.today = dat.today + n %}
+#     {%-       endif %}
+#     {%-     endif %}
+#     {%-     set dat.month = dat.month + n %}
+#     {%-   endif %}
+#     {%- endfor %}
+#     {{ {
+#       'feed_today': dat.today | int(0),
+#       'feed_week': dat.week | int(0),
+#       'feed_month': dat.month | int(0),
+#     } }}

@@ -1,0 +1,39 @@
+google_assistant:
+  project_id: sweet-home-ha
+  service_account: !include ../service_account.json
+  report_state: true
+  expose_by_default: false
+  entity_config:
+    switch.light_1_office:
+      name: office_light
+      aliases:
+        - światło w biurze
+      room: Office
+    switch.light_desk_kitchen:
+      name: kitchen_desk
+      aliases:
+        - światło w kuchni
+        - światło nad blatem
+        - nad blatem
+        - blat
+    group.kitchen_lights:
+      name: Światła w kuchni
+      aliases:
+        - wszystkie w kuchni
+        - wszystko w kuchni
+        - światła w kuchni
+    group.all_lights:
+      name: Wszystkie światła
+    group.living_room_lights:
+      name: Wszystkie światła w salonie
+    group.kitchen_lights:
+      name: Wszystkie światła w kuchni
+    group.office_lights:
+      name: Wszystkie światła w biurze
+    group.entrance_lights:
+      name: Wszystkie światła w przedpokoju
+    group.bedroom_lights:
+      name: Wszystkie światła w sypialni
+
+
+      

@@ -1,6 +1,0 @@
----
-# Wojciech Home Wifi states
-
-wojciech_wifi:
-  name: Wojciech Wifi
-  initial: off

@@ -1,0 +1,55 @@
+{
+    "config": {
+        "abort": {
+            "already_configured": "Urządzenie jest już skonfigurowane"
+        },
+        "error": {
+            "unknown_parcel_locker": "Nie udało się znaleźć paczkomatu z tym kodem",
+            "parcel_locker_no_data": "Ten paczkomat nie udostępnia danych o jakości powietrza"
+        },
+        "step": {
+            "user": {
+                "data": {
+                    "parcelLockerId": "Kod paczkomatu"
+                }
+            }
+        }
+    },
+    "entity": {
+        "sensor": {
+            "humidity": {
+                "name": "Wilgotność"
+            },
+            "no2": {
+                "name": "NO2"
+            },
+            "o3": {
+                "name": "O3"
+            },
+            "pm1": {
+                "name": "PM 1"
+            },
+            "pm10": {
+                "name": "PM 10"
+            },
+            "pm10_norm": {
+                "name": "Norma PM 10"
+            },
+            "pm25": {
+                "name": "PM 2.5"
+            },
+            "pm25_norm": {
+                "name": "Norma PM 2.5"
+            },
+            "pm4": {
+                "name": "PM 4"
+            },
+            "pressure": {
+                "name": "Ciśnienie"
+            },
+            "temperature": {
+                "name": "Temperatura"
+            }
+        }
+    }
+}

@@ -1,0 +1,22 @@
+---
+# Temperature & humidity sensors
+
+- platform: min_max
+  name: ht_temperature_average_entire_home
+  type: mean
+  round_digits: 1
+  entity_ids:
+    - sensor.ht_temperature_entrance
+    - sensor.ht_temperature_living_room
+    - sensor.ht_temperature_office
+    - sensor.ht_temperature_bathroom
+
+- platform: min_max
+  name: ht_humidity_average_entire_home
+  type: mean
+  round_digits: 1
+  entity_ids:
+    - sensor.ht_humidity_entrance
+    - sensor.ht_humidity_living_room
+    - sensor.ht_humidity_office
+    - sensor.ht_humidity_bathroom

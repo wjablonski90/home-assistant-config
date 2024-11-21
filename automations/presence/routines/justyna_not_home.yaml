@@ -1,0 +1,37 @@
+---
+# Justyna not home
+
+- alias: Presence - Justyna not home
+  trigger:
+    platform: state
+    entity_id: person.justyna
+    to: 'not_home'
+  condition:
+    - condition: time
+      after: '06:00:00'
+      before: '19:00:00'
+      weekday:
+        - mon
+        - tue
+        - wed
+        - thu
+        - fri
+  action:
+    # - service: xiaomi_aqara.play_ringtone
+    #   data:
+    #     gw_mac: 04cf8c8f8670
+    #     ringtone_id: 20
+    #     ringtone_vol: 4
+    # - service: xiaomi_aqara.play_ringtone
+    #   data:
+    #     gw_mac: 286c07f10803
+    #     ringtone_id: 20
+    #     ringtone_vol: 4
+    - service: notify.wojciech_devices
+      data:
+        title: Justyna jest poza domem.
+        message: >
+          {% if trigger.from_state.state == 'ryvu' %} Wyszła z pracy.
+          {% elif trigger.from_state.state == 'home' %} Wyszła z domu.
+          {% else %} Opuściła {{ trigger.from_state.state }}.
+          {% endif %}
